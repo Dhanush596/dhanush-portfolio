@@ -32,10 +32,10 @@ export default function About() {
       org: "Srinivas Institute of Technology, Mangalore",
       details: "Graduating 2026 • Specialized in Cloud-Native Engineering & AI",
       links: [
-        { label: "Sem 1", url: "/certificates/MCAsem1.pdf" },
-        { label: "Sem 2", url: "/certificates/MCAsem2.pdf" },
-        { label: "Sem 3", url: "/certificates/MCAsem3.pdf" },
-        { label: "Sem 4", url: "/certificates/MCAsem4.pdf" },
+        { label: "Sem 1", url: "/Certificates/MCAsem1.pdf" },
+        { label: "Sem 2", url: "/Certificates/MCAsem2.pdf" },
+        { label: "Sem 3", url: "/Certificates/MCAsem3.pdf" },
+        { label: "Sem 4", url: "/Certificates/MCAsem4.pdf" },
       ], 
     },
     {
@@ -44,7 +44,7 @@ export default function About() {
       org: "Rooman Technologies Ltd.",
       details: "Infrastructure as Code (Terraform) • Kubernetes (K3s) & GitOps (ArgoCD) • Score: 100/100",
       links: [
-        { label: "Internship Certificate", url: "/certificates/InternshipCompletionCertificate.pdf" }
+        { label: "Internship Certificate", url: "/Certificates/InternshipCompletionCertificate.pdf" }
       ],
     },
     {
@@ -53,7 +53,7 @@ export default function About() {
       org: "Encode Data Tech",
       details: "React Frontend • Node.js/Express REST APIs • Agile Workflows",
       links: [
-        { label: "Internship Certificate", url: "/certificates/FullStackInternship.pdf" } // Update this later when ready
+        { label: "Internship Certificate", url: "/Certificates/FullStackInternship.pdf" } // Update this later when ready
       ],
     },
     {
@@ -62,13 +62,13 @@ export default function About() {
       org: "Sharada Degree College, Mangalore",
       details: "CGPA: 8.2 • Built full-featured E-Commerce Platforms",
       links: [
-        { label: "All Semesters / Degree", url: "/certificates/all-sem.pdf" },
-        { label: "Sem 1", url: "/certificates/Sem1.pdf" },
-        { label: "Sem 2", url: "/certificates/Sem2.pdf" },
-        { label: "Sem 3", url: "/certificates/Sem3.pdf" },
-        { label: "Sem 4", url: "/certificates/Sem4.pdf" },
-        { label: "Sem 5", url: "/certificates/Sem5.pdf" },
-        { label: "Sem 6", url: "/certificates/Sem6.pdf" },
+        { label: "All Semesters / Degree", url: "/Certificates/all-sem.pdf" },
+        { label: "Sem 1", url: "/Certificates/Sem1.pdf" },
+        { label: "Sem 2", url: "/Certificates/Sem2.pdf" },
+        { label: "Sem 3", url: "/Certificates/Sem3.pdf" },
+        { label: "Sem 4", url: "/Certificates/Sem4.pdf" },
+        { label: "Sem 5", url: "/Certificates/Sem5.pdf" },
+        { label: "Sem 6", url: "/Certificates/Sem6.pdf" },
       ],
     },
     {
@@ -77,8 +77,8 @@ export default function About() {
       org: "Parignana PU College",
       details: "Completed Pre-University education (PCMC: Physics, Chemistry, Maths, Computer Science).",
       links: [
-         { label: "1st PUC", url: "/certificates/1stpuc.pdf" },
-         { label: "2nd PUC", url: "/certificates/2ndpuc.pdf" }
+         { label: "1st PUC", url: "/Certificates/1stpuc.pdf" },
+         { label: "2nd PUC", url: "/Certificates/2ndpuc.pdf" }
       ], 
     },
     {
@@ -87,7 +87,7 @@ export default function About() {
       org: "National Institute of Open Schooling",
       details: "Completed secondary education with foundational focus on Mathematics and Science.",
       links: [
-         { label: "10th Marks Card", url: "/certificates/10th.pdf" }
+         { label: "10th Marks Card", url: "/Certificates/10th.pdf" }
       ], 
     },
   ];

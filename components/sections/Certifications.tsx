@@ -11,7 +11,7 @@ const certifications = [
     score: "Grade: O (Outstanding)",
     category: "AI/ML",
     icon: "🤖",
-    link: "/certificates/AI-MLGoogle.pdf", 
+    link: "/Certificates/AI-MLGoogle.pdf", 
   },
   {
     title: "AI-ML Virtual Internship",
@@ -20,7 +20,7 @@ const certifications = [
     score: "Grade: O (Outstanding)",
     category: "AI/ML",
     icon: "☁️",
-    link: "/certificates/AI-MLaws.pdf", 
+    link: "/Certificates/AI-MLaws.pdf", 
   },
   {
     title: "Cloud Computing",
@@ -29,7 +29,7 @@ const certifications = [
     score: "Elite GOLD",
     category: "Cloud",
     icon: "☁️",
-    link: "/certificates/CloudComputing.pdf",
+    link: "/Certificates/CloudComputing.pdf",
   },
   {
     title: "Machine Learning with Python",
@@ -38,7 +38,7 @@ const certifications = [
     score: "Completed",
     category: "Machine Learning",
     icon: "🐍",
-    link: "/certificates/MachineLearningWithPython.pdf", 
+    link: "/Certificates/MachineLearningWithPython.pdf", 
   },
   {
     title: "Advanced Python Programming",
@@ -47,7 +47,7 @@ const certifications = [
     score: "Grade: A",
     category: "Programming",
     icon: "✨",
-    link: "/certificates/AdvancedPythonProgramming.pdf", 
+    link: "/Certificates/AdvancedPythonProgramming.pdf", 
   },
   {
     title: "Data Analytics Training",
@@ -56,7 +56,7 @@ const certifications = [
     score: "Grade: A",
     category: "Data Analytics",
     icon: "📊",
-    link: "/certificates/Advanced_IT_Skill_Training_Certificate.pdf", 
+    link: "/Certificates/Advanced_IT_Skill_Training_Certificate.pdf", 
   },
   {
     title: "Research Methodologies & IPR",
@@ -65,7 +65,7 @@ const certifications = [
     score: "Elite GOLD",
     category: "Academic",
     icon: "📜",
-    link: "/certificates/ResearchMethodologiesAndIPR.pdf", 
+    link: "/Certificates/ResearchMethodologiesAndIPR.pdf", 
   },
   {
     title: "HTML5 Application Development",
@@ -74,7 +74,7 @@ const certifications = [
     score: "40 Hours Training",
     category: "Web Development",
     icon: "🌐",
-    link: "/certificates/HTML5ApplicationDevelopment.pdf", 
+    link: "/Certificates/HTML5ApplicationDevelopment.pdf", 
   },
 ];
 
@@ -86,7 +86,7 @@ const education = [
     cgpa: "Specialized in Cloud & AI",
     status: "Graduating 2026",
     icon: "🎓",
-    link: "/certificates/MCAsem4.pdf", 
+    link: "/Certificates/MCAsem4.pdf", 
   },
   {
     degree: "Bachelor of Computer Applications (BCA)",
@@ -95,7 +95,7 @@ const education = [
     cgpa: "8.2 CGPA",
     status: "Graduated",
     icon: "🎓",
-    link: "/certificates/all-sem.pdf",
+    link: "/Certificates/all-sem.pdf",
   },
   {
     degree: "Pre-University Course — Science (PCMC)",
@@ -104,7 +104,7 @@ const education = [
     cgpa: "Science Focus",
     status: "Completed",
     icon: "🏫",
-    link: "/certificates/2ndpuc.pdf",
+    link: "/Certificates/2ndpuc.pdf",
   },
   {
     degree: "Secondary School Examination (10th)",
@@ -113,7 +113,7 @@ const education = [
     cgpa: "Math & Science",
     status: "Completed",
     icon: "🏫",
-    link: "/certificates/10th.pdf",
+    link: "/Certificates/10th.pdf",
   },
 ];
 
