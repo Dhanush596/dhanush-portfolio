@@ -173,7 +173,7 @@ export default function Hero() {
           <div className="flex gap-2 rounded-lg bg-dark-secondary/50 p-1 border border-white/5">
             {/* View Button */}
             <a
-              href="/resume/Dhanush_A_Resume.pdf"
+              href="/resume/Dhanush_A_Resume_OnePage.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-neon-cyan/10 text-neon-cyan hover:bg-neon-cyan/20 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] font-inter font-semibold rounded-md transition-all duration-300"
@@ -184,8 +184,8 @@ export default function Hero() {
             
             {/* Download Button */}
             <a
-              href="/resume/Dhanush_A_Resume.pdf"
-              download="Dhanush_A_Resume.pdf"
+              href="/resume/Dhanush_A_Resume_OnePage.pdf"
+              download="Dhanush_A_Resume_OnePage.pdf"
               className="flex items-center gap-2 px-6 py-3 bg-dark-tertiary text-gray-300 hover:text-white hover:bg-white/10 font-inter font-semibold rounded-md transition-all duration-300"
             >
               <FaDownload size={16} />
