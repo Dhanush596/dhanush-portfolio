@@ -89,7 +89,8 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-        {/* Profile Image */}
+        
+        {/* UPDATED: Profile Image with your actual photo */}
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -97,9 +98,12 @@ export default function Hero() {
           className="mb-8"
         >
           <div className="w-32 h-32 mx-auto rounded-full border-2 border-neon-cyan p-1 overflow-hidden bg-gradient-to-br from-dark-secondary to-dark-tertiary animate-pulse-glow">
-            <div className="w-full h-full rounded-full bg-gradient-to-br from-neon-cyan/20 to-neon-blue/20 flex items-center justify-center font-poppins font-bold text-4xl text-neon-cyan">
-              DA
-            </div>
+            {/* Make sure "profile.jpg" is in your public folder! */}
+            <img 
+              src="/profile.jpg" 
+              alt="Dhanush A" 
+              className="w-full h-full rounded-full object-cover"
+            />
           </div>
         </motion.div>
 
@@ -169,11 +173,11 @@ export default function Hero() {
             Contact Me
           </Button>
 
-          {/* New Split Resume Buttons */}
+          {/* Split Resume Buttons */}
           <div className="flex gap-2 rounded-lg bg-dark-secondary/50 p-1 border border-white/5">
             {/* View Button */}
             <a
-              href="/resume/Dhanush_A_Resume_OnePage.pdf"
+              href="/resume/Dhanush_A_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-neon-cyan/10 text-neon-cyan hover:bg-neon-cyan/20 hover:shadow-[0_0_15px_rgba(6,182,212,0.3)] font-inter font-semibold rounded-md transition-all duration-300"
@@ -184,8 +188,8 @@ export default function Hero() {
             
             {/* Download Button */}
             <a
-              href="/resume/Dhanush_A_Resume_OnePage.pdf"
-              download="Dhanush_A_Resume_OnePage.pdf"
+              href="/resume/Dhanush_A_Resume.pdf"
+              download="Dhanush_A_Resume.pdf"
               className="flex items-center gap-2 px-6 py-3 bg-dark-tertiary text-gray-300 hover:text-white hover:bg-white/10 font-inter font-semibold rounded-md transition-all duration-300"
             >
               <FaDownload size={16} />
