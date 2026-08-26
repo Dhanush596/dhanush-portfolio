@@ -44,7 +44,7 @@ const projects = [
     impact:
       "Achieved 87% prediction accuracy with sub-200ms response times, helping users identify stress patterns",
     github: "https://github.com/Dhanush596/mental-health-monitor.git",
-    demo: "#", // <-- Replace "#" with your live Vercel/Render link when ready
+    demo: "https://mental-health-monitor-rust.vercel.app", // <-- Replace "#" with your live Vercel/Render link when ready
   },
   {
     title: "AI-Powered Study Assistant",
