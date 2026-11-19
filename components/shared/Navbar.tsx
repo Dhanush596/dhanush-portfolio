@@ -47,7 +47,7 @@ export function Navbar() {
         aria-label="Main Navigation"
         className={cn(
           'flex items-center gap-1 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full border shadow-2xl backdrop-blur-2xl transition-all duration-300',
-          'bg-[var(--card-bg)] border-[var(--card-border)] shadow-[var(--accent)]/5'
+          'bg-black/80 border-white/[0.12] shadow-black/80'
         )}
       >
         {NAV_ITEMS.map((item, index) => {

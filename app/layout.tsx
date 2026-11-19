@@ -5,6 +5,10 @@ import { SmoothScroll } from '@/components/shared/SmoothScroll';
 import { ThemeSetter } from '@/components/shared/ThemeSetter';
 import { PageTransition } from '@/components/shared/PageTransition';
 import { Navbar } from '@/components/shared/Navbar';
+import { BackgroundModeProvider } from '@/components/canvas/BackgroundModeContext';
+import { TouchSensorWrapper } from '@/components/canvas/TouchSensorWrapper';
+import { TouchHoldIndicator } from '@/components/shared/TouchHoldIndicator';
+import { HeaderHUD } from '@/components/shared/HeaderHUD';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -63,12 +67,28 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="antialiased min-h-screen selection:bg-[var(--accent)] selection:text-[var(--bg)]">
+      <body className="antialiased min-h-screen bg-black text-white selection:bg-white selection:text-black">
         <SmoothScroll>
-          <ThemeSetter>
-            <PageTransition>{children}</PageTransition>
-            <Navbar />
-          </ThemeSetter>
+          <BackgroundModeProvider>
+            <ThemeSetter>
+              {/* Full-screen 3D WebGL Touch & Wave Background */}
+              <TouchSensorWrapper />
+
+              {/* Interactive Telemetry Reticle & Coordinates HUD */}
+              <TouchHoldIndicator />
+
+              {/* Minimal Top Header HUD */}
+              <HeaderHUD />
+
+              {/* Main Page Content */}
+              <div className="relative z-10 pt-14 pb-24">
+                <PageTransition>{children}</PageTransition>
+              </div>
+
+              {/* Bottom Dock Navigation */}
+              <Navbar />
+            </ThemeSetter>
+          </BackgroundModeProvider>
         </SmoothScroll>
       </body>
     </html>

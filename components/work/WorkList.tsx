@@ -123,25 +123,25 @@ export function WorkList() {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
       {/* 1. Header with exact data-driven counts */}
-      <div className="text-center max-w-3xl mx-auto mb-14">
-        <Reveal delay={0.1}>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--accent)]/30 bg-[var(--card-bg)] text-xs font-mono text-[var(--accent)] mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Portfolio Showcase</span>
+      <div className="max-w-4xl mx-auto mb-16 text-center">
+        <Reveal delay={0.05}>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-xs font-mono text-white/70 mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span>[INDEX // 01-17]</span>
           </div>
-          <h1 className="font-heading text-4xl sm:text-6xl font-bold tracking-tight text-[var(--text)] mb-4">
-            Work
+          <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase mb-4">
+            Work Archive
           </h1>
-          <p className="text-base sm:text-lg text-[var(--text)]/75 leading-relaxed font-mono">
+          <p className="text-sm sm:text-base text-white/60 leading-relaxed font-mono">
             {siteStats.companyWebsites} company sites · {siteStats.liveSites} live · {siteStats.realtimeSites} real-time · {practiceCount} practice builds
           </p>
         </Reveal>
       </div>
 
       {/* 2. Filter Controls */}
-      <div className="space-y-4 mb-12">
+      <div className="space-y-4 mb-14">
         {/* Category Tabs */}
-        <Reveal delay={0.2}>
+        <Reveal delay={0.1}>
           <div className="flex flex-wrap items-center justify-center gap-2">
             {availableCategories.map((tab) => {
               const isActive = currentCategory === tab.key;
@@ -152,14 +152,14 @@ export function WorkList() {
                   onClick={() => updateFilters(tab.key, undefined)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wide transition-all duration-200 border ${
                     isActive
-                      ? 'bg-[var(--accent)] text-[#0B0709] font-bold border-[var(--accent)] shadow-md shadow-[var(--accent)]/20'
-                      : 'bg-[var(--card-bg)] text-[var(--text)]/75 border-[var(--card-border)] hover:border-[var(--accent)]/40 hover:text-[var(--text)]'
+                      ? 'bg-white text-black font-bold border-white shadow-lg'
+                      : 'bg-white/[0.02] text-white/60 border-white/[0.08] hover:border-white/30 hover:text-white'
                   }`}
                 >
                   {tab.label}
                   <span
                     className={`ml-1.5 px-1.5 py-0.2 rounded-full text-[10px] ${
-                      isActive ? 'bg-[#0B0709]/20' : 'bg-[var(--text)]/10 text-[var(--text)]/60'
+                      isActive ? 'bg-black/20 text-black' : 'bg-white/10 text-white/50'
                     }`}
                   >
                     {tab.count}
@@ -171,9 +171,9 @@ export function WorkList() {
         </Reveal>
 
         {/* Status Chips */}
-        <Reveal delay={0.25}>
+        <Reveal delay={0.15}>
           <div className="flex items-center justify-center gap-2 pt-2">
-            <span className="text-xs font-mono text-[var(--text)]/50 mr-1 flex items-center gap-1">
+            <span className="text-xs font-mono text-white/40 mr-1 flex items-center gap-1">
               <Filter className="w-3 h-3" /> Status:
             </span>
             {statusOptions.map((st) => {
@@ -185,8 +185,8 @@ export function WorkList() {
                   onClick={() => updateFilters(undefined, st.key)}
                   className={`px-3 py-1 rounded-md text-xs font-mono transition-all duration-200 border ${
                     isActive
-                      ? 'bg-[var(--accent-2)] text-[#0B0709] font-bold border-[var(--accent-2)] shadow-sm'
-                      : 'bg-transparent text-[var(--text)]/65 border-[var(--card-border)] hover:border-[var(--accent-2)]/40 hover:text-[var(--text)]'
+                      ? 'bg-white/20 text-white font-bold border-white shadow-sm'
+                      : 'bg-transparent text-white/50 border-white/[0.08] hover:border-white/25 hover:text-white'
                   }`}
                 >
                   {st.label}
@@ -246,20 +246,11 @@ export function WorkList() {
                   className={isFeatured ? 'md:col-span-2' : 'col-span-1'}
                 >
                   <TiltCard
-                    className="h-full p-6 sm:p-7 flex flex-col justify-between group relative border transition-all"
-                    style={{
-                      borderColor: `${project.accent}30`,
-                    }}
+                    className="h-full p-6 sm:p-7 flex flex-col justify-between group relative border border-white/[0.08] hover:border-white/30 bg-black/60 backdrop-blur-xl transition-all duration-300"
                   >
-                    {/* Ambient Glow */}
-                    <div
-                      className="absolute -top-16 -right-16 w-44 h-44 rounded-full blur-3xl pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity duration-300"
-                      style={{ backgroundColor: project.accent }}
-                    />
-
                     <div>
                       {/* Top Visual Artwork */}
-                      <Link href={`/work/${project.slug}`} className="block mb-5 overflow-hidden rounded-xl">
+                      <Link href={`/work/${project.slug}`} className="block mb-5 overflow-hidden rounded-xl border border-white/[0.06]">
                         <ProjectGradientArt
                           title={project.title}
                           accent={project.accent}
@@ -268,49 +259,48 @@ export function WorkList() {
                         />
                       </Link>
 
-                      {/* Badges Row */}
-                      <div className="flex flex-wrap items-center gap-2 mb-3">
-                        {/* Status Badge - only if project.status is defined */}
-                        {project.status && (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold border bg-[var(--text)]/5 text-[var(--text)]">
-                            {project.status === 'live' && (
-                              <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                              </span>
-                            )}
-                            {project.status === 'realtime' && (
-                              <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-                            )}
-                            {project.status === 'practice' && (
-                              <span className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
-                            )}
-                            <span>{statusLabels[project.status]?.label}</span>
-                          </span>
-                        )}
-
-                        {/* Category Label */}
-                        <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--text)]/75">
-                          {categoryLabels[project.category]}
+                      {/* Header Line with Index & Badges */}
+                      <div className="flex items-center justify-between border-b border-white/[0.08] pb-3 mb-4">
+                        <span className="font-mono text-xs text-white/40 font-bold">
+                          [{String(idx + 1).padStart(2, '0')}]
                         </span>
 
-                        {/* Backend Badge */}
-                        {project.backend && (
-                          <span className="px-2 py-0.5 rounded-full text-[10px] font-mono border border-[var(--card-border)] bg-[var(--text)]/5 text-[var(--text)]/70">
-                            {backendLabels[project.backend]}
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          {/* Status Badge - only if project.status is defined */}
+                          {project.status && (
+                            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono font-medium border border-white/[0.08] bg-white/[0.03] text-white/90">
+                              {project.status === 'live' && (
+                                <span className="relative flex h-1.5 w-1.5">
+                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                                </span>
+                              )}
+                              {project.status === 'realtime' && (
+                                <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+                              )}
+                              {project.status === 'practice' && (
+                                <span className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
+                              )}
+                              <span>{statusLabels[project.status]?.label}</span>
+                            </span>
+                          )}
+
+                          {/* Category Label */}
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-mono border border-white/[0.08] bg-white/[0.02] text-white/60">
+                            {categoryLabels[project.category]}
                           </span>
-                        )}
+                        </div>
                       </div>
 
                       {/* Project Title */}
-                      <h2 className="font-heading text-xl sm:text-2xl font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors duration-200 mb-2">
+                      <h2 className="font-heading text-xl sm:text-2xl font-bold text-white group-hover:text-white transition-colors duration-200 mb-2 tracking-tight">
                         <Link href={`/work/${project.slug}`}>
                           {project.title}
                         </Link>
                       </h2>
 
                       {/* Tagline */}
-                      <p className="text-sm text-[var(--text)]/75 leading-relaxed mb-6">
+                      <p className="text-sm text-white/60 leading-relaxed font-sans mb-6">
                         {project.tagline}
                       </p>
                     </div>
@@ -319,17 +309,17 @@ export function WorkList() {
                     <div>
                       {/* Up to four stack chips - hidden if stack is empty */}
                       {hasStack && (
-                        <div className="flex flex-wrap gap-1.5 mb-6 pt-3 border-t border-[var(--card-border)]">
+                        <div className="flex flex-wrap gap-1.5 mb-6 pt-3 border-t border-white/[0.08]">
                           {project.stack.slice(0, 4).map((tech) => (
                             <span
                               key={tech}
-                              className="px-2 py-0.5 rounded text-[11px] font-mono bg-[var(--text)]/5 text-[var(--text)]/75 border border-[var(--card-border)]"
+                              className="px-2 py-0.5 rounded text-[10px] font-mono bg-white/[0.03] text-white/60 border border-white/[0.08]"
                             >
                               {tech}
                             </span>
                           ))}
                           {project.stack.length > 4 && (
-                            <span className="px-1.5 py-0.5 text-[10px] font-mono text-[var(--text)]/40 self-center">
+                            <span className="px-1.5 py-0.5 text-[10px] font-mono text-white/40 self-center">
                               +{project.stack.length - 4}
                             </span>
                           )}
@@ -340,10 +330,10 @@ export function WorkList() {
                       <div className="flex items-center justify-between pt-2">
                         <Link
                           href={`/work/${project.slug}`}
-                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--accent)] hover:translate-x-1 transition-transform duration-200"
+                          className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-white/70 hover:text-white transition-colors"
                         >
                           <span>{isRealtime ? 'View project' : 'View case study'}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                         </Link>
 
                         {hasLiveLink && (
@@ -352,9 +342,9 @@ export function WorkList() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-mono border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--text)]/70 hover:text-[var(--accent)] hover:border-[var(--accent)]/40 transition-colors"
+                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-mono border border-white/[0.1] bg-white/[0.03] text-white/70 hover:text-white hover:border-white/30 transition-colors"
                           >
-                            <span>Visit site</span>
+                            <span>Live site</span>
                             <ExternalLink className="w-3 h-3" />
                           </a>
                         )}
