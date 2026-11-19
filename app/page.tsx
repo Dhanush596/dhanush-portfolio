@@ -1,38 +1,26 @@
-"use client";
+import { Hero } from '@/components/home/Hero';
+import { StatsStrip } from '@/components/home/StatsStrip';
+import { LiveSites } from '@/components/home/LiveSites';
+import { WhatIDo } from '@/components/home/WhatIDo';
+import { Footer } from '@/components/shared/Footer';
 
-import { useEffect, useState } from "react";
-import LoadingScreen from "@/components/ui/LoadingScreen";
-import Hero from "@/components/sections/Hero";
-import About from "@/components/sections/About";
-import Skills from "@/components/sections/Skills";
-import Experience from "@/components/sections/Experience";
-import Projects from "@/components/sections/Projects";
-import Certifications from "@/components/sections/Certifications";
-import Contact from "@/components/sections/Contact";
-import Footer from "@/components/sections/Footer";
-
-export default function Home() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 2500);
-    return () => clearTimeout(timer);
-  }, []);
-
+export default function HomePage() {
   return (
-    <>
-      {!isLoaded && <LoadingScreen />}
+    <div className="w-full">
+      {/* 1. Hero with 3D Canvas, headline, rotating titles & CTA buttons */}
+      <Hero />
 
-      <div className="min-h-screen bg-gradient-to-br from-dark-primary via-dark-secondary to-dark-tertiary">
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Certifications />
-        <Contact />
-        <Footer />
-      </div>
-    </>
+      {/* 2. Stats Strip with count-up animation */}
+      <StatsStrip />
+
+      {/* 3. Live Sites Row of 4 colourful TiltCards */}
+      <LiveSites />
+
+      {/* 4. Two 'What I do' Cards (Full-Stack & Cloud-Native) */}
+      <WhatIDo />
+
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }

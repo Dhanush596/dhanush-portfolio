@@ -1,45 +1,55 @@
-import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/ui/Navbar";
-import CursorFollower from "@/components/effects/CursorFollower";
-import ScrollProgress from "@/components/effects/ScrollProgress";
+import type { Metadata, Viewport } from 'next';
+import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
+import './globals.css';
+import { SmoothScroll } from '@/components/shared/SmoothScroll';
+import { ThemeSetter } from '@/components/shared/ThemeSetter';
+import { PageTransition } from '@/components/shared/PageTransition';
+import { Navbar } from '@/components/shared/Navbar';
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const poppins = Poppins({
-  weight: ["400", "600", "700", "800"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "Dhanush A | Cloud-Native Engineer & Full-Stack Developer",
+  title: 'Dhanush A | Software Engineer',
   description:
-    "Cloud-Native DevOps Specialist | Full-Stack MERN Developer | ML Integrations | Production-Grade Infrastructure",
-  authors: [{ name: "Dhanush A", url: "https://github.com/Dhanush596" }],
-  keywords: [
-    "DevOps",
-    "Cloud-Native",
-    "Kubernetes",
-    "Terraform",
-    "MERN Stack",
-    "Full-Stack Developer",
-    "ML Engineering",
-    "AWS",
-    "Docker",
-  ],
+    'Full-stack developer and cloud-native engineer building production web applications and resilient delivery pipelines.',
+  metadataBase: new URL('https://dhanush.dev'),
   openGraph: {
-    title: "Dhanush A | Elite Cloud-Native Engineer",
+    title: 'Dhanush A | Software Engineer',
     description:
-      "Production-ready cloud infrastructure & full-stack solutions with enterprise-grade DevOps practices",
-    type: "website",
-    url: "https://dhanush-portfolio.dev",
-    siteName: "Dhanush A Portfolio",
+      'I build full-stack web apps and the cloud pipelines that ship them.',
+    url: 'https://dhanush.dev',
+    siteName: 'Dhanush A Portfolio',
+    locale: 'en_US',
+    type: 'website',
   },
-  robots: {
-    index: true,
-    follow: true,
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dhanush A | Software Engineer',
+    description:
+      'I build full-stack web apps and the cloud pipelines that ship them.',
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#05060A',
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -48,18 +58,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <head>
-        <meta name="theme-color" content="#030712" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
-      <body
-        className={`${inter.variable} ${poppins.variable} bg-dark-primary text-gray-100 overflow-x-hidden`}
-      >
-        <CursorFollower />
-        <ScrollProgress />
-        <Navbar />
-        <main className="relative">{children}</main>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="antialiased min-h-screen selection:bg-[var(--accent)] selection:text-[var(--bg)]">
+        <SmoothScroll>
+          <ThemeSetter>
+            <PageTransition>{children}</PageTransition>
+            <Navbar />
+          </ThemeSetter>
+        </SmoothScroll>
       </body>
     </html>
   );

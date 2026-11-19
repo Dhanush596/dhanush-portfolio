@@ -1,0 +1,399 @@
+import { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import {
+  ExternalLink,
+  ArrowLeft,
+  Calendar,
+  UserCheck,
+  CheckCircle2,
+  AlertCircle,
+  HelpCircle,
+  Code2,
+  Layers,
+} from 'lucide-react';
+import {
+  projects,
+  categoryLabels,
+  statusLabels,
+  backendLabels,
+} from '@/lib/projects';
+import { GlassCard } from '@/components/shared/GlassCard';
+import { MagneticButton } from '@/components/shared/MagneticButton';
+import { Reveal } from '@/components/shared/Reveal';
+import { GithubIcon } from '@/components/shared/Icons';
+import { DeviceCoverFrame } from '@/components/work/DeviceCoverFrame';
+import { Footer } from '@/components/shared/Footer';
+
+interface ProjectDetailPageProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
+export async function generateStaticParams() {
+  return projects.map((p) => ({
+    slug: p.slug,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: ProjectDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
+
+  if (!project) {
+    return {
+      title: 'Project Not Found | Dhanush A',
+    };
+  }
+
+  return {
+    title: `${project.title} | Case Study | Dhanush A`,
+    description: project.tagline,
+    openGraph: {
+      title: `${project.title} | Dhanush A`,
+      description: project.realVsSimulated || project.tagline,
+      url: `https://dhanush.dev/work/${project.slug}`,
+      siteName: 'Dhanush A Portfolio',
+      type: 'article',
+    },
+  };
+}
+
+export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+  const { slug } = await params;
+  const projectIndex = projects.findIndex((p) => p.slug === slug);
+
+  if (projectIndex === -1) {
+    notFound();
+  }
+
+  const project = projects[projectIndex];
+  const prevProject =
+    projects[(projectIndex - 1 + projects.length) % projects.length];
+  const nextProject = projects[(projectIndex + 1) % projects.length];
+
+  const hasLiveLink = Boolean(project.links?.live);
+  const hasRepoLink = Boolean(project.links?.repo);
+  const hasActionButtons = hasLiveLink || hasRepoLink;
+  const hasStack = project.stack && project.stack.length > 0;
+  const hasFeatures = project.features && project.features.length > 0;
+  const hasChallenges = project.challenges && project.challenges.length > 0;
+
+  return (
+    <div
+      style={
+        {
+          '--accent': project.accent,
+          '--accent-2': project.accent2,
+          '--card-border': `${project.accent}30`,
+          '--card-bg': `${project.accent}0a`,
+          '--glass-glare': `${project.accent}20`,
+        } as React.CSSProperties
+      }
+      className="w-full min-h-screen transition-colors duration-500"
+    >
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
+        {/* Back Link */}
+        <Reveal delay={0.05}>
+          <Link
+            href="/work"
+            className="inline-flex items-center gap-2 text-xs font-mono text-[var(--text)]/70 hover:text-[var(--accent)] mb-8 transition-colors"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to all projects</span>
+          </Link>
+        </Reveal>
+
+        {/* 1. Hero Section */}
+        <div className="mb-12">
+          {/* Badges Row */}
+          <Reveal delay={0.1}>
+            <div className="flex flex-wrap items-center gap-2 mb-4">
+              {/* Status Badge - rendered only if project.status is defined */}
+              {project.status && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold border bg-[var(--text)]/5 text-[var(--text)]">
+                  {project.status === 'live' && (
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                    </span>
+                  )}
+                  {project.status === 'realtime' && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+                  )}
+                  {project.status === 'practice' && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-zinc-400" />
+                  )}
+                  <span>{statusLabels[project.status]?.label}</span>
+                </span>
+              )}
+
+              {/* Category Badge */}
+              <span className="px-3 py-1 rounded-full text-xs font-mono border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--text)]/80">
+                {categoryLabels[project.category]}
+              </span>
+
+              {/* Backend Badge */}
+              {project.backend && (
+                <span className="px-3 py-1 rounded-full text-xs font-mono border border-[var(--card-border)] bg-[var(--text)]/5 text-[var(--accent)] font-medium">
+                  {backendLabels[project.backend]}
+                </span>
+              )}
+            </div>
+          </Reveal>
+
+          {/* Title */}
+          <Reveal delay={0.15}>
+            <h1 className="font-heading text-4xl sm:text-6xl font-extrabold tracking-tight text-[var(--text)] mb-4">
+              {project.title}
+            </h1>
+          </Reveal>
+
+          {/* Tagline */}
+          <Reveal delay={0.2}>
+            <p className="text-lg sm:text-xl text-[var(--text)]/80 max-w-3xl leading-relaxed mb-8">
+              {project.tagline}
+            </p>
+          </Reveal>
+
+          {/* Action Buttons - only shown if links exist (hidden for real-time projects) */}
+          {hasActionButtons && (
+            <Reveal delay={0.25}>
+              <div className="flex flex-wrap items-center gap-4">
+                {hasLiveLink && (
+                  <MagneticButton
+                    href={project.links.live}
+                    variant="primary"
+                    target="_blank"
+                  >
+                    <span>Visit Live Site</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </MagneticButton>
+                )}
+
+                {hasRepoLink && (
+                  <MagneticButton
+                    href={project.links.repo}
+                    variant="glass"
+                    target="_blank"
+                  >
+                    <GithubIcon className="w-4 h-4" />
+                    <span>View Source Code</span>
+                  </MagneticButton>
+                )}
+              </div>
+            </Reveal>
+          )}
+        </div>
+
+        {/* 2. At-a-glance Row */}
+        <Reveal delay={0.3} className="mb-12">
+          <GlassCard className="p-6 sm:p-8 border-[var(--accent)]/30">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div>
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text)]/50 mb-1 flex items-center gap-1.5">
+                  <UserCheck className="w-3.5 h-3.5 text-[var(--accent)]" /> Role
+                </span>
+                <span className="text-sm font-semibold text-[var(--text)]">
+                  {project.role}
+                </span>
+              </div>
+
+              {project.period && (
+                <div>
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text)]/50 mb-1 flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-[var(--accent)]" /> Timeline
+                  </span>
+                  <span className="text-sm font-semibold text-[var(--text)]">
+                    {project.period}
+                  </span>
+                </div>
+              )}
+
+              <div>
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text)]/50 mb-1 flex items-center gap-1.5">
+                  <Layers className="w-3.5 h-3.5 text-[var(--accent)]" /> Category
+                </span>
+                <span className="text-sm font-semibold text-[var(--text)]">
+                  {categoryLabels[project.category]}
+                </span>
+              </div>
+
+              {project.status && (
+                <div>
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text)]/50 mb-1 flex items-center gap-1.5">
+                    <Code2 className="w-3.5 h-3.5 text-[var(--accent)]" /> Status
+                  </span>
+                  <span className="text-sm font-semibold text-[var(--text)]">
+                    {statusLabels[project.status]?.label}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Stack Chips - hidden if stack is empty */}
+            {hasStack && (
+              <div className="mt-6 pt-6 border-t border-[var(--card-border)]">
+                <span className="text-xs font-mono uppercase tracking-wider text-[var(--text)]/60 block mb-3">
+                  Technologies & Architecture
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {project.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 rounded-lg text-xs font-mono bg-[var(--text)]/5 text-[var(--text)] border border-[var(--card-border)]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </GlassCard>
+        </Reveal>
+
+        {/* 3. Device Cover Area with Parallax (Generates gradient art with initials for real-time) */}
+        <Reveal delay={0.35} className="mb-14">
+          <DeviceCoverFrame
+            title={project.title}
+            cover={project.cover}
+            accent={project.accent}
+            accent2={project.accent2}
+          />
+        </Reveal>
+
+        {/* 4. Real vs Simulated Callout (Only if realVsSimulated exists) */}
+        {project.realVsSimulated && (
+          <Reveal delay={0.4} className="mb-14">
+            <GlassCard className="p-6 sm:p-8 border-l-4 border-l-[var(--accent)] border-[var(--accent)]/30 bg-[var(--card-bg)] shadow-xl">
+              <div className="flex items-start gap-4">
+                <div className="p-2.5 rounded-xl bg-[var(--accent)]/15 text-[var(--accent)] shrink-0">
+                  <HelpCircle className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-heading font-bold text-lg text-[var(--text)] mb-2">
+                    Architecture Note: Real vs. Simulated
+                  </h3>
+                  <p className="text-sm text-[var(--text)]/85 leading-relaxed font-mono">
+                    {project.realVsSimulated}
+                  </p>
+                </div>
+              </div>
+            </GlassCard>
+          </Reveal>
+        )}
+
+        {/* 5. Key Features Grid - hidden if features are empty */}
+        {hasFeatures && (
+          <div className="mb-14">
+            <Reveal delay={0.45}>
+              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--text)] mb-6">
+                Key Features & Capabilities
+              </h2>
+            </Reveal>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {project.features.map((feature, fIdx) => (
+                <Reveal key={fIdx} delay={0.45 + fIdx * 0.05}>
+                  <GlassCard className="p-5 h-full flex items-start gap-3 border-[var(--card-border)] hover:border-[var(--accent)]/40 transition-colors">
+                    <CheckCircle2 className="w-5 h-5 text-[var(--accent)] shrink-0 mt-0.5" />
+                    <span className="text-sm text-[var(--text)]/85 leading-relaxed">
+                      {feature}
+                    </span>
+                  </GlassCard>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 6. Technical Challenges & Solutions Pairs - hidden if challenges are empty */}
+        {hasChallenges && (
+          <div className="mb-16">
+            <Reveal delay={0.5}>
+              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--text)] mb-2">
+                Engineering Challenges & Solutions
+              </h2>
+              <p className="text-sm text-[var(--text)]/70 mb-8">
+                Obstacles encountered during development and the architectural solutions applied.
+              </p>
+            </Reveal>
+
+            <div className="space-y-6">
+              {project.challenges!.map((chal, cIdx) => (
+                <Reveal key={cIdx} delay={0.5 + cIdx * 0.07}>
+                  <GlassCard className="p-6 sm:p-7 border-[var(--card-border)] overflow-hidden">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 divide-y md:divide-y-0 md:divide-x divide-[var(--card-border)]">
+                      {/* Problem Column */}
+                      <div className="pr-0 md:pr-4">
+                        <div className="flex items-center gap-2 text-rose-400 font-mono text-xs uppercase tracking-wider mb-2 font-semibold">
+                          <AlertCircle className="w-4 h-4 shrink-0" />
+                          <span>The Challenge</span>
+                        </div>
+                        <p className="text-sm text-[var(--text)]/85 leading-relaxed">
+                          {chal.problem}
+                        </p>
+                      </div>
+
+                      {/* Solution Column */}
+                      <div className="pt-4 md:pt-0 md:pl-6">
+                        <div className="flex items-center gap-2 text-[var(--accent)] font-mono text-xs uppercase tracking-wider mb-2 font-semibold">
+                          <CheckCircle2 className="w-4 h-4 shrink-0" />
+                          <span>Applied Solution</span>
+                        </div>
+                        <p className="text-sm text-[var(--text)]/90 leading-relaxed">
+                          {chal.solution}
+                        </p>
+                      </div>
+                    </div>
+                  </GlassCard>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 7. Previous / Next Project Navigation */}
+        <Reveal delay={0.6}>
+          <div className="pt-10 border-t border-[var(--card-border)] flex flex-col sm:flex-row items-center justify-between gap-4">
+            <Link
+              href={`/work/${prevProject.slug}`}
+              className="w-full sm:w-auto p-4 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] hover:border-[var(--accent)]/50 transition-all text-left group"
+            >
+              <span className="text-[10px] font-mono text-[var(--text)]/50 block mb-1">
+                ← Previous Project
+              </span>
+              <span className="text-sm font-heading font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
+                {prevProject.title}
+              </span>
+            </Link>
+
+            <Link
+              href="/work"
+              className="px-4 py-2 text-xs font-mono text-[var(--text)]/70 hover:text-[var(--accent)] transition-colors"
+            >
+              All Projects
+            </Link>
+
+            <Link
+              href={`/work/${nextProject.slug}`}
+              className="w-full sm:w-auto p-4 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] hover:border-[var(--accent)]/50 transition-all text-right group"
+            >
+              <span className="text-[10px] font-mono text-[var(--text)]/50 block mb-1">
+                Next Project →
+              </span>
+              <span className="text-sm font-heading font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
+                {nextProject.title}
+              </span>
+            </Link>
+          </div>
+        </Reveal>
+      </div>
+
+      <Footer />
+    </div>
+  );
+}

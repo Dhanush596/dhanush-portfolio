@@ -1,176 +1,159 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-* {
+:root {
+  /* Default: home */
+  --bg: #05060A;
+  --text: #F8FAFC;
+  --accent: #22D3EE;
+  --accent-2: #8B5CF6;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --glass-glare: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="home"] {
+  --bg: #05060A;
+  --text: #F8FAFC;
+  --accent: #22D3EE;
+  --accent-2: #8B5CF6;
+  --card-bg: rgba(34, 211, 238, 0.03);
+  --card-border: rgba(34, 211, 238, 0.12);
+  --glass-glare: rgba(34, 211, 238, 0.15);
+}
+
+[data-theme="work"] {
+  --bg: #0B0709;
+  --text: #F8FAFC;
+  --accent: #FB7185;
+  --accent-2: #FBBF24;
+  --card-bg: rgba(251, 113, 133, 0.03);
+  --card-border: rgba(251, 113, 133, 0.12);
+  --glass-glare: rgba(251, 113, 133, 0.15);
+}
+
+[data-theme="journey"] {
+  --bg: #04100D;
+  --text: #F8FAFC;
+  --accent: #34D399;
+  --accent-2: #14B8A6;
+  --card-bg: rgba(52, 211, 153, 0.03);
+  --card-border: rgba(52, 211, 153, 0.12);
+  --glass-glare: rgba(52, 211, 153, 0.15);
+}
+
+[data-theme="devops"] {
+  --bg: #020617;
+  --text: #F8FAFC;
+  --accent: #4ADE80;
+  --accent-2: #3B82F6;
+  --card-bg: rgba(74, 222, 128, 0.03);
+  --card-border: rgba(74, 222, 128, 0.12);
+  --glass-glare: rgba(74, 222, 128, 0.15);
+}
+
+[data-theme="stack"] {
+  --bg: #0A0612;
+  --text: #F8FAFC;
+  --accent: #E879F9;
+  --accent-2: #6366F1;
+  --card-bg: rgba(232, 121, 249, 0.03);
+  --card-border: rgba(232, 121, 249, 0.12);
+  --glass-glare: rgba(232, 121, 249, 0.15);
+}
+
+[data-theme="credentials"] {
+  --bg: #0F0A04;
+  --text: #F8FAFC;
+  --accent: #FBBF24;
+  --accent-2: #F59E0B;
+  --card-bg: rgba(251, 191, 36, 0.03);
+  --card-border: rgba(251, 191, 36, 0.12);
+  --glass-glare: rgba(251, 191, 36, 0.15);
+}
+
+[data-theme="about"] {
+  --bg: #F5F0E8;
+  --text: #1C1917;
+  --accent: #C2410C;
+  --accent-2: #0F766E;
+  --card-bg: rgba(28, 25, 23, 0.03);
+  --card-border: rgba(28, 25, 23, 0.12);
+  --glass-glare: rgba(194, 65, 12, 0.12);
+}
+
+[data-theme="contact"] {
+  --bg: #0C0508;
+  --text: #F8FAFC;
+  --accent: #F43F5E;
+  --accent-2: #FDBA74;
+  --card-bg: rgba(244, 63, 94, 0.03);
+  --card-border: rgba(244, 63, 94, 0.12);
+  --glass-glare: rgba(244, 63, 94, 0.15);
+}
+
+/* Base Body & HTML Smooth Fading */
+html,
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Typography mappings */
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-space-grotesk), sans-serif;
+  letter-spacing: -0.02em;
 }
 
-body {
-  background: linear-gradient(135deg, #030712 0%, #0f172a 50%, #1e293b 100%);
-  background-attachment: fixed;
-  font-family: var(--font-inter), sans-serif;
-  color: #e2e8f0;
+code, kbd, samp, pre, .font-mono, [data-mono] {
+  font-family: var(--font-jetbrains-mono), monospace;
 }
 
-/* Animated Grid Background */
-.animated-grid {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(
-      rgba(6, 182, 212, 0.05) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  pointer-events: none;
-  z-index: 1;
-  animation: slide 20s linear infinite;
+/* Visible Keyboard Focus Styles */
+:focus-visible {
+  outline: 2px solid var(--accent) !important;
+  outline-offset: 3px !important;
+  border-radius: 6px;
 }
 
-@keyframes slide {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 50px 50px;
-  }
-}
-
-/* Glassmorphism */
-.glassmorphism {
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-}
-
-.glassmorphism-dark {
-  background: rgba(3, 7, 18, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(6, 182, 212, 0.15);
-}
-
-/* Smooth Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #06b6d4, #3b82f6);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  border: 2px solid var(--bg);
+}
+
+[data-theme="about"] ::-webkit-scrollbar-thumb {
+  background: rgba(28, 25, 23, 0.2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #06b6d4, #a855f7);
+  background: var(--accent);
 }
 
-/* Text Selection */
-::selection {
-  background: rgba(6, 182, 212, 0.3);
-  color: #e2e8f0;
-}
-
-/* Focus Styles */
-:focus-visible {
-  outline: 2px solid #06b6d4;
-  outline-offset: 2px;
-}
-
-/* Heading Styles */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-poppins);
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
-h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
-}
-
-h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-}
-
-h3 {
-  font-size: 1.5rem;
-}
-
-/* Responsive Text */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.75rem;
-  }
-
-  h3 {
-    font-size: 1.25rem;
-  }
-}
-
-/* Links */
-a {
-  transition: all 0.3s ease;
-}
-
-a:hover {
-  color: #06b6d4;
-  text-decoration: none;
-}
-
-/* Form Elements */
-input,
-textarea,
-select {
-  background: rgba(15, 23, 42, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #e2e8f0;
-  transition: all 0.3s ease;
-  border-radius: 8px;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  background: rgba(15, 23, 42, 0.8);
-  border-color: #06b6d4;
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
-}
-
-/* Placeholder */
-input::placeholder,
-textarea::placeholder {
-  color: rgba(226, 232, 240, 0.5);
-}
-
-/* Container Queries */
-@supports (container-type: inline-size) {
-  @container (min-width: 400px) {
-    .container-md {
-      padding: 2rem;
-    }
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

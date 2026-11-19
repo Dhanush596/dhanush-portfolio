@@ -1,25 +1,53 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, subject, message } = body;
+    const { name, email, message, subject } = body;
 
-    if (!name || !email || !subject || !message) {
+    // Basic Validation
+    if (!name || typeof name !== 'string' || name.trim().length === 0) {
       return NextResponse.json(
-        { error: "All fields are required." },
+        { error: 'Name is required' },
         { status: 400 }
       );
     }
 
-    // TODO: wire this up to a real email provider (e.g. Resend, SendGrid, Nodemailer)
-    // For now this just acknowledges receipt so the contact form has a real endpoint to call.
-    console.log("New contact form submission:", { name, email, subject, message });
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
+      return NextResponse.json(
+        { error: 'A valid email address is required' },
+        { status: 400 }
+      );
+    }
 
-    return NextResponse.json({ success: true });
-  } catch {
+    if (!message || typeof message !== 'string' || message.trim().length === 0) {
+      return NextResponse.json(
+        { error: 'Message cannot be empty' },
+        { status: 400 }
+      );
+    }
+
+    // In production, dispatch email through Resend, Sendgrid, or SMTP
+    // (e.g. process.env.RESEND_API_KEY)
+    console.log('[Contact API Received Message]', {
+      name: name.trim(),
+      email: email.trim(),
+      subject: subject ? subject.trim() : 'New Portfolio Contact',
+      message: message.trim(),
+      timestamp: new Date().toISOString(),
+    });
+
     return NextResponse.json(
-      { error: "Something went wrong. Please try again." },
+      {
+        success: true,
+        message: 'Your message has been sent successfully. Thank you for reaching out!',
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('[Contact API Error]', error);
+    return NextResponse.json(
+      { error: 'Failed to process message. Please try again later.' },
       { status: 500 }
     );
   }

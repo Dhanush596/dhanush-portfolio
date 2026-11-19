@@ -1,55 +1,47 @@
-# Dhanush A — Portfolio
+# Dhanush A — Software Engineer Portfolio
 
-A production-ready Next.js 14 portfolio: glassmorphism UI, animated Kubernetes-style loading screen, scroll-tracking navbar, typewriter hero, animated stats, timeline, project modals, and a contact form.
+Modern, high-performance portfolio engineered with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS**, and **React Three Fiber**.
 
-## Getting started
+Live at: [https://dhanush.dev](https://dhanush.dev)
+
+---
+
+## Key Features
+
+- **Interactive 3D Node Network**: Physics-driven 3D background canvas in Three.js / React Three Fiber leaning toward the cursor, with a graceful static ambient gradient fallback on mobile and reduced-motion environments.
+- **Dynamic Work Section**: Bento-grid showcase with real-time category filtering (`Company`, `Internship`, `Self-practice`) and status badges (`LIVE`, `REAL-TIME PROJECT`, `PRACTICE`) persisted in URL query parameters.
+- **Route-Driven Dynamic Theming**: Smooth 0.5s CSS color transitions between 8 specialized palettes driven by `data-theme` attributes.
+- **3D Interactive UI**: `TiltCard`s with dynamic radial glare highlights, `MagneticButton`s, and `Reveal` scroll animations.
+- **Fluid Momentum Scrolling**: Powered by `lenis` smooth scroll with full `prefers-reduced-motion` compliance and visible keyboard focus styling.
+- **Case Study Deep Dives**: Dynamic static route pre-rendering for all production and real-time client projects with problem/solution challenge analysis.
+
+---
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router), React 19, TypeScript
+- **Styling**: Tailwind CSS
+- **Motion & 3D**: Three.js, `@react-three/fiber`, `@react-three/drei`, `framer-motion`
+- **Scrolling**: `lenis`
+- **Icons**: `lucide-react`
+
+---
+
+## Getting Started
 
 ```bash
 # 1. Install dependencies
 npm install
 
-# 2. Add your resume
-# Replace the placeholder at public/resume/Dhanush_A_Resume.pdf with your real PDF
-
-# 3. Run the dev server
+# 2. Run the development server
 npm run dev
 ```
 
-Open http://localhost:3000 to view it.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-## Build & deploy
+## Build for Production
 
 ```bash
 npm run build
 npm start
 ```
-
-Or deploy straight to Vercel:
-
-```bash
-npx vercel deploy
-```
-
-## Project structure
-
-```
-app/
-  layout.tsx          Root layout, fonts, navbar, cursor, scroll bar
-  page.tsx             Assembles all sections
-  globals.css          Global styles, glassmorphism, animated grid
-  api/contact/route.ts Contact form POST endpoint (stub — wire up an email provider)
-components/
-  sections/            Hero, About, Skills, Experience, Projects, Certifications, Contact, Footer
-  ui/                  Navbar, GlassCard, Button, LoadingScreen
-  effects/             CursorFollower, ScrollProgress
-hooks/
-  useMousePosition.ts
-  useScrollProgress.ts
-public/resume/          Drop your resume PDF here
-```
-
-## Notes
-
-- All personal content (name, links, experience, projects, certifications) lives directly in the section components under `components/sections/` — edit those to update your info.
-- The contact form currently simulates a submission in the UI. `app/api/contact/route.ts` gives you a real POST endpoint to wire it to — hook in Resend, SendGrid, or Nodemailer and call `fetch("/api/contact", ...)` from `Contact.tsx`.
-- Images are set to `unoptimized: true` in `next.config.mjs` for easy static hosting; remove that if you deploy somewhere with Next.js Image Optimization support.
