@@ -26,12 +26,12 @@ type Tab = 'all' | 'academic' | 'internships' | 'certifications';
 export default function CredentialsPage() {
   const [activeTab, setActiveTab] = useState<Tab>('all');
 
-  const totalAcademicDocs = ACADEMIC_CREDENTIALS.reduce(
-    (acc, curr) => acc + curr.documents.length,
+  const totalAcademicDocs = (ACADEMIC_CREDENTIALS || []).reduce(
+    (acc, curr) => acc + (curr.documents?.length || 0),
     0
   );
-  const totalInternshipDocs = INTERNSHIP_CREDENTIALS.length;
-  const totalCertDocs = CERTIFICATIONS.length;
+  const totalInternshipDocs = (INTERNSHIP_CREDENTIALS || []).length;
+  const totalCertDocs = (CERTIFICATIONS || []).length;
   const grandTotalDocs =
     totalAcademicDocs + totalInternshipDocs + totalCertDocs;
 
