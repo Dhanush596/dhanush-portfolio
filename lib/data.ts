@@ -31,6 +31,31 @@ export interface Certification {
   category: 'Cloud' | 'AI & ML' | 'Development' | 'Security';
 }
 
+export interface AcademicDocument {
+  id: string;
+  title: string;
+  degree: string;
+  institution?: string;
+  boardOrUniversity?: string;
+  period?: string;
+  description: string;
+  documents: {
+    label: string;
+    file: string;
+    type: 'Semester Markscard' | 'Consolidated' | 'Board Certificate';
+  }[];
+}
+
+export interface InternshipDocument {
+  id: string;
+  role: string;
+  company: string;
+  period: string;
+  certificateFile: string;
+  description: string;
+  skills: string[];
+}
+
 export interface SkillCategory {
   category: string;
   description: string;
@@ -258,6 +283,86 @@ export const CERTIFICATIONS: Certification[] = [
     issuer: 'Academic Certification',
     file: '/Certificates/ResearchMethodologiesAndIPR.pdf',
     category: 'Development',
+  },
+];
+
+export const INTERNSHIP_CREDENTIALS: InternshipDocument[] = [
+  {
+    id: 'intern-rooman',
+    role: 'DevOps Engineering Intern',
+    company: 'Rooman Technologies',
+    period: 'Feb 2026 – May 2026',
+    certificateFile: '/Certificates/InternshipCompletionCertificate.pdf',
+    description:
+      'Verified internship completion in containerized deployment, CI/CD pipeline automation with GitHub Actions, Kubernetes clustering, and Terraform infrastructure as code.',
+    skills: ['Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'Linux', 'GitOps'],
+  },
+  {
+    id: 'intern-encode',
+    role: 'Full-Stack Development Intern',
+    company: 'Encode Data Tech',
+    period: 'Apr 2024 – Jun 2024',
+    certificateFile: '/Certificates/FullStackInternship.pdf',
+    description:
+      'Verified internship completion designing and engineering a full-stack digital commerce web application, API integrations, and MySQL relational database management.',
+    skills: ['PHP', 'JavaScript', 'HTML5', 'CSS3', 'MySQL', 'Full-Stack Development'],
+  },
+];
+
+export const ACADEMIC_CREDENTIALS: AcademicDocument[] = [
+  {
+    id: 'acad-mca',
+    title: 'Master of Computer Applications (MCA)',
+    degree: 'MCA',
+    boardOrUniversity: 'Visvesvaraya Technological University (VTU)',
+    description:
+      'Postgraduate degree curriculum in software engineering, cloud architecture, system design, data structures, and enterprise applications.',
+    documents: [
+      { label: 'MCA Semester 1 Markscard', file: '/Certificates/MCAsem1.pdf', type: 'Semester Markscard' },
+      { label: 'MCA Semester 2 Markscard', file: '/Certificates/MCAsem2.pdf', type: 'Semester Markscard' },
+      { label: 'MCA Semester 3 Markscard', file: '/Certificates/MCAsem3.pdf', type: 'Semester Markscard' },
+      { label: 'MCA Semester 4 Markscard', file: '/Certificates/MCAsem4.pdf', type: 'Semester Markscard' },
+    ],
+  },
+  {
+    id: 'acad-bca',
+    title: 'Bachelor of Computer Applications (BCA)',
+    degree: 'BCA',
+    boardOrUniversity: 'Undergraduate Computer Applications',
+    description:
+      'Comprehensive undergraduate study in core computer science, software programming, web development, object-oriented paradigms, and database management systems.',
+    documents: [
+      { label: 'BCA Consolidated All-Semesters', file: '/Certificates/all-sem.pdf', type: 'Consolidated' },
+      { label: 'BCA Semester 1 Markscard', file: '/Certificates/Sem1.pdf', type: 'Semester Markscard' },
+      { label: 'BCA Semester 2 Markscard', file: '/Certificates/Sem2.pdf', type: 'Semester Markscard' },
+      { label: 'BCA Semester 3 Markscard', file: '/Certificates/Sem3.pdf', type: 'Semester Markscard' },
+      { label: 'BCA Semester 4 Markscard', file: '/Certificates/Sem4.pdf', type: 'Semester Markscard' },
+      { label: 'BCA Semester 5 Markscard', file: '/Certificates/Sem5.pdf', type: 'Semester Markscard' },
+      { label: 'BCA Semester 6 Markscard', file: '/Certificates/Sem6.pdf', type: 'Semester Markscard' },
+    ],
+  },
+  {
+    id: 'acad-puc',
+    title: 'Pre-University Course (PUC)',
+    degree: '1st & 2nd PUC',
+    boardOrUniversity: 'Department of Pre-University Education, Karnataka',
+    description:
+      'Higher secondary pre-university coursework with foundational analytics, mathematics, and science principles.',
+    documents: [
+      { label: '1st PUC Markscard', file: '/Certificates/1stpuc.pdf', type: 'Semester Markscard' },
+      { label: '2nd PUC Markscard', file: '/Certificates/2ndpuc.pdf', type: 'Board Certificate' },
+    ],
+  },
+  {
+    id: 'acad-10th',
+    title: 'Secondary School Leaving Certificate (SSLC / 10th)',
+    degree: '10th Standard',
+    boardOrUniversity: 'Karnataka Secondary Education Examination Board (KSEEB)',
+    description:
+      'Secondary school examination certification with foundational academics and language disciplines.',
+    documents: [
+      { label: '10th Standard / SSLC Markscard', file: '/Certificates/10th.pdf', type: 'Board Certificate' },
+    ],
   },
 ];
 
