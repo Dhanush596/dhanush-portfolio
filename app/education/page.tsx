@@ -18,6 +18,7 @@ import {
 import { ACADEMIC_CREDENTIALS } from '@/lib/data';
 import { BorderBeam } from '@/components/shared/BorderBeam';
 import { ProtectedDocumentModal } from '@/components/shared/ProtectedDocumentModal';
+import { Footer } from '@/components/shared/Footer';
 
 export default function EducationPage() {
   const [selectedDoc, setSelectedDoc] = useState<{
@@ -304,6 +305,9 @@ export default function EducationPage() {
           </div>
         </div>
       </div>
+
+      {/* Global Interactive Animated Footer */}
+      <Footer />
     </div>
   );
 }

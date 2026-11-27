@@ -21,6 +21,7 @@ import {
 import { Reveal } from '@/components/shared/Reveal';
 import { TiltCard } from '@/components/shared/TiltCard';
 import { ProtectedDocumentModal } from '@/components/shared/ProtectedDocumentModal';
+import { Footer } from '@/components/shared/Footer';
 
 type Tab = 'all' | 'academic' | 'internships' | 'certifications';
 
@@ -460,6 +461,9 @@ export default function CredentialsPage() {
         fileUrl={selectedDoc.fileUrl}
         category={selectedDoc.category}
       />
+
+      {/* Global Interactive Animated Footer */}
+      <Footer />
     </div>
   );
 }

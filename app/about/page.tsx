@@ -19,6 +19,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { Reveal } from '@/components/shared/Reveal';
+import { Footer } from '@/components/shared/Footer';
 import { TiltCard } from '@/components/shared/TiltCard';
 import { BorderBeam } from '@/components/shared/BorderBeam';
 import { PERSONAL_INFO } from '@/lib/data';
@@ -315,6 +316,9 @@ export default function AboutPage() {
           </div>
         </Reveal>
       </div>
+
+      {/* Global Interactive Animated Footer */}
+      <Footer />
     </div>
   );
 }

@@ -28,17 +28,39 @@ export function getThemeFromPathname(pathname: string): ThemeName {
 
 export function ThemeSetter({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const theme = useMemo(() => getThemeFromPathname(pathname || '/'), [pathname]);
+  const routeTheme = useMemo(() => getThemeFromPathname(pathname || '/'), [pathname]);
 
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      document.documentElement.setAttribute('data-theme', theme);
-      document.body.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-route', routeTheme);
+      document.body.setAttribute('data-route', routeTheme);
+
+      // Initialize or restore active theme preference
+      let activeTheme = 'dark'; // default
+      try {
+        const stored = localStorage.getItem('theme');
+        if (stored === 'light' || stored === 'dark') {
+          activeTheme = stored;
+        } else {
+          // Check system preference
+          activeTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+      } catch {}
+
+      document.documentElement.setAttribute('data-theme', activeTheme);
+      document.body.setAttribute('data-theme', activeTheme);
+      if (activeTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+      }
     }
-  }, [theme]);
+  }, [routeTheme]);
 
   return (
-    <div data-theme={theme} className="min-h-screen flex flex-col transition-colors duration-500 ease-in-out">
+    <div data-route={routeTheme} className="min-h-screen flex flex-col transition-colors duration-500 ease-in-out">
       {children}
     </div>
   );

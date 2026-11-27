@@ -21,6 +21,7 @@ import { EXPERIENCES, INTERNSHIP_CREDENTIALS } from '@/lib/data';
 import { Reveal } from '@/components/shared/Reveal';
 import { BorderBeam } from '@/components/shared/BorderBeam';
 import { ProtectedDocumentModal } from '@/components/shared/ProtectedDocumentModal';
+import { Footer } from '@/components/shared/Footer';
 
 export default function ExperiencePage() {
   const [selectedDoc, setSelectedDoc] = useState<{
@@ -647,6 +648,9 @@ export default function ExperiencePage() {
         fileUrl={selectedDoc.fileUrl}
         category={selectedDoc.category}
       />
+
+      {/* Global Interactive Animated Footer */}
+      <Footer />
     </div>
   );
 }

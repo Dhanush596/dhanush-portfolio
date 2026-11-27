@@ -45,7 +45,7 @@ function StatCounter({ target, suffix = '' }: StatCounterProps) {
   }, [isInView, target, prefersReducedMotion]);
 
   return (
-    <span ref={ref} className="font-heading font-black text-3xl sm:text-5xl text-white tracking-tight">
+    <span ref={ref} className="font-heading font-black text-3xl sm:text-5xl text-[var(--ink)] tracking-tight">
       {count}
       {suffix}
     </span>
@@ -61,9 +61,9 @@ export function StatsStrip() {
   ];
 
   return (
-    <section className="relative z-10 px-4 sm:px-8 lg:px-12 py-12 border-y border-white/[0.08] bg-black/40 backdrop-blur-md">
+    <section className="relative z-10 px-4 sm:px-8 lg:px-12 py-12 border-y border-[var(--line)] bg-[var(--surface-2)]/60 backdrop-blur-md">
       <Reveal direction="up" delay={0.1}>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 divide-y md:divide-y-0 md:divide-x divide-white/[0.08]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 divide-y md:divide-y-0 md:divide-x divide-[var(--line)]">
           {statsList.map((stat, idx) => (
             <div
               key={stat.label}
@@ -71,11 +71,11 @@ export function StatsStrip() {
                 idx > 0 && idx < 2 ? 'pt-4 md:pt-0 md:pl-6' : idx >= 2 ? 'pt-4 md:pt-0 md:pl-6' : ''
               }`}
             >
-              <div className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-2">
+              <div className="text-[10px] font-mono uppercase tracking-widest text-[var(--accent)] mb-2 font-semibold">
                 [Metric // 0{idx + 1}]
               </div>
               <StatCounter target={stat.value} suffix={stat.suffix} />
-              <div className="mt-1 text-xs sm:text-sm font-sans text-white/60">
+              <div className="mt-1 text-xs sm:text-sm font-sans text-[var(--muted)] font-medium">
                 {stat.label}
               </div>
             </div>

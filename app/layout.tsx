@@ -69,10 +69,15 @@ export default function RootLayout({
               (function() {
                 try {
                   var saved = localStorage.getItem('theme');
-                  if (saved === 'dark') {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                  } else {
+                  var isLight = saved === 'light';
+                  if (isLight) {
                     document.documentElement.setAttribute('data-theme', 'light');
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                  } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
                   }
                 } catch (e) {}
               })();
