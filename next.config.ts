@@ -25,6 +25,16 @@ const nextConfig: NextConfig = {
         destination: '/work/online-grocery-store',
         permanent: false,
       },
+      {
+        source: '/work/hangerhome',
+        destination: '/work/hanger-commerce',
+        permanent: false,
+      },
+      {
+        source: '/work/sri-seetharama',
+        destination: '/work/sri-seetarama',
+        permanent: false,
+      },
     ];
   },
 };
