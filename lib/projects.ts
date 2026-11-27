@@ -1098,25 +1098,84 @@ export const projects: Project[] = [
   },
   {
     slug: "sri-manjunatha-batteries",
-    title: "Sri Manjunatha Batteries",
-    tagline: "Authorized multi-brand automotive and inverter battery platform with 60-minute doorstep installation across Bengaluru",
+    title: "Sri Manjunath Batteries — E-Commerce & Doorstep Service Platform",
+    tagline: "Full-stack battery e-commerce & doorstep electrical service dispatch platform with vehicle/inverter compatibility matcher and dual-mode architecture",
     category: "company",
     status: "realtime",
-    role: "Developer, PrimePro.ai",
-    period: "2024 – 2025",
+    backend: "simulated-api",
+    role: "Full-Stack Lead Engineer / Architect, PrimePro.ai",
+    period: "Commercial Project (PrimePro.ai)",
     cover: "/media/sites/sri-manjunatha-batteries.png",
     accent: "#0EA5E9",
-    accent2: "#10B981",
-    features: [
-      "Comprehensive multi-brand battery catalog for automotive (cars, bikes), inverters, UPS backup systems, and accessories",
-      "Authorized master dealership portal representing Exide, Amaron, and Luminous with full factory warranty protection",
-      "Smart Battery Finder matching vehicle brand and model (Swift, Creta, etc.) to exact Ah battery specifications",
-      "60-Minute rapid doorstep delivery and certified technician installation booking across Bengaluru",
-      "Old battery exchange rebate calculator offering up to ₹2,500 scrap discounts with live order tracking",
-      "Bilingual interface (English & Kannada) with instant technician call routing and 24/7 WhatsApp emergency dispatch",
+    accent2: "#22C55E",
+    featured: true,
+    stack: [
+      "React 18.3",
+      "Vite 5.4",
+      "React Router DOM v6",
+      "Tailwind CSS 3.4",
+      "Framer Motion",
+      "Recharts 2.12",
+      "Canvas Confetti",
+      "Lucide React",
+      "Node.js & Express 4.21",
+      "MongoDB & Mongoose 9.12",
+      "JWT & Bcryptjs",
+      "Dual-Mode LocalStorage Architecture",
+      "Bilingual Engine (EN / ಕನ್ನಡ)",
+      "Vercel",
     ],
-    stack: ["React", "Node.js", "Express", "Tailwind CSS", "WhatsApp Dispatch", "Vercel"],
-    links: {},
+    features: [
+      "Smart Matchers: Vehicle battery finder (make, model, fuel type) and Home Inverter VA/Ah backup runtime calculator",
+      "Online Battery Store: Multi-brand battery catalog (Exide, Amaron, Luminous, Microtek) with PIN code serviceability check",
+      "Doorstep Electrical Services: Booking engine with Bengaluru PIN validation, photo upload, and live field technician assignment",
+      "Cart & Checkout Pipeline: Promo coupons, old battery scrap rebate deduction, simulated checkout, and GST invoice generation",
+      "Full Admin Management Suite: Recharts KPI revenue and service reports, battery inventory CRUD, technician dispatch queue, customer CRM, and store settings",
+      "Bilingual Support: English and Kannada (ಕನ್ನಡ) toggle via LanguageProvider plus built-in bilingual AI assistant (chatbotKnowledge.js)",
+      "1-Click Demo Onboarding: Instant 1-click access for Customer (customer@gmail.com / customer123) and Admin (admin@srimanjunath.com / admin123)",
+      "Live Order & Service Tracking: Real-time progress stepper monitoring dispatch, technician arrival, installation, and warranty activation",
+    ],
+    highlights: [
+      "Vehicle battery finder & inverter VA/Ah backup sizer matching exact electrical loads",
+      "Dual-Mode Architecture (standalone localStorage demo on Vercel or full-stack Express/MongoDB)",
+      "Field technician dispatch management syncing live with customer service tracking",
+      "Old battery scrap rebate engine deducting exchange value at checkout",
+      "Full bilingual localization (English / ಕನ್ನಡ) with dedicated customer chatbot",
+    ],
+    impact:
+      "Consolidated multi-brand battery retailing, scrap exchange discounts, and on-demand doorstep technician dispatch into a single dual-mode web platform for Bengaluru vehicle and home owners.",
+    realVsSimulated:
+      "Dual-Mode Architecture: Engineered with a hybrid data layer in ShopProvider utilizing localStorage and seeded JSON datasets on Vercel, switchable to a production Express + MongoDB REST API via VITE_API_URL (https://batteries-neon.vercel.app/).",
+    challenges: [
+      {
+        problem:
+          "Calculating accurate home inverter battery capacity (VA rating, Ah requirements) based on varied domestic appliance wattages.",
+        solution:
+          "Engineered an interactive Inverter Backup Sizer algorithmic calculator estimating total peak wattage, power factor, and desired backup hours to recommend exact inverter + battery pairings.",
+      },
+      {
+        problem:
+          "Providing zero-delay reviewer exploration on static Vercel hosting without requiring live MongoDB connection strings.",
+        solution:
+          "Implemented a dual-mode persistence architecture where ShopProvider falls back seamlessly to localStorage and pre-seeded mock datasets with stateful CRUD.",
+      },
+      {
+        problem:
+          "Real-time state synchronization between admin technician dispatch updates and customer service status tracking.",
+        solution:
+          "Structured reactive Context state linking Admin ServiceManagement updates directly to customer TrackServicePage timelines.",
+      },
+      {
+        problem:
+          "Bilingual interface consistency across technical automotive battery specifications in English and Kannada.",
+        solution:
+          "Engineered LanguageProvider with centralized dictionary keys ensuring accurate technical translations without breaking typography.",
+      },
+    ],
+    links: {
+      live: "https://batteries-neon.vercel.app/",
+      repo: "https://github.com/Dhanush596/batteries.git",
+    },
   },
 
   // =========================================================================
