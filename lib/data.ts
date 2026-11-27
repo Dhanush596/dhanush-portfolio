@@ -11,6 +11,7 @@ export interface Project {
   gradient: string;
   borderGlow: string;
   highlightMetric?: string;
+  cover?: string;
 }
 
 export interface Experience {
@@ -88,8 +89,8 @@ export const PERSONAL_INFO = {
 };
 
 export const STATS = [
-  { value: 12, label: 'Websites Built', suffix: '' },
-  { value: 4, label: 'Live in Production', suffix: '' },
+  { value: 13, label: 'Websites Built', suffix: '' },
+  { value: 5, label: 'Live in Production', suffix: '' },
   { value: 2, label: 'Internships Completed', suffix: '' },
   { value: 8, label: 'Certifications', suffix: '+' },
 ];
@@ -99,49 +100,66 @@ export const LIVE_SITES: Project[] = [
     id: 'marichin-homestay',
     title: 'Marichin Homestay',
     slug: 'marichin-homestay',
-    description: 'Nature Coffee Estate Retreat in Kushalnagar, Coorg. Complete booking system, accommodation showcases, and real-time reservation workflow.',
+    description: 'Nature Coffee Estate Retreat in Kushalnagar, Coorg. Planned and fully developed 100% from scratch by Dhanush for PrimePro.ai, featuring a custom room reservation engine and dedicated Admin Panel.',
     category: 'Live Product',
     url: 'https://marichinhomestay.in/',
-    techStack: ['React', 'Node.js', 'Express', 'Tailwind CSS', 'Render'],
+    cover: '/media/sites/marichin-homestay.png',
+    techStack: ['React', 'Node.js', 'Express', 'Tailwind CSS', 'Admin Panel'],
     gradient: 'from-emerald-500/20 via-teal-500/10 to-transparent',
     borderGlow: 'hover:border-emerald-400/50',
-    highlightMetric: 'Live Commercial Booking',
+    highlightMetric: 'Fully Built from Scratch + Admin',
   },
   {
     id: 'karnataka-kalyanothsava',
     title: 'Karnataka Kalyanothsava',
     slug: 'karnataka-kalyanothsava',
-    description: 'Premier matrimonial and cultural matchmaking platform serving regional wedding registrations, profile matchmaking, and events.',
+    description: 'Premier matrimonial & cultural matchmaking platform. Planned and fully developed 100% from scratch by Dhanush for PrimePro.ai, with member matchmaking filters, photo privacy, and complete Admin Panel.',
     category: 'Live Product',
     url: 'https://karnatakakalyanothsava.com/',
-    techStack: ['Next.js', 'React', 'Tailwind CSS', 'Node.js', 'MongoDB'],
+    cover: '/media/sites/karnataka-kalyanothsava.png',
+    techStack: ['Next.js', 'React', 'Tailwind CSS', 'Node.js', 'MongoDB', 'Admin Panel'],
     gradient: 'from-amber-500/20 via-orange-500/10 to-transparent',
     borderGlow: 'hover:border-amber-400/50',
-    highlightMetric: 'Active Community Platform',
+    highlightMetric: 'Fully Built from Scratch + Admin',
   },
   {
-    id: 'alankar-fashion',
+    id: 'alankarstyles',
     title: 'Alankar Fashion',
-    slug: 'alankar-fashion',
-    description: 'Modern e-commerce platform for ethnic sarees, designer apparel, spectacles, and optical wear with dynamic product catalogs.',
+    slug: 'alankarstyles',
+    description: 'First commercial live website worked on in the industry. Migrated legacy HTML/CSS/PHP to the modern MERN stack for PrimePro.ai, complete UI/UX makeover, and built custom Admin Panel from scratch.',
     category: 'Live Product',
     url: 'https://alankarfashion.in/',
-    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'],
+    cover: '/media/sites/alankar-fashion.png',
+    techStack: ['MERN Stack', 'React', 'Node.js', 'Express', 'MongoDB Atlas', 'Admin Panel'],
     gradient: 'from-rose-500/20 via-pink-500/10 to-transparent',
     borderGlow: 'hover:border-rose-400/50',
-    highlightMetric: 'High-Conversion E-Commerce',
+    highlightMetric: 'MERN Migration & Admin from Scratch',
   },
   {
-    id: 'bangalore-vibes',
+    id: 'bangalore-32-vibes',
     title: 'Bangalore Vibes',
-    slug: 'bangalore-vibes',
-    description: 'Dynamic city media portal, entertainment directory, and event hub celebrating Bangalore nightlife, community culture, and local businesses.',
+    slug: 'bangalore-32-vibes',
+    description: 'Private celebration venue and lounge booking platform in Bangalore. Contributed to this commercial platform for PrimePro.ai: overhauled process workflows, added new features, and revamped UI/UX.',
     category: 'Live Product',
     url: 'https://bangalorevibes.in/',
+    cover: '/media/sites/bangalore-vibes.png',
     techStack: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express'],
     gradient: 'from-purple-500/20 via-violet-500/10 to-transparent',
     borderGlow: 'hover:border-purple-400/50',
-    highlightMetric: 'Fast City Media Platform',
+    highlightMetric: 'Process Redesign & UI/UX Revamp',
+  },
+  {
+    id: 'instacartowing',
+    title: 'Insta Car Towing',
+    slug: 'instacartowing',
+    description: '24/7 on-demand vehicle emergency towing and rescue platform in Bengaluru. Contributed to this commercial site for PrimePro.ai: updated core information and overhauled UI/UX for fast emergency dispatch.',
+    category: 'Live Product',
+    url: 'https://instacartowing.com/',
+    cover: '/media/sites/instacar-towing.png',
+    techStack: ['React', 'Tailwind CSS', 'WhatsApp GPS Dispatch', 'Emergency UI/UX'],
+    gradient: 'from-yellow-500/20 via-amber-500/10 to-transparent',
+    borderGlow: 'hover:border-yellow-400/50',
+    highlightMetric: 'Information Architecture & UI/UX',
   },
 ];
 

@@ -283,12 +283,22 @@ export function WorkList() {
                     <div>
                       {/* Top Visual Artwork */}
                       <Link href={`/work/${project.slug}`} className="block mb-5 overflow-hidden rounded-2xl border border-[var(--line)]">
-                        <ProjectGradientArt
-                          title={project.title}
-                          accent={project.accent}
-                          accent2={project.accent2}
-                          large={isFeatured}
-                        />
+                        {project.cover ? (
+                          <div className={`relative w-full ${isFeatured ? 'h-52 sm:h-64' : 'h-40 sm:h-48'} overflow-hidden group/thumb bg-[var(--surface-2)]`}>
+                            <img
+                              src={project.cover}
+                              alt={project.title}
+                              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/thumb:scale-105"
+                            />
+                          </div>
+                        ) : (
+                          <ProjectGradientArt
+                            title={project.title}
+                            accent={project.accent}
+                            accent2={project.accent2}
+                            large={isFeatured}
+                          />
+                        )}
                       </Link>
 
                       {/* Header Line with Index & Section Indicator */}

@@ -11,9 +11,9 @@ export function LiveDeck() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Fanning angles for 4 cards: -9, -3, +3, +9 deg
-  const fanRotations = [-9, -3, 3, 9];
-  const fanXOffsets = [-120, -40, 40, 120];
+  // Fanning angles for 5 cards: -14, -7, 0, +7, +14 deg
+  const fanRotations = [-14, -7, 0, 7, 14];
+  const fanXOffsets = [-160, -80, 0, 80, 160];
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -117,31 +117,41 @@ export function LiveDeck() {
                     </span>
                   </div>
 
-                  {/* Screenshot Placeholder Area */}
-                  {/* TODO(MEDIA): replace with recording -> /public/media/sites/<slug>.webp (1440x900 high-res screenshot) */}
-                  <div className="relative flex-1 bg-gradient-to-br from-[var(--act-tint)] to-[var(--surface)] p-6 flex flex-col justify-between overflow-hidden border-b border-dashed border-[var(--line)]">
-                    <div className="flex items-start justify-between">
+                  {/* Screenshot Thumbnail Preview */}
+                  {site.cover && (
+                    <div className="relative w-full h-40 sm:h-44 overflow-hidden border-b border-[var(--line)] bg-[var(--surface-2)] shrink-0">
+                      <img
+                        src={site.cover}
+                        alt={site.title}
+                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-transparent to-transparent opacity-30" />
+                    </div>
+                  )}
+
+                  <div className="relative flex-1 bg-gradient-to-br from-[var(--act-tint)] to-[var(--surface)] p-5 sm:p-6 flex flex-col justify-between overflow-hidden">
+                    <div className="flex items-start justify-between gap-2">
                       <div>
                         <span className="text-[10px] font-mono text-[var(--accent)] font-bold block mb-1">
-                          0{idx + 1} / 04 · {site.highlightMetric}
+                          0{idx + 1} / 05 · {site.highlightMetric}
                         </span>
-                        <h3 className="font-heading font-black text-2xl text-[var(--ink)] tracking-tight group-hover:text-[var(--accent)] transition-colors">
+                        <h3 className="font-heading font-black text-xl sm:text-2xl text-[var(--ink)] tracking-tight group-hover:text-[var(--accent)] transition-colors">
                           {site.title}
                         </h3>
                       </div>
 
-                      <div className="p-2 rounded-xl bg-[var(--surface)] border border-[var(--line)] text-[var(--ink)] group-hover:bg-[var(--accent)] group-hover:text-white transition-colors shadow-sm">
+                      <div className="p-2 rounded-xl bg-[var(--surface)] border border-[var(--line)] text-[var(--ink)] group-hover:bg-[var(--accent)] group-hover:text-white transition-colors shadow-sm shrink-0">
                         <ExternalLink className="w-4 h-4" />
                       </div>
                     </div>
 
                     {/* Site Description */}
-                    <p className="text-xs text-[var(--muted)] font-sans leading-relaxed line-clamp-3 my-auto">
+                    <p className="text-xs text-[var(--muted)] font-sans leading-relaxed line-clamp-2 my-2">
                       {site.description}
                     </p>
 
                     {/* Tech Stack Chips */}
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[var(--line)]">
+                    <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[var(--line)]">
                       {site.techStack.map((tech) => (
                         <span
                           key={tech}

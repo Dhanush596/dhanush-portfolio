@@ -37,7 +37,7 @@ function CounterNumber({ target, suffix = '' }: { target: number; suffix?: strin
 export function ProofStrip() {
   const proofItems = [
     {
-      value: 12,
+      value: 13,
       suffix: '',
       label: 'Production Websites Built',
       badge: 'Client Platforms',

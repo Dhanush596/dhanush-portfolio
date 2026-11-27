@@ -84,7 +84,7 @@ export function SplashIntro({ onFinish }: { onFinish?: () => void }) {
         <div className="max-w-3xl mx-auto text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] shadow-sm text-xs font-mono">
             <Terminal className="w-3.5 h-3.5 text-[var(--accent)]" />
-            <span>sys.ready: 21 projects · 4 live sites · 0 drift</span>
+            <span>sys.ready: 22 projects · 5 live sites · 0 drift</span>
           </div>
 
           <h2 className="font-heading text-4xl sm:text-7xl font-black text-[var(--ink)] tracking-tight uppercase leading-[1.05]">

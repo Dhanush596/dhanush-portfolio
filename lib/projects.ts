@@ -25,8 +25,8 @@ export type Project = {
 };
 
 export const siteStats = {
-  companyWebsites: 12,
-  liveSites: 4,
+  companyWebsites: 13,
+  liveSites: 5,
   realtimeSites: 8,
 };
 
@@ -362,25 +362,53 @@ export const projects: Project[] = [
     },
   },
 
-  // =========================================================================
+    // =========================================================================
   // 2. COMPANY - LIVE COMMERCIAL PLATFORMS (PrimePro.ai)
   // =========================================================================
   {
     slug: "marichin-homestay",
     title: "Marichin Homestay",
-    tagline: "Live luxury estate retreat reservation and guest booking website built at PrimePro.ai",
+    tagline: "Live luxury coffee estate retreat booking platform in Kushalnagar, Coorg with dedicated admin panel",
     category: "company",
     status: "live",
-    role: "Developer, PrimePro.ai",
-    period: "2024 – 2025",
+    backend: "full-stack",
+    role: "Full-Stack Engineer (Planned & Fully Developed from Scratch for PrimePro.ai)",
+    period: "Commercial Project (PrimePro.ai)",
+    cover: "/media/sites/marichin-homestay.png",
     accent: "#34D399",
     accent2: "#14B8A6",
+    featured: true,
+    stack: ["React", "Node.js", "Express", "Tailwind CSS", "MongoDB", "Render", "Vercel"],
     features: [
-      "Real-time guest booking inquiry and date availability validation",
-      "Immersive coffee estate visual gallery and amenities tour",
-      "Fast, responsive mobile navigation and local attraction guides",
+      "Planned and fully developed 100% from scratch by Dhanush for PrimePro.ai client requirements",
+      "Engineered dedicated Admin Panel from scratch for room reservation management, guest inquiries, and pricing control",
+      "Real-time guest booking inquiry pipeline with automated date availability validation",
+      "Immersive coffee estate visual gallery, amenities tour, and local Coorg travel guide",
+      "Mobile-first responsive architecture delivering sub-second page performance",
     ],
-    stack: ["React", "Node.js", "Express", "Tailwind CSS", "Vercel"],
+    highlights: [
+      "100% planned and built end-to-end from scratch by Dhanush for PrimePro.ai",
+      "Custom administrative management panel built from scratch",
+      "Live production website operating with 100% uptime",
+    ],
+    impact:
+      "Engineered from scratch for PrimePro.ai, automating direct guest reservations and cutting third-party commission overhead.",
+    realVsSimulated:
+      "Live commercial website developed for the company (PrimePro.ai). Planned and engineered 100% from scratch by Dhanush, including the customer booking flow and dedicated Admin Panel.",
+    challenges: [
+      {
+        problem:
+          "Guests booking high-end estate retreats require instant date verification and high-res photo exploration on mobile devices without lag.",
+        solution:
+          "Engineered a responsive calendar picker and optimized WebP image pipeline, achieving sub-second loads and fluid mobile reservations.",
+      },
+      {
+        problem:
+          "Homestay managers needed an intuitive way to manage seasonal tariffs, block dates, and review guest booking requests.",
+        solution:
+          "Designed and built an Admin Operations Panel from scratch with date blocking, rate adjustments, and real-time reservation notifications.",
+      },
+    ],
     links: {
       live: "https://marichinhomestay.in/",
     },
@@ -388,36 +416,67 @@ export const projects: Project[] = [
   {
     slug: "karnataka-kalyanothsava",
     title: "Karnataka Kalyanothsava",
-    tagline: "Live regional matrimonial and cultural matchmaking platform built at PrimePro.ai",
+    tagline: "Live regional matrimonial and cultural matchmaking platform with dedicated administrator control panel",
     category: "company",
     status: "live",
-    role: "Developer, PrimePro.ai",
-    period: "2024 – 2025",
+    backend: "full-stack",
+    role: "Full-Stack Engineer (Planned & Fully Developed from Scratch for PrimePro.ai)",
+    period: "Commercial Project (PrimePro.ai)",
+    cover: "/media/sites/karnataka-kalyanothsava.png",
     accent: "#FB7185",
     accent2: "#FBBF24",
+    featured: true,
+    stack: ["Next.js", "React", "Node.js", "MongoDB", "Tailwind CSS", "Vercel"],
     features: [
-      "Member onboarding, profile registration, and privacy-first discovery",
-      "Cultural celebration schedules and event management portal",
-      "Scalable relational data models ensuring zero service interruption",
+      "Planned and fully developed 100% from scratch by Dhanush for PrimePro.ai client requirements",
+      "Engineered dedicated Admin Panel from scratch for member verification, profile moderation, and event management",
+      "Structured member registration flows with regional matrimonial matchmaking filters (religion, caste, location, mother tongue)",
+      "Privacy-first photo protection and verified badge credentialing for genuine profiles",
+      "Scalable MongoDB relational schema modeling supporting high-concurrency member traffic with zero downtime",
+      "Community celebration schedules and cultural event announcement feeds",
     ],
-    stack: ["Next.js", "React", "Node.js", "MongoDB", "Tailwind CSS"],
+    highlights: [
+      "100% planned and built end-to-end from scratch by Dhanush for PrimePro.ai",
+      "Custom administrative management panel built from scratch",
+      "Active regional platform serving community celebrations and matchmaking",
+    ],
+    impact:
+      "Architected and delivered from scratch for PrimePro.ai, supporting high-concurrency cultural registrations and automated member verification.",
+    realVsSimulated:
+      "Live commercial website developed for the company (PrimePro.ai). Planned and engineered 100% from scratch by Dhanush, including member matchmaking filters and dedicated Admin Panel.",
+    challenges: [
+      {
+        problem:
+          "Regional matrimony platforms require sensitive profile verification and privacy controls to prevent unauthorized photo access.",
+        solution:
+          "Implemented privacy-first photo protection toggles and an administrative approval queue where profiles are reviewed before publishing.",
+      },
+      {
+        problem:
+          "High concurrent traffic spikes during cultural event registration periods causing database slowdowns.",
+        solution:
+          "Optimized MongoDB indexing across search attributes (caste, district, age bracket) and cached active member counts.",
+      },
+    ],
     links: {
       live: "https://karnatakakalyanothsava.com/",
     },
   },
   {
     slug: "alankarstyles",
-    title: "Shringar Luxury (AlankarStyles)",
-    tagline: "Luxury D2C ethnic fashion e-commerce platform with 3D virtual try-on studio and 14-module admin suite",
+    title: "Alankar Fashion (AlankarStyles)",
+    tagline: "Modernized ethnic fashion & optical e-commerce platform migrated to MERN with custom admin suite",
     category: "company",
     status: "live",
     backend: "full-stack",
-    role: "Full-Stack Lead Developer / Architect",
+    role: "Full-Stack Engineer (MERN Migration & Admin Panel Architect for PrimePro.ai)",
     period: "Commercial Project (PrimePro.ai)",
+    cover: "/media/sites/alankar-fashion.png",
     accent: "#D4AF37",
     accent2: "#800020",
     featured: true,
     stack: [
+      "MERN Stack",
       "React 18",
       "Vite 8",
       "React Router DOM v6",
@@ -427,79 +486,138 @@ export const projects: Project[] = [
       "Lucide React",
       "Vanilla Modern CSS3",
       "React Context (Shop & Auth)",
-      "Custom Mock Axios Adapter (mockBackend.js)",
       "Node.js",
       "Express.js",
-      "MongoDB",
+      "MongoDB Atlas",
       "Mongoose",
       "JWT & Bcrypt",
       "RBAC",
       "Vercel",
     ],
     features: [
-      "Curated Indian luxury fashion storefront featuring heirloom silks, bridal couture, sarees, and eyewear with 30 high-resolution canonical product records",
-      "Interactive 3D Virtual Try-On Studio: 3D Canvas spectacles viewer with rotate, pan, and zoom controls paired with a virtual drape simulation preview",
-      "Slide-over bag drawer with live subtotal calculation, coupon validation (WELCOME10, FESTIVE20, SHRINGAR500), and simulated payment gateways (Card, UPI, COD)",
-      "Customer account hub with visual 4-stage tracking timeline (Order Placed -> Confirmed -> Shipped -> Delivered), saved addresses, and personal wishlist",
-      "Floating AI Concierge assistant answering drape fabric queries and safe WhatsApp demo concierge pre-filled with couture inquiry text",
-      "14-Module Enterprise Admin Suite: Real-time Recharts analytics (revenue area curves, sales velocity, order status donuts), product CRUD drawer, inventory stock indicators, and customer CRM",
-      "Storefront Content Studio (CMS): Real-time editor allowing non-technical administrators to modify homepage headlines, hero banners, brand mottos, and policies without code changes",
-      "Chronological audit logging, team RBAC (Super Admin, Admin, Catalog Manager, Customer), and 1-click pre-configured demo credentials",
+      "First live commercial website Dhanush worked on in the software industry (developed for PrimePro.ai)",
+      "Technological Migration: Switched the legacy architecture to the MERN stack (MongoDB, Express, React, Node.js) from normal HTML, CSS, and PHP",
+      "Complete UI/UX makeover from scratch with responsive luxury editorial aesthetics",
+      "Designed and created the full-featured Admin Panel from scratch for catalog management, order processing, and customer reviews",
+      "Added new interactive features including multi-category filtering, shopping cart, and customer reviews",
+      "Also engineered an interactive 3D Virtual Try-On showcase demo (Shringar Luxury) deployed on Vercel with Three.js",
     ],
     highlights: [
-      "3D Virtual Try-On Studio with Three.js canvas controls and drape simulation",
-      "14 full enterprise admin modules with Recharts data visualizations",
-      "Dual-mode architecture: connects to MongoDB cluster or runs offline via mockBackend.js",
-      "Automated startup cache purging for secure client data sanitization",
-      "1-click demo login buttons for Executive Admin and Demo Customer",
+      "First live commercial website worked on in the industry",
+      "Migrated legacy HTML/CSS/PHP to modern MERN stack with complete UI/UX overhaul",
+      "Created custom administrative control panel from scratch",
+      "Interactive 3D Virtual Try-On showcase demo available",
     ],
     impact:
-      "Delivered a zero-downtime luxury showcase on Vercel with instant 0ms cold starts, offline relational joins, and complete full-stack transaction persistence.",
+      "Transformed a legacy static website into a modern MERN e-commerce application with a custom admin portal, slashing catalog update turnaround time.",
     realVsSimulated:
-      "Seamless Dual-Mode Execution: Production-grade React (Vite) + Node.js/Express + MongoDB architecture with a 1,300+ line in-browser mock backend engine (mockBackend.js + mockAxiosAdapter) that intercepts Axios requests and persists CRUD changes to localStorage for zero-cost static showcase deployment.",
+      "Live commercial website modernized for the company (PrimePro.ai). Not developed from scratch initially: switched to MERN stack from HTML/CSS/PHP, completely overhauled UI/UX, and built the Admin Panel from scratch. Includes 3D virtual try-on showcase demo.",
     challenges: [
       {
         problem:
-          "Hosting on free-tier cloud backends caused 50+ second cold-start delays or server inactivity shutdowns, degrading reviewer impressions.",
+          "The client's original website was built on static HTML/CSS/PHP, making inventory and price updates slow and prone to inconsistency.",
         solution:
-          "Engineered an in-browser mock backend and network adapter (mockAxiosAdapter) with 1,300+ lines of TypeScript/JS supporting full relational CRUD, coupon math, and localStorage persistence.",
+          "Migrated the entire architecture to a modern MERN stack (MongoDB, Express, React, Node.js), giving it a complete UI/UX overhaul and building an Admin Panel from scratch.",
       },
       {
         problem:
-          "Sanitizing sensitive commercial client information before publishing the public portfolio demonstration.",
+          "Customers wanted to preview eyewear and fabric drapes before purchasing ethnic sarees.",
         solution:
-          "Designed an automated startup cache purging and migration routine that scrubs existing browser storage and seeds sanitized showcase models and demo credentials.",
-      },
-      {
-        problem:
-          "Delivering an interactive 3D virtual try-on experience without heavy computational overhead or sluggish page rendering.",
-        solution:
-          "Built an isolated Three.js canvas viewer with manual orbit controls and an HTML5 Canvas virtual drape preview that runs smoothly at 60 FPS.",
+          "Engineered an interactive 3D Virtual Try-On Studio using Three.js and HTML5 Canvas, allowing users to rotate spectacles in 3D and simulate drape fabrics.",
       },
     ],
     links: {
-      live: "https://shringar-luxury.vercel.app/",
+      live: "https://alankarfashion.in/",
       repo: "https://github.com/Dhanush596/alankarstyles.git",
     },
   },
   {
     slug: "bangalore-32-vibes",
-    title: "Bangalore 32 Vibes",
-    tagline: "Live urban media portal and local entertainment directory built at PrimePro.ai",
+    title: "Bangalore Vibes (Celebration Lounge)",
+    tagline: "Urban private celebration venue booking portal and nightlife directory with revamped UI/UX",
     category: "company",
     status: "live",
-    role: "Developer, PrimePro.ai",
-    period: "2024 – 2025",
+    backend: "full-stack",
+    role: "Frontend & Process Engineer (UI/UX Revamp & Process Workflow for PrimePro.ai)",
+    period: "Commercial Project (PrimePro.ai)",
+    cover: "/media/sites/bangalore-vibes.png",
     accent: "#22D3EE",
     accent2: "#8B5CF6",
-    features: [
-      "Curated local nightlife, dining, and city culture guides",
-      "High-speed single page architecture with lightweight bundle size",
-      "Community discovery feeds and social media spotlight integration",
-    ],
     stack: ["React", "Vite", "Node.js", "Express", "Tailwind CSS"],
+    features: [
+      "Contributed to this commercial platform built for PrimePro.ai (not built from scratch, worked on existing system)",
+      "Redesigned the full process workflow and engineered new features for hourly private lounge reservations",
+      "Revamped and modernized the UI/UX for party package selection, add-on booking, and car celebrations",
+      "Optimized single-page navigation speed with lightweight React and Tailwind CSS bundle loading",
+      "Integrated interactive Instagram reel showcases and WhatsApp booking concierge",
+    ],
+    highlights: [
+      "Complete process workflow redesign and feature expansion",
+      "Modernized luxury dark lounge UI/UX aesthetic",
+      "Live commercial platform operating in Bangalore",
+    ],
+    impact:
+      "Streamlined the private celebration reservation process with clear hourly booking steps and transparent package pricing.",
+    realVsSimulated:
+      "Live commercial platform built for the company (PrimePro.ai). Contributed by re-engineering the booking process workflow, adding new features, and revamping UI/UX.",
+    challenges: [
+      {
+        problem:
+          "The original booking flow was confusing for customers trying to choose between hourly lounge packages and custom party add-ons.",
+        solution:
+          "Redesigned the full booking process into a clear step-by-step experience with transparent package tiers and visual add-on selection.",
+      },
+    ],
     links: {
       live: "https://bangalorevibes.in/",
+    },
+  },
+  {
+    slug: "instacartowing",
+    title: "Insta Car Towing Services",
+    tagline: "Live 24/7 on-demand vehicle emergency towing and rescue platform across Bengaluru with revamped UI/UX",
+    category: "company",
+    status: "live",
+    backend: "full-stack",
+    role: "UI/UX & Content Engineer (Information Architecture & UI/UX Redesign for PrimePro.ai)",
+    period: "Commercial Project (PrimePro.ai)",
+    cover: "/media/sites/instacar-towing.png",
+    accent: "#EAB308",
+    accent2: "#16A34A",
+    stack: ["React", "Tailwind CSS", "WhatsApp GPS Dispatch", "Emergency UI/UX", "Vercel"],
+    features: [
+      "Contributed to this commercial live website built for PrimePro.ai (not built from scratch, worked on existing platform)",
+      "Overhauled the core UI/UX workflows for emergency roadside assistance, flatbed towing, and 25-minute rescue dispatch",
+      "Restructured and updated critical service information, location coverage, and pricing transparency",
+      "Engineered high-converting emergency mobile CTAs: 1-tap phone calls and WhatsApp live GPS location sharing",
+      "Streamlined 3-step dispatch stepper: Call/WhatsApp -> Truck Dispatched -> Safe Hook-up & Delivery",
+      "Optimized high-contrast visual design for day and night emergency readability across mobile devices",
+    ],
+    highlights: [
+      "Information architecture and emergency dispatch UI/UX overhaul",
+      "1-tap emergency mobile call & WhatsApp live location routing",
+      "Live commercial platform serving Bengaluru drivers 24/7",
+    ],
+    impact:
+      "Enhanced roadside emergency conversion flow with instant WhatsApp GPS dispatch and clear step-by-step rescue status, reducing caller friction during breakdowns.",
+    realVsSimulated:
+      "Live commercial website built for the company (PrimePro.ai). Contributed by updating core content/information and completely revamping the emergency roadside assistance UI/UX.",
+    challenges: [
+      {
+        problem:
+          "Drivers stranded on busy highways require sub-second page access and zero navigation friction to request assistance.",
+        solution:
+          "Streamlined the UI into a high-visibility dark/yellow emergency theme with prominent 1-tap Call and WhatsApp live location sharing buttons.",
+      },
+      {
+        problem:
+          "Unclear towing options and ambiguous pricing caused driver hesitation during emergency breakdowns.",
+        solution:
+          "Restructured vehicle service categories (flatbed, wheel-lift, luxury, accident recovery) with upfront pricing and an interactive step-by-step dispatch roadmap.",
+      },
+    ],
+    links: {
+      live: "https://instacartowing.com/",
     },
   },
 
