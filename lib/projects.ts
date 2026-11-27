@@ -17,7 +17,9 @@ export type Project = {
   impact?: string;
   realVsSimulated?: string;
   challenges?: { problem: string; solution: string }[];
-  links: { live?: string; repo?: string };
+  links: { live?: string; demo?: string; repo?: string };
+  isProductionClient?: boolean;
+  demoNotice?: string;
   accent: string;
   accent2: string;
   cover?: string;
@@ -39,7 +41,7 @@ export const categoryLabels: Record<Category, string> = {
 };
 
 export const statusLabels: Record<Status, { label: string; description: string }> = {
-  live: { label: "LIVE", description: "Publicly accessible online" },
+  live: { label: "INTERACTIVE DEMO", description: "Hosted interactive demo showcase" },
   realtime: { label: "REAL-TIME PROJECT", description: "Commercial project built at PrimePro.ai" },
   practice: { label: "PRACTICE", description: "Technical implementation project" },
 };
@@ -413,8 +415,12 @@ export const projects: Project[] = [
           "Designed and built an Admin Operations Panel from scratch with date blocking, rate adjustments, and real-time reservation notifications.",
       },
     ],
+    isProductionClient: true,
+    demoNotice:
+      "Showcased for portfolio demonstration to exhibit engineering, UI/UX, and architecture work. Client production domains or third-party servers may experience maintenance or service updates (not all 5 client websites are actively operational at all times).",
     links: {
       live: "https://marichinhomestay.in/",
+      demo: "https://marichinhomestay.in/",
     },
   },
   {
@@ -462,8 +468,12 @@ export const projects: Project[] = [
           "Optimized MongoDB indexing across search attributes (caste, district, age bracket) and cached active member counts.",
       },
     ],
+    isProductionClient: true,
+    demoNotice:
+      "Showcased for portfolio demonstration to exhibit engineering, UI/UX, and architecture work. Client production domains or third-party servers may experience maintenance or service updates (not all 5 client websites are actively operational at all times).",
     links: {
       live: "https://karnatakakalyanothsava.com/",
+      demo: "https://karnatakakalyanothsava.com/",
     },
   },
   {
@@ -530,8 +540,12 @@ export const projects: Project[] = [
           "Engineered an interactive 3D Virtual Try-On Studio using Three.js and HTML5 Canvas, allowing users to rotate spectacles in 3D and simulate drape fabrics.",
       },
     ],
+    isProductionClient: true,
+    demoNotice:
+      "Showcased for portfolio demonstration to exhibit engineering, UI/UX, and architecture work. Client production domains or third-party servers may experience maintenance or service updates (not all 5 client websites are actively operational at all times).",
     links: {
       live: "https://alankarfashion.in/",
+      demo: "https://alankarfashion.in/",
       repo: "https://github.com/Dhanush596/alankarstyles.git",
     },
   },
@@ -572,8 +586,12 @@ export const projects: Project[] = [
           "Redesigned the full booking process into a clear step-by-step experience with transparent package tiers and visual add-on selection.",
       },
     ],
+    isProductionClient: true,
+    demoNotice:
+      "Showcased for portfolio demonstration to exhibit engineering, UI/UX, and architecture work. Client production domains or third-party servers may experience maintenance or service updates (not all 5 client websites are actively operational at all times).",
     links: {
       live: "https://bangalorevibes.in/",
+      demo: "https://bangalorevibes.in/",
     },
   },
   {
@@ -620,8 +638,12 @@ export const projects: Project[] = [
           "Restructured vehicle service categories (flatbed, wheel-lift, luxury, accident recovery) with upfront pricing and an interactive step-by-step dispatch roadmap.",
       },
     ],
+    isProductionClient: true,
+    demoNotice:
+      "Showcased for portfolio demonstration to exhibit engineering, UI/UX, and architecture work. Client production domains or third-party servers may experience maintenance or service updates (not all 5 client websites are actively operational at all times).",
     links: {
       live: "https://instacartowing.com/",
+      demo: "https://instacartowing.com/",
     },
   },
 

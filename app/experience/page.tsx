@@ -310,9 +310,17 @@ export default function ExperiencePage() {
               href="/work?status=live"
               className="text-xs font-mono text-[var(--accent)] hover:underline flex items-center gap-1 cursor-pointer pointer-events-auto"
             >
-              <span>View live section</span>
+              <span>View demo showcases</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
+          </div>
+
+          {/* Demo Notice Banner */}
+          <div className="mb-8 p-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs font-mono flex items-start gap-3 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse mt-1 shrink-0" />
+            <p className="leading-relaxed">
+              <strong>Demo Notice:</strong> These client websites are featured strictly for portfolio demonstration to show real-world engineering, UI/UX, and admin architecture. Client production domains and third-party servers may experience maintenance, updates, or service changes (not all 5 client websites are actively operational at all times).
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -323,8 +331,8 @@ export default function ExperiencePage() {
               >
                 <div>
                   <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-4">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
-                      LIVE IN PRODUCTION
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                      CLIENT PRODUCTION · DEMO
                     </span>
                     <span className="text-xs font-mono text-[var(--muted)]">{proj.period}</span>
                   </div>
@@ -360,12 +368,12 @@ export default function ExperiencePage() {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[var(--line)] flex items-center justify-between gap-3">
+                <div className="pt-4 border-t border-[var(--line)] flex items-center justify-between gap-2">
                   <Link
                     href={`/work/${proj.slug}`}
                     className="flex-1 py-2 px-3 rounded-xl bg-[var(--act-tint)] hover:bg-[var(--accent)] hover:text-white text-[var(--accent)] border border-[var(--line)] font-mono text-xs font-bold transition-all text-center cursor-pointer pointer-events-auto"
                   >
-                    Inspect Architecture
+                    Demo Showcase
                   </Link>
 
                   {proj.liveUrl && (
@@ -375,7 +383,7 @@ export default function ExperiencePage() {
                       rel="noopener noreferrer"
                       className="py-2 px-3 rounded-xl border border-[var(--line)] hover:border-[var(--accent)] text-[var(--ink)] font-mono text-xs font-semibold flex items-center gap-1.5 cursor-pointer pointer-events-auto"
                     >
-                      <span>Live Site</span>
+                      <span>Live Website</span>
                       <ExternalLink className="w-3.5 h-3.5 text-[var(--accent)]" />
                     </a>
                   )}

@@ -160,16 +160,16 @@ export function CommandPalette({
       },
     ];
 
-    // Add Live Sites
+    // Add Demo Showcases
     projects
       .filter((p) => p.links?.live)
       .slice(0, 5)
       .forEach((p) => {
         list.push({
-          id: `live-${p.slug}`,
-          title: `Visit: ${p.title}`,
+          id: `demo-${p.slug}`,
+          title: `Launch Demo: ${p.title}`,
           subtitle: p.tagline,
-          category: 'Live Sites',
+          category: 'Demo Showcases',
           action: () => {
             window.open(p.links.live!, '_blank');
           },

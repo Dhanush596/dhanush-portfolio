@@ -18,21 +18,29 @@ export function LiveDeck() {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14 border-b border-[var(--line)] pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 border-b border-[var(--line)] pb-6">
         <div>
           <span className="text-[11px] font-mono text-[var(--accent)] uppercase tracking-widest block mb-2 font-semibold">
-            [2.1 PRODUCTION SYSTEMS]
+            [2.1 CLIENT PRODUCTION PLATFORMS]
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black text-[var(--ink)] uppercase tracking-tight">
-            Live in{' '}
+            Client{' '}
             <span className="font-serif-accent bg-gradient-to-r from-[var(--ok)] to-[var(--accent)] bg-clip-text text-transparent font-normal italic lowercase">
               production
-            </span>
-            .
+            </span>{' '}
+            showcase.
           </h2>
         </div>
         <p className="text-xs sm:text-sm font-mono text-[var(--muted)] max-w-md">
-          Commercial platforms operating in live production. Click any card to launch the live platform.
+          Commercial platforms developed for clients. Exhibited to showcase technical architecture and UI/UX engineering.
+        </p>
+      </div>
+
+      {/* Demo Information Banner */}
+      <div className="mb-10 p-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs font-mono flex items-start gap-3 shadow-sm">
+        <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse mt-1 shrink-0" />
+        <p className="leading-relaxed">
+          <strong>Demo Notice:</strong> These commercial websites are featured strictly for demonstration to review engineering contributions, design systems, and admin portals. Please note that third-party client domains and production servers may undergo maintenance, updates, or service pauses (not all 5 client websites are guaranteed to be actively operating in live production at all times).
         </p>
       </div>
 
@@ -111,9 +119,9 @@ export function LiveDeck() {
                     </div>
 
                     {/* Status Indicator */}
-                    <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      LIVE
+                    <span className="inline-flex items-center gap-1 text-[10px] font-mono text-amber-600 dark:text-amber-400 font-semibold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                      DEMO SHOWCASE
                     </span>
                   </div>
 
@@ -160,6 +168,31 @@ export function LiveDeck() {
                           {tech}
                         </span>
                       ))}
+                    </div>
+
+                    {/* Action Buttons: Live Website & Demo Showcase */}
+                    <div className="flex items-center gap-2 pt-3 border-t border-[var(--line)] mt-1">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(site.url, '_blank');
+                        }}
+                        className="flex-1 py-1.5 px-2.5 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-2)] text-white text-[11px] font-mono font-bold flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+                      >
+                        <span>Live Website</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.location.href = `/work/${site.slug}`;
+                        }}
+                        className="py-1.5 px-2.5 rounded-lg bg-[var(--surface)] hover:bg-[var(--surface-2)] text-[var(--ink)] border border-[var(--line)] text-[11px] font-mono font-medium flex items-center justify-center gap-1 transition-colors"
+                      >
+                        <span>Demo Showcase</span>
+                      </button>
                     </div>
                   </div>
                 </div>

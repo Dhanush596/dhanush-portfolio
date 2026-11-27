@@ -12,6 +12,7 @@ import {
   HelpCircle,
   Code2,
   Layers,
+  Globe,
 } from 'lucide-react';
 import {
   projects,
@@ -166,30 +167,77 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
             </p>
           </Reveal>
 
-          {/* Action Buttons - only shown if links exist (hidden for real-time projects) */}
+          {/* Action Buttons */}
           {hasActionButtons && (
             <Reveal delay={0.25}>
-              <div className="flex flex-wrap items-center gap-4">
-                {hasLiveLink && (
-                  <MagneticButton
-                    href={project.links.live}
-                    variant="primary"
-                    target="_blank"
-                  >
-                    <span>Visit Live Site</span>
-                    <ExternalLink className="w-4 h-4" />
-                  </MagneticButton>
-                )}
+              <div className="space-y-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  {project.isProductionClient ? (
+                    <>
+                      {project.links.live && (
+                        <MagneticButton
+                          href={project.links.live}
+                          variant="primary"
+                          target="_blank"
+                        >
+                          <Globe className="w-4 h-4" />
+                          <span>Live Website</span>
+                        </MagneticButton>
+                      )}
+                      <MagneticButton
+                        href={project.links.demo || project.links.live}
+                        variant="glass"
+                        target="_blank"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span>Demo Showcase</span>
+                      </MagneticButton>
+                    </>
+                  ) : (
+                    hasLiveLink && (
+                      <MagneticButton
+                        href={project.links.live}
+                        variant="primary"
+                        target="_blank"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span>Interactive Demo</span>
+                      </MagneticButton>
+                    )
+                  )}
 
-                {hasRepoLink && (
-                  <MagneticButton
-                    href={project.links.repo}
-                    variant="glass"
-                    target="_blank"
-                  >
-                    <GithubIcon className="w-4 h-4" />
-                    <span>View Source Code</span>
-                  </MagneticButton>
+                  {hasRepoLink && (
+                    <MagneticButton
+                      href={project.links.repo}
+                      variant="glass"
+                      target="_blank"
+                    >
+                      <GithubIcon className="w-4 h-4" />
+                      <span>View Source Code</span>
+                    </MagneticButton>
+                  )}
+                </div>
+
+                {/* Portfolio Demonstration Notice */}
+                {project.isProductionClient ? (
+                  <div className="p-3.5 sm:p-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs font-mono leading-relaxed flex items-start gap-3 shadow-sm max-w-2xl">
+                    <AlertCircle className="w-4 h-4 shrink-0 text-amber-500 mt-0.5" />
+                    <div>
+                      <span className="font-bold uppercase tracking-wider block mb-1 text-amber-600 dark:text-amber-400">
+                        Portfolio Demonstration Notice
+                      </span>
+                      <span>
+                        This commercial platform is showcased strictly for demonstration to exhibit full-stack engineering, UI/UX, and architecture work. Client production domains or third-party servers may experience maintenance, hosting changes, or service pauses (not all 5 client websites are guaranteed to be actively running in live production at all times).
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  hasLiveLink && (
+                    <p className="text-[11px] font-mono text-[var(--text)]/60 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                      <span>Hosted cloud environment running an interactive showcase for portfolio evaluation.</span>
+                    </p>
+                  )
                 )}
               </div>
             </Reveal>
