@@ -24,10 +24,10 @@ export default function ResumePage() {
           <FileText className="w-8 h-8" />
         </div>
 
-        <h3 className="font-heading font-bold text-xl text-[var(--text)] mb-2">
+        <h3 className="font-heading font-bold text-xl text-[var(--ink)] mb-2">
           Dhanush A - Resume.pdf
         </h3>
-        <p className="text-xs text-[var(--text)]/70 mb-6 max-w-md mx-auto">
+        <p className="text-xs text-[var(--muted)] mb-6 max-w-md mx-auto">
           Updated with production highlights at PrimePro.ai (12 websites built), DevOps internships, and 8+ verified certifications.
         </p>
 

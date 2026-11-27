@@ -187,7 +187,7 @@ export default function CredentialsPage() {
             <Reveal delay={0.1}>
               <div className="flex items-center justify-between border-b border-[var(--line)] pb-4 mb-8">
                 <div className="flex items-center gap-3">
-                  <GraduationCap className="w-5 h-5 text-amber-500" />
+                  <GraduationCap className="w-5 h-5 text-amber-700 dark:text-amber-300" />
                   <h2 className="font-heading text-2xl sm:text-3xl font-bold uppercase tracking-tight text-[var(--ink)]">
                     Academic Markscards & Transcripts
                   </h2>
@@ -219,7 +219,7 @@ export default function CredentialsPage() {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[var(--line)] pb-4 mb-6">
                       <div>
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="font-mono text-xs text-amber-500 font-bold">
+                          <span className="font-mono text-xs text-amber-700 dark:text-amber-300 font-bold">
                             [DEGREE // 0{pIdx + 1}]
                           </span>
                           <span className="px-2 py-0.5 rounded text-[10px] font-mono border border-[var(--line)] bg-[var(--act-tint)] text-[var(--muted)]">
@@ -240,7 +240,7 @@ export default function CredentialsPage() {
                             <span>· {program.period}</span>
                           )}
                           {program.grade && (
-                            <span className="text-amber-500 font-semibold px-2 py-0.2 rounded bg-amber-500/10 border border-amber-500/20">
+                            <span className="text-amber-800 dark:text-amber-300 font-semibold px-2 py-0.2 rounded bg-amber-500/15 border border-amber-500/30">
                               {program.grade}
                             </span>
                           )}
@@ -273,7 +273,7 @@ export default function CredentialsPage() {
                           className="group flex items-center justify-between p-3.5 rounded-2xl border border-[var(--line)] bg-[var(--surface)]/85 backdrop-blur-xs hover:border-[var(--accent)] hover:shadow-md transition-all duration-200 text-left"
                         >
                           <div className="flex items-center gap-2.5 min-w-0">
-                            <div className="p-2 rounded-xl bg-amber-500/10 text-amber-500 shrink-0">
+                            <div className="p-2 rounded-xl bg-amber-500/10 text-amber-700 dark:text-amber-300 shrink-0">
                               <FileText className="w-4 h-4" />
                             </div>
                             <div className="truncate">

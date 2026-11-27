@@ -132,12 +132,12 @@ export default function AboutPage() {
                 colorPop={getCardTheme(3).c3Hex}
               />
               <div className="relative z-10 flex items-start gap-4">
-                <div className="p-3 rounded-2xl bg-amber-500/10 text-amber-500 shrink-0 mt-1">
+                <div className="p-3 rounded-2xl bg-amber-500/10 text-amber-700 dark:text-amber-300 shrink-0 mt-1">
                   <GraduationCap className="w-6 h-6" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-mono font-bold text-amber-500 uppercase">
+                    <span className="text-xs font-mono font-bold text-amber-700 dark:text-amber-300 uppercase">
                       [ACADEMIC BACKGROUND]
                     </span>
                     <span className="text-[10px] font-mono text-[var(--muted)] px-2 py-0.2 rounded bg-[var(--act-tint)] border border-[var(--line)]">

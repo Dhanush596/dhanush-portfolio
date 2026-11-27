@@ -49,15 +49,15 @@ export default function DevOpsLabPage() {
                 <div className="p-2 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
                   <Icon className="w-5 h-5" />
                 </div>
-                <h3 className="font-heading font-bold text-base text-[var(--text)]">
+                <h3 className="font-heading font-bold text-base text-[var(--ink)]">
                   {mod.title}
                 </h3>
               </div>
-              <ul className="space-y-1.5 text-xs text-[var(--text)]/75">
+              <ul className="space-y-1.5 text-xs text-[var(--muted)]">
                 {mod.items.map((item, iIdx) => (
                   <li key={iIdx} className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
-                    <span>{item}</span>
+                    <span className="text-[var(--ink)]">{item}</span>
                   </li>
                 ))}
               </ul>

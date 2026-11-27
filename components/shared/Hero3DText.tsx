@@ -177,15 +177,26 @@ export function Hero3DText({
           {words.map((word, wIdx) => (
             <React.Fragment key={`${word.text}-${wIdx}`}>
               <motion.span
-                initial={{
-                  opacity: 0,
-                  y: 44,
-                  z: -140,
-                  rotateX: -72,
-                  rotateY: wIdx % 2 === 0 ? -18 : 18,
-                  scale: 0.82,
-                  filter: 'blur(8px)',
-                }}
+                initial={
+                  trigger === 'inView'
+                    ? {
+                        opacity: 1,
+                        y: 24,
+                        z: -85,
+                        rotateX: -48,
+                        rotateY: wIdx % 2 === 0 ? -14 : 14,
+                        scale: 0.9,
+                      }
+                    : {
+                        opacity: 0,
+                        y: 44,
+                        z: -140,
+                        rotateX: -72,
+                        rotateY: wIdx % 2 === 0 ? -18 : 18,
+                        scale: 0.82,
+                        filter: 'blur(8px)',
+                      }
+                }
                 {...(trigger === 'inView'
                   ? {
                       whileInView: {

@@ -116,7 +116,7 @@ export function ContactBlock() {
         <button
           type="button"
           onClick={handleCopyEmail}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink)] text-xs font-mono hover:border-[var(--accent)] transition-colors shadow-sm"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--line)] bg-[var(--surface)]/85 backdrop-blur-sm text-[var(--ink)] text-xs font-mono hover:border-[var(--accent)] transition-colors shadow-sm"
         >
           {copied ? (
             <>
@@ -277,7 +277,7 @@ export function ContactBlock() {
                   href={PERSONAL_INFO.resumePdf}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink)] text-xs font-mono hover:border-[var(--accent)] transition-colors shadow-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-[var(--line)] bg-[var(--surface)]/85 backdrop-blur-sm text-[var(--ink)] text-xs font-mono hover:border-[var(--accent)] transition-colors shadow-sm"
                 >
                   <FileText className="w-3.5 h-3.5 text-[var(--accent)]" />
                   <span>View PDF</span>

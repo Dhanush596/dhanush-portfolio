@@ -144,7 +144,7 @@ export function Footer() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-10 sm:pb-12">
         {/* Hero Brand & Live Availability Header with 3D Motion Wordmark */}
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 1, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 'some' }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
@@ -192,7 +192,7 @@ export function Footer() {
               href="/resume"
               className="py-3 px-5 rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] hover:bg-[var(--surface)] text-[var(--ink)] text-xs font-mono font-semibold flex items-center justify-center gap-2 transition-all hover:border-[var(--accent)]"
             >
-              <FileText className="w-4 h-4 text-amber-500" />
+              <FileText className="w-4 h-4 text-amber-700 dark:text-amber-400" />
               <span>Resume PDF</span>
             </Link>
           </div>
@@ -200,7 +200,7 @@ export function Footer() {
 
         {/* 4. Multi-Color Navigation Cards Directory (Every card distinct multi-color!) */}
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 1, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 'some' }}
           transition={{ duration: 0.45, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}

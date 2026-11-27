@@ -183,7 +183,15 @@ export function MegaFooter() {
         {/* 3. Balanced 4-Column Cards Grid (Prevents narrow wrapping on clock & Back to Top) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.45fr_1fr_1fr_0.95fr] gap-5 sm:gap-6 pb-14 border-b border-white/25">
           {/* Card 1: DevOps System Status (Crisp high-contrast emerald/white/cyan gradient) */}
-          <div className="relative p-6 rounded-3xl text-[#0F172A] shadow-2xl flex flex-col justify-between overflow-hidden animate-float-1 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 border border-white/60">
+          <div
+          style={{
+            '--mc1': '16, 185, 129',
+            '--mc2': '6, 182, 212',
+            '--mc3': '139, 92, 246',
+            '--mc-delay': '0s',
+          } as React.CSSProperties}
+          className="relative p-6 rounded-3xl text-[#0F172A] shadow-2xl flex flex-col justify-between overflow-hidden animate-float-1 !bg-white/95 border border-white/70 multi-card"
+        >
             <BorderBeam duration={7} borderWidth={1.8} colorFrom="#06B6D4" colorTo="#10B981" colorPop="#F43F5E" />
 
             <div className="relative z-10 w-full h-full flex flex-col justify-between">
@@ -229,7 +237,15 @@ export function MegaFooter() {
           </div>
 
           {/* Card 2: Multi-Page Navigation Directory (Teal + Violet + Cyan glass) */}
-          <div className="p-6 rounded-3xl border border-white/25 bg-gradient-to-br from-violet-600/45 via-indigo-700/45 to-cyan-600/40 backdrop-blur-md space-y-3 font-mono text-xs shadow-xl flex flex-col justify-between">
+          <div
+          style={{
+            '--mc1': '99, 102, 241',
+            '--mc2': '236, 72, 153',
+            '--mc3': '6, 182, 212',
+            '--mc-delay': '-1.8s',
+          } as React.CSSProperties}
+          className="relative overflow-hidden p-6 rounded-3xl border border-white/25 !bg-slate-950/65 backdrop-blur-md space-y-3 font-mono text-xs shadow-xl flex flex-col justify-between multi-card"
+        >
             <div>
               <span className="text-[11px] text-cyan-200 uppercase tracking-widest font-bold block mb-4 border-b border-white/20 pb-2.5">
                 [PAGES DIRECTORY]
@@ -270,7 +286,15 @@ export function MegaFooter() {
           </div>
 
           {/* Card 3: Socials & Connect Column (Rose + Purple + Amber glass) */}
-          <div className="p-6 rounded-3xl border border-white/25 bg-gradient-to-br from-rose-600/40 via-purple-700/45 to-amber-500/35 backdrop-blur-md space-y-3 font-mono text-xs shadow-xl flex flex-col justify-between">
+          <div
+          style={{
+            '--mc1': '244, 63, 94',
+            '--mc2': '168, 85, 247',
+            '--mc3': '245, 158, 11',
+            '--mc-delay': '-3.6s',
+          } as React.CSSProperties}
+          className="relative overflow-hidden p-6 rounded-3xl border border-white/25 !bg-slate-950/65 backdrop-blur-md space-y-3 font-mono text-xs shadow-xl flex flex-col justify-between multi-card"
+        >
             <div>
               <span className="text-[11px] text-amber-200 uppercase tracking-widest font-bold block mb-4 border-b border-white/20 pb-2.5">
                 [CONNECT & CODE]
@@ -323,7 +347,15 @@ export function MegaFooter() {
           </div>
 
           {/* Card 4: Location, Live Clock & Back to Top (Emerald + Teal + Blue glass, no wrapping!) */}
-          <div className="p-6 rounded-3xl border border-white/25 bg-gradient-to-br from-emerald-600/40 via-teal-700/45 to-blue-700/45 backdrop-blur-md flex flex-col justify-between items-start shadow-xl">
+          <div
+          style={{
+            '--mc1': '16, 185, 129',
+            '--mc2': '20, 184, 166',
+            '--mc3': '234, 179, 8',
+            '--mc-delay': '-5.4s',
+          } as React.CSSProperties}
+          className="relative overflow-hidden p-6 rounded-3xl border border-white/25 !bg-slate-950/65 backdrop-blur-md flex flex-col justify-between items-start shadow-xl multi-card"
+        >
             <div className="w-full font-mono text-xs space-y-3">
               <span className="text-[11px] text-emerald-200 font-bold uppercase tracking-widest flex items-center gap-1.5 border-b border-white/20 pb-2.5">
                 <MapPin className="w-3.5 h-3.5 shrink-0" />

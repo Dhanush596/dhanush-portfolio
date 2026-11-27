@@ -182,10 +182,10 @@ export function HomeHubAct() {
 
             <div className="relative z-10">
               <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-5">
-                <span className="text-xs font-mono text-amber-500 font-bold">
+                <span className="text-xs font-mono text-amber-700 dark:text-amber-300 font-bold">
                   [03 // ACADEMIC QUALIFICATIONS]
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/30 font-bold">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/35 font-bold">
                   BCA 8.2 CGPA
                 </span>
               </div>

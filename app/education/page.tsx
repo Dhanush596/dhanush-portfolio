@@ -216,7 +216,7 @@ export default function EducationPage() {
                             fileUrl: doc.file,
                           })
                         }
-                        className="group flex items-center justify-between p-3.5 rounded-xl border border-[var(--line)] bg-[var(--surface-2)] hover:bg-[var(--act-tint)] hover:border-[var(--accent)] text-[var(--ink)] transition-all shadow-sm text-left cursor-pointer pointer-events-auto"
+                        className="group flex items-center justify-between p-3.5 rounded-xl border border-[var(--line)] bg-[var(--surface)]/85 backdrop-blur-sm hover:bg-[var(--act-tint)] hover:border-[var(--accent)] text-[var(--ink)] transition-all shadow-sm text-left cursor-pointer pointer-events-auto"
                       >
                         <div className="flex items-center gap-2.5 min-w-0 pr-2">
                           <FileText className="w-4 h-4 text-[var(--accent)] shrink-0" />

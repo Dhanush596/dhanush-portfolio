@@ -30,11 +30,11 @@ export function Reveal({
 
   const offset = 12;
   const initialVariants = {
-    up: { opacity: 0, y: offset },
-    down: { opacity: 0, y: -offset },
-    left: { opacity: 0, x: offset },
-    right: { opacity: 0, x: -offset },
-    none: { opacity: 0 },
+    up: { opacity: 1, y: offset },
+    down: { opacity: 1, y: -offset },
+    left: { opacity: 1, x: offset },
+    right: { opacity: 1, x: -offset },
+    none: { opacity: 1 },
   };
 
   return (

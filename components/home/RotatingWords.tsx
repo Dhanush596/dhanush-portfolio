@@ -41,7 +41,7 @@ export function RotatingWords({
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -24, opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="inline-block font-mono font-semibold text-[var(--accent)] tracking-tight whitespace-nowrap"
+          className="inline-flex items-center px-3.5 py-0.5 rounded-full border border-[var(--line)] bg-[var(--surface)]/80 backdrop-blur-md font-mono font-semibold text-[var(--accent)] tracking-tight whitespace-nowrap shadow-sm"
         >
           {words[index]}
         </motion.span>

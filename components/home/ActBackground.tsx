@@ -108,10 +108,19 @@ export function ActBackground() {
     };
 
     window.addEventListener('theme-changed', handleThemeChange);
+    const observer = new MutationObserver(() => handleThemeChange());
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme', 'class'],
+    });
+    handleThemeChange();
 
     return () => {
       triggers.forEach((t) => t.kill());
       window.removeEventListener('theme-changed', handleThemeChange);
+      observer.disconnect();
+      document.documentElement.style.removeProperty('--act-bg');
+      document.documentElement.style.removeProperty('--act-tint');
     };
   }, [prefersReducedMotion]);
 

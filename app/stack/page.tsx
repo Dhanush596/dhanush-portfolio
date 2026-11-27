@@ -20,18 +20,18 @@ export default function StackPage() {
       <div className="space-y-6 text-left max-w-2xl mx-auto my-6">
         {SKILL_CATEGORIES.map((cat, idx) => (
           <GlassCard key={idx} colorIndex={idx * 3} className="p-6">
-            <h3 className="font-heading font-bold text-lg text-[var(--accent)] mb-1">
+            <h3 className="font-heading font-bold text-lg text-[var(--ink)] mb-1">
               {cat.category}
             </h3>
-            <p className="text-xs text-[var(--text)]/70 mb-4">{cat.description}</p>
+            <p className="text-xs text-[var(--muted)] mb-4">{cat.description}</p>
             <div className="flex flex-wrap gap-2">
               {cat.items.map((skill, sIdx) => (
                 <div
                   key={sIdx}
-                  className="px-3 py-1.5 rounded-lg border border-[var(--card-border)] bg-[var(--text)]/5 text-xs font-mono flex items-center gap-2"
+                  className="px-3 py-1.5 rounded-lg border border-[var(--line)] bg-[var(--surface)]/80 text-xs font-mono flex items-center gap-2"
                 >
-                  <span className="text-[var(--text)] font-medium">{skill.name}</span>
-                  <span className="text-[10px] text-[var(--accent)] px-1.5 py-0.2 rounded bg-[var(--accent)]/10">
+                  <span className="text-[var(--ink)] font-medium">{skill.name}</span>
+                  <span className="text-[10px] text-[var(--accent)] px-1.5 py-0.2 rounded bg-[var(--accent)]/10 font-semibold">
                     {skill.tag || skill.level}
                   </span>
                 </div>

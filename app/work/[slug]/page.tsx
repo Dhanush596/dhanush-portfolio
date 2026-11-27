@@ -136,19 +136,19 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
               )}
 
               {/* Category Badge */}
-              <span className="px-3 py-1 rounded-full text-xs font-mono border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--text)]/80">
+              <span className="px-3 py-1 rounded-full text-xs font-mono border border-[var(--line)] bg-[var(--act-tint)] text-[var(--ink)]">
                 {categoryLabels[project.category]}
               </span>
 
               {project.secondaryCategory && (
-                <span className="px-3 py-1 rounded-full text-xs font-mono border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--accent)]">
+                <span className="px-3 py-1 rounded-full text-xs font-mono border border-[var(--line)] bg-[var(--act-tint)] text-[var(--accent)] font-semibold">
                   {categoryLabels[project.secondaryCategory]}
                 </span>
               )}
 
               {/* Backend Badge */}
               {project.backend && (
-                <span className="px-3 py-1 rounded-full text-xs font-mono border border-[var(--card-border)] bg-[var(--text)]/5 text-[var(--accent)] font-medium">
+                <span className="px-3 py-1 rounded-full text-xs font-mono border border-[var(--line)] bg-[var(--surface)]/80 text-[var(--accent)] font-semibold">
                   {backendLabels[project.backend]}
                 </span>
               )}
@@ -167,7 +167,7 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
 
           {/* Tagline */}
           <Reveal delay={0.2}>
-            <p className="text-lg sm:text-xl text-[var(--text)]/80 max-w-3xl leading-relaxed mb-8">
+            <p className="text-lg sm:text-xl text-[var(--muted)] max-w-3xl leading-relaxed mb-8">
               {project.tagline}
             </p>
           </Reveal>
@@ -225,10 +225,10 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
 
                 {/* Portfolio Demonstration Notice */}
                 {project.isProductionClient ? (
-                  <div className="p-3.5 sm:p-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300 text-xs font-mono leading-relaxed flex items-start gap-3 shadow-sm max-w-2xl">
-                    <AlertCircle className="w-4 h-4 shrink-0 text-amber-500 mt-0.5" />
+                  <div className="p-3.5 sm:p-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 text-amber-800 dark:text-amber-200 text-xs font-mono leading-relaxed flex items-start gap-3 shadow-sm max-w-2xl">
+                    <AlertCircle className="w-4 h-4 shrink-0 text-amber-700 dark:text-amber-400 mt-0.5" />
                     <div>
-                      <span className="font-bold uppercase tracking-wider block mb-1 text-amber-600 dark:text-amber-400">
+                      <span className="font-bold uppercase tracking-wider block mb-1 text-amber-800 dark:text-amber-300">
                         Portfolio Demonstration Notice
                       </span>
                       <span>
@@ -238,7 +238,7 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
                   </div>
                 ) : (
                   hasLiveLink && (
-                    <p className="text-[11px] font-mono text-[var(--text)]/60 flex items-center gap-1.5">
+                    <p className="text-[11px] font-mono text-[var(--muted)] flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                       <span>Hosted cloud environment running an interactive showcase for portfolio evaluation.</span>
                     </p>
@@ -254,40 +254,40 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
           <GlassCard colorIndex={0} className="p-6 sm:p-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text)]/50 mb-1 flex items-center gap-1.5">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--muted)] mb-1 flex items-center gap-1.5 font-semibold">
                   <UserCheck className="w-3.5 h-3.5 text-[var(--accent)]" /> Role
                 </span>
-                <span className="text-sm font-semibold text-[var(--text)]">
+                <span className="text-sm font-semibold text-[var(--ink)]">
                   {project.role}
                 </span>
               </div>
 
               {project.period && (
                 <div>
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text)]/50 mb-1 flex items-center gap-1.5">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--muted)] mb-1 flex items-center gap-1.5 font-semibold">
                     <Calendar className="w-3.5 h-3.5 text-[var(--accent)]" /> Timeline
                   </span>
-                  <span className="text-sm font-semibold text-[var(--text)]">
+                  <span className="text-sm font-semibold text-[var(--ink)]">
                     {project.period}
                   </span>
                 </div>
               )}
 
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text)]/50 mb-1 flex items-center gap-1.5">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--muted)] mb-1 flex items-center gap-1.5 font-semibold">
                   <Layers className="w-3.5 h-3.5 text-[var(--accent)]" /> Category
                 </span>
-                <span className="text-sm font-semibold text-[var(--text)]">
+                <span className="text-sm font-semibold text-[var(--ink)]">
                   {categoryLabels[project.category]}
                 </span>
               </div>
 
               {project.status && (
                 <div>
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text)]/50 mb-1 flex items-center gap-1.5">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--muted)] mb-1 flex items-center gap-1.5 font-semibold">
                     <Code2 className="w-3.5 h-3.5 text-[var(--accent)]" /> Status
                   </span>
-                  <span className="text-sm font-semibold text-[var(--text)]">
+                  <span className="text-sm font-semibold text-[var(--ink)]">
                     {statusLabels[project.status]?.label}
                   </span>
                 </div>
@@ -296,15 +296,15 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
 
             {/* Stack Chips - hidden if stack is empty */}
             {hasStack && (
-              <div className="mt-6 pt-6 border-t border-[var(--card-border)]">
-                <span className="text-xs font-mono uppercase tracking-wider text-[var(--text)]/60 block mb-3">
+              <div className="mt-6 pt-6 border-t border-[var(--line)]">
+                <span className="text-xs font-mono uppercase tracking-wider text-[var(--muted)] block mb-3 font-semibold">
                   Technologies & Architecture
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {project.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 rounded-lg text-xs font-mono bg-[var(--text)]/5 text-[var(--text)] border border-[var(--card-border)]"
+                      className="px-3 py-1 rounded-lg text-xs font-mono bg-[var(--surface)]/80 text-[var(--ink)] border border-[var(--line)]"
                     >
                       {tech}
                     </span>
@@ -334,10 +334,10 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
                   <HelpCircle className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-lg text-[var(--text)] mb-2">
+                  <h3 className="font-heading font-bold text-lg text-[var(--ink)] mb-2">
                     Architecture Note: Real vs. Simulated
                   </h3>
-                  <p className="text-sm text-[var(--text)]/85 leading-relaxed font-mono">
+                  <p className="text-sm text-[var(--ink)] leading-relaxed font-mono">
                     {project.realVsSimulated}
                   </p>
                 </div>
@@ -351,14 +351,14 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
           <Reveal delay={0.42} className="mb-14">
             <GlassCard colorIndex={1} className="p-6 sm:p-8 border-l-4 border-l-emerald-500 shadow-xl">
               <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0">
+                <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 shrink-0">
                   <CheckCircle2 className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-lg text-[var(--text)] mb-2">
+                  <h3 className="font-heading font-bold text-lg text-[var(--ink)] mb-2">
                     Engineering Impact & Results
                   </h3>
-                  <p className="text-sm text-[var(--text)]/85 leading-relaxed font-mono">
+                  <p className="text-sm text-[var(--ink)] leading-relaxed font-mono">
                     {project.impact}
                   </p>
                 </div>
@@ -371,7 +371,7 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
         {hasFeatures && (
           <div className="mb-14">
             <Reveal delay={0.45}>
-              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--text)] mb-6">
+              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--ink)] mb-6">
                 Key Features & Capabilities
               </h2>
             </Reveal>
@@ -381,7 +381,7 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
                 <Reveal key={fIdx} delay={0.45 + fIdx * 0.05}>
                   <GlassCard colorIndex={fIdx + 3} className="p-5 h-full flex items-start gap-3 transition-colors">
                     <CheckCircle2 className="w-5 h-5 text-[var(--accent)] shrink-0 mt-0.5" />
-                    <span className="text-sm text-[var(--text)]/85 leading-relaxed">
+                    <span className="text-sm text-[var(--ink)] leading-relaxed">
                       {feature}
                     </span>
                   </GlassCard>
@@ -395,10 +395,10 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
         {hasChallenges && (
           <div className="mb-16">
             <Reveal delay={0.5}>
-              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--text)] mb-2">
+              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[var(--ink)] mb-2">
                 Engineering Challenges & Solutions
               </h2>
-              <p className="text-sm text-[var(--text)]/70 mb-8">
+              <p className="text-sm text-[var(--muted)] mb-8">
                 Obstacles encountered during development and the architectural solutions applied.
               </p>
             </Reveal>
@@ -407,14 +407,14 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
               {project.challenges!.map((chal, cIdx) => (
                 <Reveal key={cIdx} delay={0.5 + cIdx * 0.07}>
                   <GlassCard colorIndex={cIdx + 6} className="p-6 sm:p-7 overflow-hidden">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 divide-y md:divide-y-0 md:divide-x divide-[var(--card-border)]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 divide-y md:divide-y-0 md:divide-x divide-[var(--line)]">
                       {/* Problem Column */}
                       <div className="pr-0 md:pr-4">
-                        <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400 font-mono text-xs uppercase tracking-wider mb-2 font-semibold">
+                        <div className="flex items-center gap-2 text-rose-700 dark:text-rose-400 font-mono text-xs uppercase tracking-wider mb-2 font-semibold">
                           <AlertCircle className="w-4 h-4 shrink-0" />
                           <span>The Challenge</span>
                         </div>
-                        <p className="text-sm text-[var(--text)]/85 leading-relaxed">
+                        <p className="text-sm text-[var(--ink)] leading-relaxed">
                           {chal.problem}
                         </p>
                       </div>
@@ -425,7 +425,7 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
                           <CheckCircle2 className="w-4 h-4 shrink-0" />
                           <span>Applied Solution</span>
                         </div>
-                        <p className="text-sm text-[var(--text)]/90 leading-relaxed">
+                        <p className="text-sm text-[var(--ink)] leading-relaxed">
                           {chal.solution}
                         </p>
                       </div>
@@ -439,7 +439,7 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
 
         {/* 7. Previous / Next Project Navigation */}
         <Reveal delay={0.6}>
-          <div className="pt-10 border-t border-[var(--card-border)] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="pt-10 border-t border-[var(--line)] flex flex-col sm:flex-row items-center justify-between gap-4">
             <Link
               href={`/work/${prevProject.slug}`}
               style={getMultiCardStyle(4)}

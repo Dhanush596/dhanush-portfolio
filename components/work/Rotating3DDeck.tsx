@@ -116,7 +116,7 @@ export function Rotating3DDeck() {
               className="p-1 rounded-md hover:text-[var(--ink)] transition-colors"
               title={isPaused ? 'Resume auto-rotation' : 'Pause auto-rotation'}
             >
-              {isPaused ? <Play className="w-3.5 h-3.5 text-amber-500" /> : <Pause className="w-3.5 h-3.5" />}
+              {isPaused ? <Play className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" /> : <Pause className="w-3.5 h-3.5" />}
             </button>
             <span className="text-[11px] sm:text-xs">
               {isPaused ? 'Paused' : 'Rotating (4.5s)'}
@@ -153,7 +153,7 @@ export function Rotating3DDeck() {
 
       {/* Portfolio Demonstration Notice */}
       <div className="mb-8 p-3.5 sm:p-4 rounded-2xl border border-amber-500/30 bg-amber-500/10 text-amber-800 dark:text-amber-200 text-xs font-mono flex items-start gap-3 shadow-sm">
-        <ShieldCheck className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+        <ShieldCheck className="w-4 h-4 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" />
         <p className="leading-relaxed">
           <strong>Client Production Notice:</strong> These platforms were built for live commercial clients. Due to client server maintenance or renewals, external client domains may occasionally undergo service pauses (not all 5 websites are guaranteed to be operating in live production at all times). Both the <strong>Live Website</strong> and internal <strong>Demo Showcase</strong> are provided for full inspection.
         </p>

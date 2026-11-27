@@ -254,7 +254,7 @@ export function TopBar({ onOpenCommand }: { onOpenCommand?: () => void }) {
             prefetch={true}
             className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)]/90 text-[var(--ink)] hover:border-[var(--accent)] transition-all duration-200 text-xs font-mono shadow-sm"
           >
-            <FileText className="w-3.5 h-3.5 text-amber-500" />
+            <FileText className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />
             <span>Resume</span>
           </Link>
 
@@ -397,7 +397,7 @@ export function TopBar({ onOpenCommand }: { onOpenCommand?: () => void }) {
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full py-3 px-4 rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink)] font-mono text-xs font-semibold flex items-center justify-center gap-2 active:scale-95 transition-colors"
               >
-                <FileText className="w-4 h-4 text-amber-500" />
+                <FileText className="w-4 h-4 text-amber-700 dark:text-amber-400" />
                 <span>Resume (View & Download)</span>
               </Link>
 

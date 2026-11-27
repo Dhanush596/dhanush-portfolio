@@ -131,7 +131,8 @@ export function getCardTheme(index: number): CardTheme {
 }
 
 export function getMultiCardStyle(index: number): React.CSSProperties {
-  const t = getCardTheme(index);
+  const safeIdx = ((Math.floor(index) % CARD_THEMES.length) + CARD_THEMES.length) % CARD_THEMES.length;
+  const t = CARD_THEMES[safeIdx];
   return {
     '--mc1': t.c1Rgb,
     '--mc2': t.c2Rgb,
@@ -139,5 +140,6 @@ export function getMultiCardStyle(index: number): React.CSSProperties {
     '--mc1-hex': t.c1Hex,
     '--mc2-hex': t.c2Hex,
     '--mc3-hex': t.c3Hex,
+    '--mc-delay': `${-(safeIdx % 6) * 1.4}s`,
   } as React.CSSProperties;
 }
