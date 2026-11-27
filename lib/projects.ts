@@ -915,24 +915,82 @@ export const projects: Project[] = [
   },
   {
     slug: "sri-seetarama",
-    title: "Sri Seetharama Adige Mane",
-    tagline: "Authentic Karnataka Brahmin culinary, domestic maid support, daily tiffin, and grand catering services platform in Bengaluru",
+    title: "Sri Seetharama Adige Mane — Authentic Brahmin Culinary & Domestic Services",
+    tagline: "Bilingual (English / ಕನ್ನಡ) pure-vegetarian culinary, domestic help, daily tiffin, and traditional catering platform with zero-backend REST simulation",
     category: "company",
     status: "realtime",
-    role: "Developer, PrimePro.ai",
-    period: "2024 – 2025",
+    backend: "simulated-api",
+    role: "Full-Stack Lead Engineer / Architect, PrimePro.ai",
+    period: "Commercial Project (PrimePro.ai)",
     cover: "/media/sites/sri-seetharama.png",
     accent: "#991B1B",
     accent2: "#D97706",
-    features: [
-      "Quick Service Picker featuring tabbed modules for Cook at Home, Domestic Maid, Daily Tiffin, and Grand Catering",
-      "Transparent pricing calculator with monthly package tiers (e.g. Cook at Home from ₹7,000/month) and 50/50 transparent monthly UPI payment schedule",
-      "100% Pure Satvik vegetarian culinary presentations celebrating authentic Karnataka Brahmin recipes and hygienic food preparation",
-      "Verified UDYAM-registered enterprise portal (UDYAM-KR-17-0045399) with direct customer booking phone hotline (63610 35501)",
-      "Bilingual interface (Kannada & English) with streamlined 'Book a Service' and 'Plan Catering' reservation funnels",
+    featured: true,
+    stack: [
+      "React 19",
+      "TypeScript",
+      "Vite 8 (Multi-Page Hybrid)",
+      "Tailwind CSS 4",
+      "Custom Glassmorphism CSS",
+      "Framer Motion",
+      "Lucide React",
+      "Custom Bilingual Engine (EN / ಕನ್ನಡ)",
+      "LocalStorage REST Engine (mockApi.ts)",
+      "Simulated Latency (300-520ms)",
+      "Manual UPI Verification Modal",
+      "Vercel",
     ],
-    stack: ["React", "Node.js", "Express", "Tailwind CSS", "UPI Invoicing", "Vercel"],
-    links: {},
+    features: [
+      "Multi-Page & React Hybrid Architecture: Public multi-page discovery pages (HTML + Vanilla ES Modules) integrated with React 19 + TypeScript booking wizards",
+      "Full Bilingual Localization (English & ಕನ್ನಡ): Custom lightweight translation engine (client/i18n.js) providing instant runtime language toggling across every view",
+      "Multi-Step Service Booking Engine: Dedicated interactive wizards for Cook at Home, Home Help / Maid, Daily Tiffin, and Event Catering with Bengaluru area location picker",
+      "Simulated UPI Payment Gateway: Manual UPI QR and UTR reference submission modal (ManualUpiPaymentModal.tsx) with transparent 50/50 monthly payment tracking",
+      "17-Section Admin Control Center: Overview Dashboard with 6-month bookings and revenue bar charts, worker assignment, payment ledger, menu editor, and customer CRM",
+      "Zero-Backend REST Simulation: client/src/demo/mockApi.ts simulating 300–520ms network latency and storing state in localStorage ('ssam_demo_db_v1') with 1-click Reset Demo",
+      "1-Click Role Switching: Seamless instant role swapping between Customer Account Portal (user@demo.com / User@123) and Owner Admin Control Center (admin@demo.com / Admin@123)",
+      "Resilient UX Architecture: Wrapped in React Error Boundaries (DemoErrorBoundary) with local FileReader image upload preview and mobile drawer navigation",
+    ],
+    highlights: [
+      "100% frontend-only interactive demo running on Vercel with zero database spin-up delay",
+      "Custom bilingual localization engine (English / ಕನ್ನಡ) with instant runtime state switching",
+      "17-section Admin Control Center with KPI metrics and 6-month revenue visualization",
+      "Multi-step React 19 booking wizards for Cook, Maid, Tiffin, and Event Catering",
+      "Simulated UPI QR/UTR payment verification with transparent 50/50 payment split",
+    ],
+    impact:
+      "Consolidated traditional Brahmin culinary bookings, domestic maid staffing, and festive catering quotes into a single bilingual platform with sub-second page transitions and zero-backend client-side persistence.",
+    realVsSimulated:
+      "Simulated REST Architecture: Engineered with a client-side mockApi.ts layer utilizing localStorage ('ssam_demo_db_v1') and 300–520ms simulated latency, enabling recruiters to test full booking workflows, worker assignment, and payment verification on Vercel (https://sri-seetharama.vercel.app/).",
+    challenges: [
+      {
+        problem:
+          "Hosting a full-stack booking system with relational database and worker dispatch on serverless tiers introduced database sleep latency and setup hurdles for reviewers.",
+        solution:
+          "Engineered client/src/demo/mockApi.ts with an in-memory and localStorage CRUD engine ('ssam_demo_db_v1') pre-seeded with realistic Bengaluru datasets, simulating realistic 300-520ms network latency.",
+      },
+      {
+        problem:
+          "Seamless bilingual localization across complex multi-step booking forms without bloated third-party i18n framework bundles.",
+        solution:
+          "Built a lightweight, custom translation engine in client/i18n.js supporting real-time runtime toggling between English and Kannada (ಕನ್ನಡ) with zero re-render flicker.",
+      },
+      {
+        problem:
+          "Combining a multi-page HTML marketing storefront with modern interactive React 19 booking components.",
+        solution:
+          "Architected a hybrid Vite 8 build pipeline with page-shell.js shared navigation layouts mounting isolated React TypeScript booking roots wrapped in DemoErrorBoundary.",
+      },
+      {
+        problem:
+          "Handling manual UPI QR code and UTR transaction verification without banking gateway webhooks.",
+        solution:
+          "Created ManualUpiPaymentModal.tsx capturing user-submitted UTR reference numbers, saving proof to localStorage, and populating an admin verification queue.",
+      },
+    ],
+    links: {
+      live: "https://sri-seetharama.vercel.app/",
+      repo: "https://github.com/Dhanush596/SriSeetharama",
+    },
   },
   {
     slug: "hanger-commerce",
