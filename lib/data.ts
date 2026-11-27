@@ -349,8 +349,8 @@ export const ACADEMIC_CREDENTIALS: AcademicDocument[] = [
     description:
       'Postgraduate degree curriculum in software engineering, cloud architecture, system design, data structures, and enterprise applications. Specialized in Cloud-Native Engineering & AI.',
     projects: [
-      'Mental Health Monitor & Stress Detector (ML predictive system)',
-      'AI-Powered Study Assistant (NLP text summarization on Vercel)',
+      'Student Wellness Monitor (AI-powered mental health & stress analytics)',
+      'AI Study Assistant / Study Buddy (document-aware RAG Q&A with Gemini 2.5 Flash)',
     ],
     documents: [
       { label: 'MCA Semester 1 Markscard', file: '/Certificates/MCAsem1.pdf', type: 'Semester Markscard' },
