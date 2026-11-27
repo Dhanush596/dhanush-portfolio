@@ -68,11 +68,11 @@ export function HomeHubAct() {
               <div className="space-y-2 mb-6 text-xs text-[var(--muted)]">
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
-                  <span><strong>MCA Projects:</strong> Mental Health Monitor (ML) & AI Study Assistant</span>
+                  <span><strong>MCA Projects:</strong> Wellness Monitor, AI Study Buddy & PayFlow Payroll</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
-                  <span><strong>BCA Projects:</strong> Online Grocery Store E-Commerce & Intelligent Payroll</span>
+                  <span><strong>BCA Capstone:</strong> Online Grocery Store E-Commerce Platform</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />

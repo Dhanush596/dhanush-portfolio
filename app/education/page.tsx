@@ -57,7 +57,21 @@ export default function EducationPage() {
       accent2: '#EC4899',
     },
     {
-      degree: 'BCA (2021–2024)',
+      degree: 'MCA 2nd Sem (2024–2025)',
+      title: 'PayFlow — Full-Stack Payroll & Payslip Management System',
+      slug: 'payflow-payroll',
+      tagline: 'Full-stack web application with gross-to-net salary computation, INR-first multi-currency conversion, and print-ready payslips.',
+      stack: ['Python', 'Flask', 'PostgreSQL (Neon)', 'SQLAlchemy', 'Bootstrap 5', 'Vercel'],
+      features: [
+        'Automated gross-to-net salary computation with live client-side estimate preview.',
+        'INR-first multi-currency conversion with dynamic exchange rates and en-IN formatting.',
+        'Print-ready payslips with CSS @media print and Neon serverless Postgres persistence.',
+      ],
+      accent: '#2563EB',
+      accent2: '#10B981',
+    },
+    {
+      degree: 'BCA Capstone (2021–2024)',
       title: 'Online Grocery Store E-Commerce Platform',
       slug: 'online-grocery-store',
       tagline: 'Full-featured grocery digital commerce platform with customer storefront and transactional admin portal.',
@@ -69,20 +83,6 @@ export default function EducationPage() {
       ],
       accent: '#10B981',
       accent2: '#06B6D4',
-    },
-    {
-      degree: 'BCA (2021–2024)',
-      title: 'Intelligent Payroll Management System',
-      slug: 'intelligent-payroll-system',
-      tagline: 'Enterprise payroll system with salary forecasting regression models and anomaly detection.',
-      stack: ['Python', 'Scikit-learn', 'Tkinter / Web UI', 'MySQL Relational'],
-      features: [
-        'Automated payslip generator with statutory deductions and tax computation.',
-        'Linear regression models for compensation benchmarking across roles.',
-        'Audit logging with role-based access control for HR administrators.',
-      ],
-      accent: '#F59E0B',
-      accent2: '#EF4444',
     },
   ];
 

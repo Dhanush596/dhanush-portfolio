@@ -13,6 +13,15 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', 'three', '@react-three/drei', 'framer-motion'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/work/intelligent-payroll-system',
+        destination: '/work/payflow-payroll',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

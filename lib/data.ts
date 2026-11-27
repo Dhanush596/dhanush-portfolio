@@ -351,6 +351,7 @@ export const ACADEMIC_CREDENTIALS: AcademicDocument[] = [
     projects: [
       'Student Wellness Monitor (AI-powered mental health & stress analytics)',
       'AI Study Assistant / Study Buddy (document-aware RAG Q&A with Gemini 2.5 Flash)',
+      'PayFlow Payroll System (Full-Stack Flask & PostgreSQL 2nd Sem Project)',
     ],
     documents: [
       { label: 'MCA Semester 1 Markscard', file: '/Certificates/MCAsem1.pdf', type: 'Semester Markscard' },
@@ -370,8 +371,7 @@ export const ACADEMIC_CREDENTIALS: AcademicDocument[] = [
     description:
       'Comprehensive undergraduate study in core computer science, software programming, web development, object-oriented paradigms, and database management systems. Graduated with 8.2 CGPA and built production-grade web systems.',
     projects: [
-      'Online Grocery Store E-Commerce Platform (Full-Stack PHP/MySQL)',
-      'Intelligent Payroll Management System (Python/Data Analysis)',
+      'Online Grocery Store E-Commerce Platform (Full-Stack PHP/MySQL Capstone)',
     ],
     documents: [
       { label: 'BCA Consolidated All-Semesters', file: '/Certificates/all-sem.pdf', type: 'Consolidated' },

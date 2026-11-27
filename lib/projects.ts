@@ -1220,56 +1220,84 @@ export const projects: Project[] = [
     },
   },
 
-  // =========================================================================
-  // 6. BCA PROJECTS
-  // =========================================================================
   {
-    slug: "intelligent-payroll-system",
-    title: "Intelligent Payroll Management System",
-    tagline: "Enterprise payroll system with salary forecasting regression models and anomaly detection",
-    category: "bca",
-    status: "practice",
+    slug: "payflow-payroll",
+    title: "PayFlow — Full-Stack Payroll & Payslip Management System",
+    tagline: "Full-stack web application with gross-to-net salary computation, INR-first multi-currency conversion, and print-ready payslip generation",
+    category: "mca",
+    status: "live",
     backend: "full-stack",
-    role: "BCA Project Developer, Sharada Degree College",
-    period: "2023 – 2024",
-    accent: "#3B82F6",
+    role: "MCA 2nd Sem Project Developer, Srinivas Institute of Technology",
+    period: "2024 – 2025",
+    cover: "/media/sites/payflow-payroll.png",
+    accent: "#2563EB",
     accent2: "#10B981",
     featured: true,
-    stack: ["Python", "Pandas", "Scikit-learn", "MySQL", "SQL", "Data Analysis"],
+    stack: [
+      "Python",
+      "Flask (3.1.3)",
+      "Flask-CORS (6.0.5)",
+      "Flask-Login (0.6.3)",
+      "Werkzeug Security (pbkdf2:sha256)",
+      "PostgreSQL (Neon Serverless)",
+      "SQLite (Local Dev)",
+      "Flask-SQLAlchemy (3.1.1)",
+      "Psycopg 3 (psycopg[binary])",
+      "Bootstrap 5 & Icons",
+      "Jinja2 Templates",
+      "Vanilla JavaScript (app.js)",
+      "CSS @media print",
+      "Vercel Serverless (WSGI)",
+    ],
     features: [
-      "Automated payroll computation supporting tiered tax deductions, bonuses, and overtime calculations",
-      "Linear regression models for forecasting department salary trends and compensation budgeting",
-      "Statistical anomaly detection alerting against irregular hours, payroll variance, and fraud indicators",
-      "Normalized MySQL relational schema ensuring data integrity and transactional consistency",
-      "Comprehensive reporting module generating executive payroll summaries and audit trails",
+      "Public Landing Page showcasing platform capabilities, 3-step payroll workflow, and instant dashboard navigation",
+      "Authentication & Lazy Cloud Bootstrapping with Flask-Login, pbkdf2:sha256 password hashing, and auto-seeding of default currencies on cold starts",
+      "Admin Dashboard computing real-time KPIs (Active Employees, Payroll Runs, Total Net Disbursed) with live search and action shortcuts",
+      "Live Salary Calculation Engine with dynamic gross-to-net estimates updating in real-time as admins type salary and tax inputs",
+      "INR-Base Multi-Currency Engine supporting INR ₹ (en-IN digit grouping), USD, EUR, GBP, AED, SGD with live exchange rate adjustments",
+      "Print-Ready Payslip Generation with dedicated CSS @media print styling for 1-click clean PDF saving directly from the browser",
+      "Full Employee Directory Lifecycle with unique constraints, profile editing, and cascade-deletion orphan cleanup",
     ],
     highlights: [
-      "Automated payroll calculation and processing",
-      "Salary forecasting using linear regression models",
-      "Anomaly detection for fraud prevention",
-      "SQL database optimization for large datasets",
-      "Comprehensive reporting and analytics",
+      "PostgreSQL (Neon) serverless database with connection recycling and pool_pre_ping",
+      "Canonical INR base ledger preventing currency rounding drift and double conversion",
+      "Live Gross-to-Net client-side estimator with automated tax and deduction computation",
+      "Print-ready compensation payslips with print media styling requiring zero external PDF binaries",
+      "Production deployment on Vercel Serverless Functions with Psycopg 3",
     ],
     impact:
-      "Reduced payroll processing time by 65% and improved calculation accuracy to 99.8% across large employee datasets.",
+      "Automated monthly employee compensation workflows and tax calculations with instant en-IN formatted currency conversion and print-ready payslips on serverless cloud infrastructure.",
     realVsSimulated:
-      "Full-stack Python & MySQL analytics application developed during BCA coursework at Sharada Degree College, demonstrating statistical regression and relational schema design.",
+      "Live serverless Python production application deployed on Vercel with Neon cloud PostgreSQL database and Psycopg 3 driver (https://payrollsystem-one.vercel.app/).",
     challenges: [
       {
         problem:
-          "Complex multi-tier tax and deduction rules causing logic conflicts and edge-case errors.",
+          "Hosting stateful SQLite writes on Vercel's read-only serverless filesystem caused database write crashes on cold starts.",
         solution:
-          "Engineered a modular, rule-based calculation engine with dedicated unit tests validating deductions across compensation brackets.",
+          "Migrated to Neon serverless PostgreSQL via DATABASE_URL parsing with pool_pre_ping=True and pool_recycle=300 to survive serverless freeze cycles.",
       },
       {
         problem:
-          "Slow query execution when compiling multi-year departmental expense aggregations.",
+          "SQLAlchemy 2.1 driver mismatch expecting Psycopg v3 while connection URLs contained legacy parameters or channel_binding flags.",
         solution:
-          "Optimized relational indexing and created materialized SQL summary views, cutting report execution latency by 65%.",
+          "Configured psycopg[binary] driver compatibility and engineered robust URL sanitization to strip unsupported query flags.",
+      },
+      {
+        problem:
+          "Multi-currency rounding drift and double-conversion inconsistencies when calculating gross-to-net salary.",
+        solution:
+          "Architected a canonical INR-base ledger storing all values in INR (1.0) and dynamically computing multi-currency views at template render time.",
+      },
+      {
+        problem:
+          "Deleting employees with historical compensation records triggering foreign key constraint violations.",
+        solution:
+          "Enforced cascade='all, delete-orphan' on the Employee-to-SalaryRecord relationship to ensure clean referential integrity.",
       },
     ],
     links: {
-      repo: "https://github.com/Dhanush596",
+      live: "https://payrollsystem-one.vercel.app/",
+      repo: "https://github.com/Dhanush596/payrollsystem",
     },
   },
 ];
