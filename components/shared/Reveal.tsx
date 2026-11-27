@@ -19,7 +19,7 @@ export function Reveal({
   className,
   delay = 0,
   direction = 'up',
-  duration = 0.5,
+  duration = 0.35,
   width = 'full',
 }: RevealProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -28,7 +28,7 @@ export function Reveal({
     return <div className={cn(width === 'full' ? 'w-full' : 'w-fit', className)}>{children}</div>;
   }
 
-  const offset = 24;
+  const offset = 12;
   const initialVariants = {
     up: { opacity: 0, y: offset },
     down: { opacity: 0, y: -offset },
@@ -41,7 +41,7 @@ export function Reveal({
     <motion.div
       initial={initialVariants[direction]}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
+      viewport={{ once: true, margin: '0px' }}
       transition={{
         duration,
         delay,

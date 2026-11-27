@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
@@ -46,7 +46,9 @@ export function HeroSceneWrapper() {
   return (
     <>
       <StaticHeroGradient />
-      <NodeNetworkCanvas />
+      <Suspense fallback={null}>
+        <NodeNetworkCanvas />
+      </Suspense>
     </>
   );
 }

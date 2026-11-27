@@ -2,13 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { SmoothScroll } from '@/components/shared/SmoothScroll';
-import { ThemeSetter } from '@/components/shared/ThemeSetter';
-import { PageTransition } from '@/components/shared/PageTransition';
-import { Navbar } from '@/components/shared/Navbar';
 import { BackgroundModeProvider } from '@/components/canvas/BackgroundModeContext';
-import { TouchSensorWrapper } from '@/components/canvas/TouchSensorWrapper';
-import { TouchHoldIndicator } from '@/components/shared/TouchHoldIndicator';
-import { HeaderHUD } from '@/components/shared/HeaderHUD';
+import { ClientShell } from '@/components/shared/ClientShell';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -29,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Dhanush A | Software Engineer',
+  title: 'Dhanush A | Software Engineer & Cloud-Native Architect',
   description:
     'Full-stack developer and cloud-native engineer building production web applications and resilient delivery pipelines.',
   metadataBase: new URL('https://dhanush.dev'),
@@ -51,7 +46,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#05060A',
+  themeColor: '#F6F9FF',
   width: 'device-width',
   initialScale: 1,
 };
@@ -67,29 +62,30 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="antialiased min-h-screen bg-black text-white selection:bg-white selection:text-black">
-        <SmoothScroll>
-          <BackgroundModeProvider>
-            <ThemeSetter>
-              {/* Full-screen 3D WebGL Touch & Wave Background */}
-              <TouchSensorWrapper />
-
-              {/* Interactive Telemetry Reticle & Coordinates HUD */}
-              <TouchHoldIndicator />
-
-              {/* Minimal Top Header HUD */}
-              <HeaderHUD />
-
-              {/* Main Page Content */}
-              <div className="relative z-10 pt-14 pb-24">
-                <PageTransition>{children}</PageTransition>
-              </div>
-
-              {/* Bottom Dock Navigation */}
-              <Navbar />
-            </ThemeSetter>
-          </BackgroundModeProvider>
-        </SmoothScroll>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('theme');
+                  if (saved === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                  } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="font-sans antialiased selection:bg-[var(--accent)] selection:text-white">
+        <BackgroundModeProvider>
+          <SmoothScroll>
+            <ClientShell>{children}</ClientShell>
+          </SmoothScroll>
+        </BackgroundModeProvider>
       </body>
     </html>
   );

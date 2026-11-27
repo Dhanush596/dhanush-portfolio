@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -23,7 +24,7 @@ import { MagneticButton } from '@/components/shared/MagneticButton';
 import { Reveal } from '@/components/shared/Reveal';
 import { GithubIcon } from '@/components/shared/Icons';
 import { DeviceCoverFrame } from '@/components/work/DeviceCoverFrame';
-import { Footer } from '@/components/shared/Footer';
+import { MegaFooter } from '@/components/contact/MegaFooter';
 
 interface ProjectDetailPageProps {
   params: Promise<{
@@ -62,7 +63,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
   const { slug } = await params;
   const projectIndex = projects.findIndex((p) => p.slug === slug);
 
@@ -99,7 +100,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         {/* Back Link */}
         <Reveal delay={0.05}>
           <Link
-            href="/work"
+            href="/#work"
             className="inline-flex items-center gap-2 text-xs font-mono text-[var(--text)]/70 hover:text-[var(--accent)] mb-8 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
@@ -135,6 +136,12 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               <span className="px-3 py-1 rounded-full text-xs font-mono border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--text)]/80">
                 {categoryLabels[project.category]}
               </span>
+
+              {project.secondaryCategory && (
+                <span className="px-3 py-1 rounded-full text-xs font-mono border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--accent)]">
+                  {categoryLabels[project.secondaryCategory]}
+                </span>
+              )}
 
               {/* Backend Badge */}
               {project.backend && (
@@ -286,6 +293,27 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </Reveal>
         )}
 
+        {/* 4b. Verified Engineering Impact & Results */}
+        {project.impact && (
+          <Reveal delay={0.42} className="mb-14">
+            <GlassCard className="p-6 sm:p-8 border-l-4 border-l-emerald-400 border-emerald-500/30 bg-[var(--card-bg)] shadow-xl">
+              <div className="flex items-start gap-4">
+                <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-400 shrink-0">
+                  <CheckCircle2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-heading font-bold text-lg text-[var(--text)] mb-2">
+                    Engineering Impact & Results
+                  </h3>
+                  <p className="text-sm text-[var(--text)]/85 leading-relaxed font-mono">
+                    {project.impact}
+                  </p>
+                </div>
+              </div>
+            </GlassCard>
+          </Reveal>
+        )}
+
         {/* 5. Key Features Grid - hidden if features are empty */}
         {hasFeatures && (
           <div className="mb-14">
@@ -372,7 +400,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             </Link>
 
             <Link
-              href="/work"
+              href="/#work"
               className="px-4 py-2 text-xs font-mono text-[var(--text)]/70 hover:text-[var(--accent)] transition-colors"
             >
               All Projects
@@ -393,7 +421,21 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
         </Reveal>
       </div>
 
-      <Footer />
+      <MegaFooter />
     </div>
+  );
+}
+
+export default function ProjectDetailPage(props: ProjectDetailPageProps) {
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full min-h-screen flex items-center justify-center bg-[var(--surface)]">
+          <div className="w-8 h-8 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" />
+        </div>
+      }
+    >
+      <ProjectDetailContent {...props} />
+    </Suspense>
   );
 }

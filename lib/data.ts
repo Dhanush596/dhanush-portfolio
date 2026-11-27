@@ -18,6 +18,7 @@ export interface Experience {
   company: string;
   period: string;
   type: 'Full-time' | 'Internship';
+  score?: string;
   description: string;
   achievements: string[];
   skills: string[];
@@ -38,7 +39,9 @@ export interface AcademicDocument {
   institution?: string;
   boardOrUniversity?: string;
   period?: string;
+  grade?: string;
   description: string;
+  projects?: string[];
   documents: {
     label: string;
     file: string;
@@ -51,9 +54,11 @@ export interface InternshipDocument {
   role: string;
   company: string;
   period: string;
+  score?: string;
   certificateFile: string;
   description: string;
   skills: string[];
+  project?: string;
 }
 
 export interface SkillCategory {
@@ -192,17 +197,19 @@ export const EXPERIENCES: Experience[] = [
   },
   {
     role: 'DevOps Intern',
-    company: 'Rooman Technologies',
+    company: 'Rooman Technologies Ltd.',
     period: 'Feb 2026 – May 2026',
     type: 'Internship',
+    score: '100/100',
     description:
-      'Hands-on experience in containerization, infrastructure provisioning, and continuous deployment workflows.',
+      'Hands-on enterprise experience in containerization, infrastructure provisioning, and continuous deployment workflows. Achieved a perfect 100/100 score in DevOps engineering assessment.',
     achievements: [
-      'Constructed CI/CD automation pipelines utilizing GitHub Actions.',
-      'Configured containerized environments with Docker and container orchestration via Kubernetes.',
-      'Worked with declarative infrastructure provisioning using Terraform and GitOps paradigms.',
+      'Engineered the MERN GitOps CI/CD Pipeline Architecture (DevStream) with ArgoCD & K3s.',
+      'Constructed CI/CD automation pipelines utilizing GitHub Actions with Trivy security scanning.',
+      'Orchestrated repeatable cloud infrastructure using Terraform Infrastructure-as-Code (IaC) and Ansible on AWS EC2.',
+      'Configured containerized microservices with Docker multi-stage builds and Kubernetes pod auto-scaling.',
     ],
-    skills: ['Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'Linux', 'CI/CD'],
+    skills: ['Terraform', 'Ansible', 'Docker', 'Kubernetes K3s', 'ArgoCD', 'GitOps', 'AWS EC2', 'GitHub Actions', 'Trivy'],
   },
   {
     role: 'Full-Stack Development Intern',
@@ -210,13 +217,14 @@ export const EXPERIENCES: Experience[] = [
     period: 'Apr 2024 – Jun 2024',
     type: 'Internship',
     description:
-      'Designed and developed end-to-end web modules for commercial web applications and digital commerce.',
+      'Designed and developed end-to-end commercial web modules and digital commerce platforms in Agile sprint cycles.',
     achievements: [
-      'Engineered a complete online grocery platform with product listings, cart logic, and order placement.',
-      'Implemented responsive client interfaces and robust backend data processing with MySQL database storage.',
-      'Collaborated on database query optimization and API request-response validation.',
+      'Engineered the Online Grocery Store E-Commerce Platform with dynamic product catalog, shopping cart, and transactional checkout.',
+      'Implemented responsive client interfaces with TypeScript, React, and PHP backends.',
+      'Structured normalized MySQL relational database schemas with atomic order processing.',
+      'Managed Git collaborative workflows and participated in bi-weekly sprint releases.',
     ],
-    skills: ['PHP', 'JavaScript', 'HTML5', 'CSS3', 'MySQL', 'Full-Stack Development'],
+    skills: ['PHP', 'JavaScript', 'HTML5', 'CSS3', 'MySQL', 'React', 'Node.js', 'Express', 'Agile'],
   },
 ];
 
@@ -290,22 +298,25 @@ export const INTERNSHIP_CREDENTIALS: InternshipDocument[] = [
   {
     id: 'intern-rooman',
     role: 'DevOps Engineering Intern',
-    company: 'Rooman Technologies',
+    company: 'Rooman Technologies Ltd.',
     period: 'Feb 2026 – May 2026',
+    score: '100/100',
+    project: 'MERN GitOps CI/CD Pipeline Architecture',
     certificateFile: '/Certificates/InternshipCompletionCertificate.pdf',
     description:
-      'Verified internship completion in containerized deployment, CI/CD pipeline automation with GitHub Actions, Kubernetes clustering, and Terraform infrastructure as code.',
-    skills: ['Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'Linux', 'GitOps'],
+      'Verified internship completion in containerized deployment, CI/CD pipeline automation with GitHub Actions, Kubernetes clustering (K3s), Terraform infrastructure as code, and ArgoCD GitOps. Built the MERN GitOps CI/CD Pipeline Architecture (DevStream) and achieved a perfect 100/100 evaluation score.',
+    skills: ['Terraform', 'Ansible', 'Docker', 'Kubernetes K3s', 'ArgoCD', 'GitOps', 'AWS EC2', 'GitHub Actions', 'Trivy'],
   },
   {
     id: 'intern-encode',
     role: 'Full-Stack Development Intern',
     company: 'Encode Data Tech',
-    period: 'Apr 2024 – Jun 2024',
+    period: 'Apr 2024 – Jun 2024 (2 Months)',
+    project: 'Online Grocery Store E-Commerce Platform',
     certificateFile: '/Certificates/FullStackInternship.pdf',
     description:
-      'Verified internship completion designing and engineering a full-stack digital commerce web application, API integrations, and MySQL relational database management.',
-    skills: ['PHP', 'JavaScript', 'HTML5', 'CSS3', 'MySQL', 'Full-Stack Development'],
+      'Verified internship completion designing and engineering a full-stack digital commerce web application, API integrations, and MySQL relational database management. Engineered the Online Grocery Store platform across two months in an Agile sprint environment.',
+    skills: ['PHP', 'JavaScript', 'HTML5', 'CSS3', 'MySQL', 'React', 'Node.js', 'Express', 'Agile'],
   },
 ];
 
@@ -314,9 +325,15 @@ export const ACADEMIC_CREDENTIALS: AcademicDocument[] = [
     id: 'acad-mca',
     title: 'Master of Computer Applications (MCA)',
     degree: 'MCA',
+    institution: 'Srinivas Institute of Technology, Mangalore',
     boardOrUniversity: 'Visvesvaraya Technological University (VTU)',
+    period: '2024 – 2026',
     description:
-      'Postgraduate degree curriculum in software engineering, cloud architecture, system design, data structures, and enterprise applications.',
+      'Postgraduate degree curriculum in software engineering, cloud architecture, system design, data structures, and enterprise applications. Specialized in Cloud-Native Engineering & AI.',
+    projects: [
+      'Mental Health Monitor & Stress Detector (ML predictive system)',
+      'AI-Powered Study Assistant (NLP text summarization on Vercel)',
+    ],
     documents: [
       { label: 'MCA Semester 1 Markscard', file: '/Certificates/MCAsem1.pdf', type: 'Semester Markscard' },
       { label: 'MCA Semester 2 Markscard', file: '/Certificates/MCAsem2.pdf', type: 'Semester Markscard' },
@@ -328,9 +345,16 @@ export const ACADEMIC_CREDENTIALS: AcademicDocument[] = [
     id: 'acad-bca',
     title: 'Bachelor of Computer Applications (BCA)',
     degree: 'BCA',
+    institution: 'Sharada Degree College, Mangalore',
     boardOrUniversity: 'Undergraduate Computer Applications',
+    period: '2021 – 2024',
+    grade: 'CGPA: 8.2',
     description:
-      'Comprehensive undergraduate study in core computer science, software programming, web development, object-oriented paradigms, and database management systems.',
+      'Comprehensive undergraduate study in core computer science, software programming, web development, object-oriented paradigms, and database management systems. Graduated with 8.2 CGPA and built production-grade web systems.',
+    projects: [
+      'Online Grocery Store E-Commerce Platform (Full-Stack PHP/MySQL)',
+      'Intelligent Payroll Management System (Python/Data Analysis)',
+    ],
     documents: [
       { label: 'BCA Consolidated All-Semesters', file: '/Certificates/all-sem.pdf', type: 'Consolidated' },
       { label: 'BCA Semester 1 Markscard', file: '/Certificates/Sem1.pdf', type: 'Semester Markscard' },
@@ -344,10 +368,12 @@ export const ACADEMIC_CREDENTIALS: AcademicDocument[] = [
   {
     id: 'acad-puc',
     title: 'Pre-University Course (PUC)',
-    degree: '1st & 2nd PUC',
+    degree: '1st & 2nd PUC — Science',
+    institution: 'Parignana PU College',
     boardOrUniversity: 'Department of Pre-University Education, Karnataka',
+    period: '2019 – 2021',
     description:
-      'Higher secondary pre-university coursework with foundational analytics, mathematics, and science principles.',
+      'Higher secondary pre-university coursework in PCMC (Physics, Chemistry, Mathematics, and Computer Science) with foundational analytics and algorithmic thinking.',
     documents: [
       { label: '1st PUC Markscard', file: '/Certificates/1stpuc.pdf', type: 'Semester Markscard' },
       { label: '2nd PUC Markscard', file: '/Certificates/2ndpuc.pdf', type: 'Board Certificate' },
@@ -355,11 +381,13 @@ export const ACADEMIC_CREDENTIALS: AcademicDocument[] = [
   },
   {
     id: 'acad-10th',
-    title: 'Secondary School Leaving Certificate (SSLC / 10th)',
+    title: 'Secondary School Examination (SSLC / 10th)',
     degree: '10th Standard',
-    boardOrUniversity: 'Karnataka Secondary Education Examination Board (KSEEB)',
+    institution: 'National Institute of Open Schooling (NIOS)',
+    boardOrUniversity: 'National Institute of Open Schooling',
+    period: '2019',
     description:
-      'Secondary school examination certification with foundational academics and language disciplines.',
+      'Secondary school examination certification with foundational disciplines in Mathematics, Science, and Computing.',
     documents: [
       { label: '10th Standard / SSLC Markscard', file: '/Certificates/10th.pdf', type: 'Board Certificate' },
     ],

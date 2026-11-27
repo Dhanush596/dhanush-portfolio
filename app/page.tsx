@@ -1,26 +1,22 @@
-import { Hero } from '@/components/home/Hero';
-import { StatsStrip } from '@/components/home/StatsStrip';
-import { LiveSites } from '@/components/home/LiveSites';
-import { WhatIDo } from '@/components/home/WhatIDo';
-import { Footer } from '@/components/shared/Footer';
+import { Suspense } from 'react';
+import { HeroAct } from '@/components/home/HeroAct';
+import { HomeHubAct } from '@/components/home/HomeHubAct';
+import { ContactAct } from '@/components/contact/ContactAct';
 
-export default function HomePage() {
+export default function ConsolidatedHomePage() {
   return (
-    <div className="w-full">
-      {/* 1. Hero with 3D Canvas, headline, rotating titles & CTA buttons */}
-      <Hero />
+    <Suspense fallback={<div className="w-full min-h-screen bg-[var(--act-bg)]" />}>
+      <div className="w-full relative">
+        {/* Act 01: Hero Intro + Live Status + Tech Marquee + Proof Strip (No live project mentions) */}
+        <HeroAct />
 
-      {/* 2. Stats Strip with count-up animation */}
-      <StatsStrip />
+        {/* Home Hub: Concise Overview Cards with "View All" links to dedicated pages */}
+        {/* 1. Projects (Starts with BCA & MCA), 2. Experience & Internships, 3. Education, 4. Protected Credentials, 5. About */}
+        <HomeHubAct />
 
-      {/* 3. Live Sites Row of 4 colourful TiltCards */}
-      <LiveSites />
-
-      {/* 4. Two 'What I do' Cards (Full-Stack & Cloud-Native) */}
-      <WhatIDo />
-
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Act 03: Contact & Mega Footer */}
+        <ContactAct />
+      </div>
+    </Suspense>
   );
 }

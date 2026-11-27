@@ -80,7 +80,7 @@ const vertexShader = `
   }
 `;
 
-// Custom Fragment Shader for Deep Glossy Black Surface with Specular Sheen
+// Fragment Shader tailored for Bright Light Theme with soft pastel wave & indigo lines
 const fragmentShader = `
   uniform float u_time;
   uniform float u_mode;
@@ -96,34 +96,40 @@ const fragmentShader = `
     vec3 normal = normalize(vNormal);
     vec3 viewDir = normalize(vViewPosition);
 
-    // Fresnel effect for rim lighting
-    float fresnel = pow(1.0 - max(dot(viewDir, normal), 0.0), 3.0);
+    // Fresnel effect
+    float fresnel = pow(1.0 - max(dot(viewDir, normal), 0.0), 2.5);
 
-    // Specular highlight from imaginary light source
+    // Specular highlight
     vec3 lightDir = normalize(vec3(0.5, 0.8, 1.0));
     vec3 halfVector = normalize(lightDir + viewDir);
     float NdotH = max(dot(normal, halfVector), 0.0);
-    float specular = pow(NdotH, 24.0) * 0.6;
+    float specular = pow(NdotH, 18.0);
 
-    // Mode 0: Glossy Fluid Surface (adrienquechon dark aesthetic)
-    vec3 baseColor = vec3(0.015, 0.015, 0.02);
-    vec3 highlightColor = vec3(0.85, 0.88, 0.95);
-    vec3 secondarySheen = vec3(0.35, 0.38, 0.45);
+    // Palette: #BFDBFE, #DDD6FE, #FFFFFF with highlights in #2563EB
+    vec3 colorSky = vec3(0.749, 0.859, 0.996);     // #BFDBFE
+    vec3 colorLavender = vec3(0.867, 0.839, 0.996); // #DDD6FE
+    vec3 colorWhite = vec3(1.0, 1.0, 1.0);
+    vec3 colorIndigo = vec3(0.145, 0.388, 0.922);  // #2563EB
 
-    vec3 finalColor = baseColor;
-    finalColor += secondarySheen * (fresnel * 0.7);
-    finalColor += highlightColor * specular;
-    finalColor += vec3(0.12) * smoothstep(-0.2, 0.4, vElevation);
-
-    // Mode 1: Wireframe Grid Mode
+    // Mode 1: Wireframe Mode (Indigo lines on transparent)
     if (u_mode > 0.5) {
-      vec2 grid = abs(fract(vUv * 40.0 - 0.5) - 0.5) / fwidth(vUv * 40.0);
+      vec2 grid = abs(fract(vUv * 36.0 - 0.5) - 0.5) / fwidth(vUv * 36.0);
       float line = min(grid.x, grid.y);
-      float gridColor = 1.0 - min(line, 1.0);
-      finalColor = mix(vec3(0.02), vec3(0.7, 0.75, 0.85), gridColor * 0.6 + fresnel * 0.4);
+      float gridLine = 1.0 - min(line, 1.0);
+      float alpha = gridLine * 0.28 + fresnel * 0.15;
+      gl_FragColor = vec4(colorIndigo, alpha);
+      return;
     }
 
-    gl_FragColor = vec4(finalColor, 0.95);
+    // Mode 0: Soft Pastel Gradient Wave
+    float mixFactor = clamp((vElevation + 0.25) * 1.6, 0.0, 1.0);
+    vec3 pastelBase = mix(colorSky, colorLavender, vUv.x);
+    pastelBase = mix(pastelBase, colorWhite, mixFactor * 0.65);
+
+    vec3 finalColor = pastelBase;
+    finalColor = mix(finalColor, colorIndigo, specular * 0.22 + fresnel * 0.12);
+
+    gl_FragColor = vec4(finalColor, 0.72 + mixFactor * 0.2);
   }
 `;
 
@@ -196,8 +202,8 @@ export function TouchSensorScene({ mode = 'fluid' }: TouchSensorSceneProps) {
 
   return (
     <mesh ref={meshRef} position={[0, 0, 0]} rotation={[-0.2, 0, 0]}>
-      {/* High-density plane geometry for fluid wave dynamics */}
-      <planeGeometry args={[viewport.width * 1.5, viewport.height * 1.5, 96, 96]} />
+      {/* Optimized plane geometry for fluid wave dynamics */}
+      <planeGeometry args={[viewport.width * 1.5, viewport.height * 1.5, 36, 36]} />
       <shaderMaterial
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}

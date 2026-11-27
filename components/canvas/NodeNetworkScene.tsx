@@ -4,6 +4,12 @@ import React, { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
+// Seeded pseudo-random generator for idempotent node positions
+function seededRandom(seed: number) {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
 export function NodeNetworkScene() {
   const groupRef = useRef<THREE.Group>(null);
 
@@ -14,11 +20,11 @@ export function NodeNetworkScene() {
     const radius = 3.2;
 
     for (let i = 0; i < count; i++) {
-      const u = Math.random();
-      const v = Math.random();
+      const u = seededRandom(i * 3 + 1);
+      const v = seededRandom(i * 3 + 2);
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
-      const r = Math.cbrt(Math.random()) * radius;
+      const r = Math.cbrt(seededRandom(i * 3 + 3)) * radius;
 
       const sinPhi = Math.sin(phi);
       const x = r * sinPhi * Math.cos(theta);

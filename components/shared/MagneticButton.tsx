@@ -28,32 +28,47 @@ export function MagneticButton({
 }: MagneticButtonProps) {
   const buttonRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const rafId = useRef<number | null>(null);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (prefersReducedMotion || !buttonRef.current) return;
-      const rect = buttonRef.current.getBoundingClientRect();
-      const x = (e.clientX - (rect.left + rect.width / 2)) * 0.3;
-      const y = (e.clientY - (rect.top + rect.height / 2)) * 0.3;
-      setPosition({ x, y });
+      if (rafId.current !== null) return;
+
+      const clientX = e.clientX;
+      const clientY = e.clientY;
+
+      rafId.current = requestAnimationFrame(() => {
+        rafId.current = null;
+        if (!buttonRef.current) return;
+        const rect = buttonRef.current.getBoundingClientRect();
+        const x = (clientX - (rect.left + rect.width / 2)) * 0.25;
+        const y = (clientY - (rect.top + rect.height / 2)) * 0.25;
+        buttonRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      });
     },
     [prefersReducedMotion]
   );
 
   const handleMouseLeave = useCallback(() => {
-    setPosition({ x: 0, y: 0 });
+    if (rafId.current !== null) {
+      cancelAnimationFrame(rafId.current);
+      rafId.current = null;
+    }
+    if (buttonRef.current) {
+      buttonRef.current.style.transform = 'translate3d(0, 0, 0)';
+    }
   }, []);
 
   const variantStyles = {
     primary:
-      'bg-[var(--accent)] text-[#05060A] font-semibold hover:shadow-lg hover:shadow-[var(--accent)]/30 hover:brightness-110',
+      'bg-[var(--accent)] text-white font-semibold hover:shadow-lg hover:shadow-[var(--accent)]/25 hover:bg-[var(--accent-2)] transition-colors',
     secondary:
-      'bg-transparent border border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)]/10',
+      'bg-[var(--surface)] text-[var(--ink)] border border-[var(--line)] hover:border-[var(--accent)] hover:shadow-md transition-all',
     glass:
-      'bg-[var(--card-bg)] text-[var(--text)] border border-[var(--card-border)] backdrop-blur-md hover:border-[var(--accent)] hover:text-[var(--accent)]',
+      'bg-[var(--surface)]/80 text-[var(--ink)] border border-[var(--line)] backdrop-blur-md hover:border-[var(--accent)] hover:text-[var(--accent)]',
     outline:
-      'bg-transparent border border-white/20 text-white/90 hover:border-white/50 hover:bg-white/5',
+      'bg-transparent border border-[var(--line)] text-[var(--ink)] hover:border-[var(--accent)] hover:bg-[var(--surface-2)]',
   };
 
   const content = (
@@ -62,30 +77,27 @@ export function MagneticButton({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        transform: prefersReducedMotion
-          ? 'none'
-          : `translate3d(${position.x}px, ${position.y}px, 0)`,
         transition: 'transform 0.15s ease-out',
       }}
       className={cn(
-        'group inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-medium transition-all duration-300',
-        'focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]',
+        'relative inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-heading font-medium tracking-wide cursor-pointer select-none overflow-hidden group',
         variantStyles[variant],
         className
       )}
+      onClick={onClick}
     >
-      {children}
+      <span className="relative z-10 flex items-center gap-2">{children}</span>
     </div>
   );
 
   if (href) {
-    const isExternal = href.startsWith('http') || href.endsWith('.pdf');
-    if (isExternal) {
+    const isExternal = href.startsWith('http') || href.startsWith('//');
+    if (isExternal || download) {
       return (
         <a
           href={href}
-          target={target || (href.endsWith('.pdf') ? '_blank' : undefined)}
-          rel={rel || 'noopener noreferrer'}
+          target={target || (isExternal ? '_blank' : undefined)}
+          rel={rel || (isExternal ? 'noopener noreferrer' : undefined)}
           download={download}
           className="inline-block"
         >
@@ -94,15 +106,11 @@ export function MagneticButton({
       );
     }
     return (
-      <Link href={href} className="inline-block">
+      <Link href={href} prefetch={true} className="inline-block">
         {content}
       </Link>
     );
   }
 
-  return (
-    <button type="button" onClick={onClick} className="inline-block bg-transparent p-0 border-0">
-      {content}
-    </button>
-  );
+  return content;
 }

@@ -25,7 +25,7 @@ function StatCounter({ target, suffix = '' }: StatCounterProps) {
 
     if (!isInView) return;
 
-    let start = 0;
+    const start = 0;
     const duration = 1400;
     const startTime = performance.now();
 

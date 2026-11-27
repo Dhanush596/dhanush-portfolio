@@ -10,11 +10,15 @@ interface TouchSensorCanvasProps {
 
 export default function TouchSensorCanvas({ mode = 'fluid' }: TouchSensorCanvasProps) {
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-black">
+    <div style={{ pointerEvents: 'none' }} className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-transparent">
       <Canvas
+        style={{ pointerEvents: 'none' }}
+        onCreated={({ gl }) => {
+          gl.domElement.style.pointerEvents = 'none';
+        }}
         camera={{ position: [0, 0, 5], fov: 50 }}
-        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-        dpr={[1, 2]}
+        gl={{ antialias: true, alpha: true, powerPreference: 'low-power' }}
+        dpr={[1, 1.25]}
       >
         <TouchSensorScene mode={mode} />
       </Canvas>

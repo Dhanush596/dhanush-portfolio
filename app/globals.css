@@ -1,50 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 @import "tailwindcss";
 
 :root {
-  /* Editorial Brutalist Palette (adrienquechon inspired) */
-  --bg: #000000;
-  --text: #FFFFFF;
-  --text-muted: #888888;
-  --accent: #FFFFFF;
-  --accent-2: #888888;
-  --card-bg: rgba(255, 255, 255, 0.02);
-  --card-border: rgba(255, 255, 255, 0.1);
-  --glass-glare: rgba(255, 255, 255, 0.15);
+  /* LIGHT THEME (Default) */
+  --ink: #0F172A;
+  --muted: #475569;
+  --surface: #FFFFFF;
+  --surface-2: #F1F5F9;
+  --text: var(--ink);
+  --line: rgba(15, 23, 42, 0.10);
+  --accent: #2563EB;
+  --accent-2: #7C3AED;
+  --pop: #F43F5E;
+  --ok: #10B981;
+  --warn: #F59E0B;
+
+  /* Animated Act Background & Tint (Initial Act 01: Hello) */
+  --act-bg: #F6F9FF;
+  --act-tint: #E2ECFE;
+
+  /* Card styling bindings */
+  --bg: var(--act-bg);
+  --card-bg: var(--surface);
+  --card-border: var(--line);
+  --card-shadow: 0 10px 30px -12px rgba(37, 99, 235, 0.18);
+  --glass-glare: rgba(37, 99, 235, 0.08);
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-[data-theme="home"],
-[data-theme="work"],
-[data-theme="journey"],
-[data-theme="devops"],
-[data-theme="stack"],
-[data-theme="credentials"],
-[data-theme="contact"] {
-  --bg: #000000;
-  --text: #FFFFFF;
-  --text-muted: #888888;
-  --accent: #FFFFFF;
-  --accent-2: #888888;
-  --card-bg: rgba(255, 255, 255, 0.02);
-  --card-border: rgba(255, 255, 255, 0.1);
-  --glass-glare: rgba(255, 255, 255, 0.15);
-}
+[data-theme="dark"] {
+  /* DARK THEME (Optional toggle) */
+  --ink: #F1F5F9;
+  --muted: #94A3B8;
+  --surface: #0F172A;
+  --surface-2: #1E293B;
+  --text: var(--ink);
+  --line: rgba(255, 255, 255, 0.10);
+  --accent: #22D3EE;
+  --accent-2: #8B5CF6;
+  --pop: #F43F5E;
+  --ok: #34D399;
+  --warn: #F59E0B;
 
-[data-theme="about"] {
-  --bg: #000000;
-  --text: #FFFFFF;
-  --text-muted: #999999;
-  --accent: #FFFFFF;
-  --accent-2: #666666;
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(255, 255, 255, 0.12);
-  --glass-glare: rgba(255, 255, 255, 0.15);
+  --act-bg: #070B12;
+  --act-tint: #131E32;
+
+  --bg: var(--act-bg);
+  --card-bg: var(--surface);
+  --card-border: var(--line);
+  --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  --glass-glare: rgba(34, 211, 238, 0.12);
 }
 
 /* Base Body & HTML */
 html,
 body {
-  background-color: var(--bg);
-  color: var(--text);
+  background-color: var(--act-bg);
+  color: var(--ink);
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
   margin: 0;
@@ -52,51 +65,197 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color 0.6s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s ease, border-color 0.4s ease;
 }
 
 /* Typography mappings */
 h1, h2, h3, h4, h5, h6, .font-heading {
-  font-family: var(--font-space-grotesk), sans-serif;
+  font-family: var(--font-space-grotesk), var(--font-inter), sans-serif;
   letter-spacing: -0.03em;
+  color: var(--ink);
 }
 
-code, kbd, samp, pre, .font-mono, [data-mono] {
+.font-mono {
   font-family: var(--font-jetbrains-mono), monospace;
 }
 
-/* Visible Keyboard Focus Styles */
-:focus-visible {
-  outline: 2px solid #FFFFFF !important;
-  outline-offset: 3px !important;
-  border-radius: 4px;
+.font-serif-accent {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
 }
 
-/* Custom Minimalist Scrollbar */
+/* Easter Egg: Calm Mode */
+body.calm-mode {
+  filter: saturate(0.65);
+}
+body.calm-mode * {
+  animation-duration: 0.001s !important;
+  transition-duration: 0.001s !important;
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: var(--act-bg);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--line);
   border-radius: 9999px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--accent);
 }
 
-/* Prefers Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+/* Selection Color */
+::selection {
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+/* =========================================================================
+   BORDER LIGHT BEAM & FLOATING CARD ANIMATIONS
+   ========================================================================= */
+
+@keyframes beamSpin {
+  0% {
+    transform: rotate(0deg);
   }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cardFloat1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.35deg);
+  }
+}
+
+@keyframes cardFloat2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(-0.45deg);
+  }
+}
+
+@keyframes cardFloat3 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0.55deg);
+  }
+}
+
+@keyframes stickerOrbit1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(-2deg);
+  }
+}
+
+@keyframes stickerOrbit2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(7deg);
+  }
+  50% {
+    transform: translateY(-11px) rotate(4deg);
+  }
+}
+
+@keyframes stickerOrbit3 {
+  0%, 100% {
+    transform: translateY(0px) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1deg);
+  }
+}
+
+@keyframes stickerOrbit4 {
+  0%, 100% {
+    transform: translateY(0px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(8deg);
+  }
+}
+
+.animate-float-1 {
+  animation: cardFloat1 5.2s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: cardFloat2 6.4s ease-in-out infinite;
+}
+
+.animate-float-3 {
+  animation: cardFloat3 5.8s ease-in-out infinite;
+}
+
+.animate-sticker-1 {
+  animation: stickerOrbit1 4.6s ease-in-out infinite;
+}
+
+.animate-sticker-2 {
+  animation: stickerOrbit2 5.4s ease-in-out infinite;
+}
+
+.animate-sticker-3 {
+  animation: stickerOrbit3 4.9s ease-in-out infinite;
+}
+
+.animate-sticker-4 {
+  animation: stickerOrbit4 5.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-1,
+  .animate-float-2,
+  .animate-float-3,
+  .animate-sticker-1,
+  .animate-sticker-2,
+  .animate-sticker-3,
+  .animate-sticker-4 {
+    animation: none !important;
+  }
+}
+
+
+/* =========================================================================
+   UNIVERSAL INTERACTION & POINTER PASS-THROUGH SAFETY
+   ========================================================================= */
+
+/* All 3D canvases, grain layers, and decorative overlays MUST NEVER intercept clicks */
+canvas,
+canvas *,
+.grain-overlay,
+[data-overlay] {
+  pointer-events: none !important;
+}
+
+/* All interactive elements, navigation links, and buttons MUST ALWAYS be clickable */
+a,
+button,
+[role="button"],
+input,
+select,
+textarea,
+nav,
+nav a,
+nav button,
+.pointer-events-auto,
+.pointer-events-auto * {
+  pointer-events: auto !important;
+  cursor: pointer;
 }
