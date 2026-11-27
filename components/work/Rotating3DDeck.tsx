@@ -13,8 +13,16 @@ export function Rotating3DDeck() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
   const total = LIVE_SITES.length;
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const nextSlide = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % total);
@@ -122,7 +130,7 @@ export function Rotating3DDeck() {
 
       {/* 3D Cylindrical Perspective Carousel Stage */}
       <div
-        className="relative w-full min-h-[480px] sm:min-h-[540px] flex items-center justify-center overflow-visible py-4 select-none"
+        className="relative w-full min-h-[480px] sm:min-h-[540px] flex items-center justify-center overflow-hidden sm:overflow-visible py-4 select-none"
         style={{ perspective: '1200px' }}
       >
         <div
@@ -148,38 +156,38 @@ export function Rotating3DDeck() {
 
             if (isActive) {
               xOffset = 0;
-              zOffset = 40;
+              zOffset = isMobile ? 10 : 40;
               rotateY = 0;
               scale = 1;
               opacity = 1;
               zIndex = 30;
             } else if (offset === 1) {
-              xOffset = 260;
-              zOffset = -120;
-              rotateY = -28;
-              scale = 0.88;
-              opacity = 0.72;
+              xOffset = isMobile ? 65 : 280;
+              zOffset = isMobile ? -60 : -120;
+              rotateY = isMobile ? -18 : -28;
+              scale = isMobile ? 0.88 : 0.88;
+              opacity = isMobile ? 0.35 : 0.72;
               zIndex = 20;
             } else if (offset === -1) {
-              xOffset = -260;
-              zOffset = -120;
-              rotateY = 28;
-              scale = 0.88;
-              opacity = 0.72;
+              xOffset = isMobile ? -65 : -280;
+              zOffset = isMobile ? -60 : -120;
+              rotateY = isMobile ? 18 : 28;
+              scale = isMobile ? 0.88 : 0.88;
+              opacity = isMobile ? 0.35 : 0.72;
               zIndex = 20;
             } else if (offset === 2) {
-              xOffset = 420;
-              zOffset = -260;
-              rotateY = -45;
+              xOffset = isMobile ? 120 : 440;
+              zOffset = isMobile ? -140 : -260;
+              rotateY = isMobile ? -30 : -45;
               scale = 0.76;
-              opacity = 0.25;
+              opacity = isMobile ? 0 : 0.25;
               zIndex = 10;
             } else if (offset === -2) {
-              xOffset = -420;
-              zOffset = -260;
-              rotateY = 45;
+              xOffset = isMobile ? -120 : -440;
+              zOffset = isMobile ? -140 : -260;
+              rotateY = isMobile ? 30 : 45;
               scale = 0.76;
-              opacity = 0.25;
+              opacity = isMobile ? 0 : 0.25;
               zIndex = 10;
             }
 
