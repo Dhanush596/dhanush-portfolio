@@ -72,7 +72,7 @@ export function HomeHubAct() {
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
-                  <span><strong>BCA Capstone:</strong> Online Grocery Store E-Commerce Platform</span>
+                  <span><strong>BCA Capstone:</strong> GStore Grocery E-Commerce (PHP to MERN Modernization)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />

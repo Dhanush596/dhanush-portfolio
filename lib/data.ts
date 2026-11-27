@@ -371,7 +371,7 @@ export const ACADEMIC_CREDENTIALS: AcademicDocument[] = [
     description:
       'Comprehensive undergraduate study in core computer science, software programming, web development, object-oriented paradigms, and database management systems. Graduated with 8.2 CGPA and built production-grade web systems.',
     projects: [
-      'Online Grocery Store E-Commerce Platform (Full-Stack PHP/MySQL Capstone)',
+      'GStore — Full-Stack Grocery E-Commerce Platform (BCA Capstone & MERN Modernization)',
     ],
     documents: [
       { label: 'BCA Consolidated All-Semesters', file: '/Certificates/all-sem.pdf', type: 'Consolidated' },

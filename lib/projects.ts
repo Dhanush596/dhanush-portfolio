@@ -1019,52 +1019,83 @@ export const projects: Project[] = [
   },
   {
     slug: "online-grocery-store",
-    title: "Online Grocery Store E-Commerce Platform",
-    tagline: "Full-featured grocery e-commerce platform with customer storefront and transactional admin portal",
+    title: "GStore — Full-Stack Grocery E-Commerce Platform",
+    tagline: "Legacy PHP 8 + MySQL (XAMPP) monolithic store modernized into a React 18 + MERN architecture with interactive Vercel showcase",
     category: "internship",
     secondaryCategory: "bca",
-    status: "practice",
+    status: "live",
     backend: "full-stack",
-    role: "Full-Stack Development Intern, Encode Data Tech & BCA Capstone",
-    period: "Apr 2024 – Jun 2024",
-    accent: "#FB923C",
-    accent2: "#F59E0B",
+    role: "Full-Stack Development Intern, Encode Data Tech & BCA Capstone Lead",
+    period: "Apr 2024 – Jun 2024 (Modernized 2025)",
+    cover: "/media/sites/gstore.png",
+    accent: "#16A34A",
+    accent2: "#22C55E",
     featured: true,
-    stack: ["PHP", "MySQL", "JavaScript", "HTML5", "CSS3", "XAMPP", "Apache"],
+    stack: [
+      "React 18",
+      "Vite 5",
+      "Tailwind CSS 3",
+      "React Router v6",
+      "React Context API",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Mongoose (7 models)",
+      "JWT & Bcryptjs",
+      "Cloudinary",
+      "localStorage REST Adapter",
+      "Legacy PHP 8.2 & MySQL (XAMPP)",
+      "Vercel",
+    ],
     features: [
-      "Customer storefront with dynamic product catalog searching, category filtering, and cart logic",
-      "Secure MySQL-backed transactional checkout system with order history tracking",
-      "Role-based authentication dividing Admin management and customer shopping interfaces",
-      "Admin order management workflow with live status updates: Ordered, Packed, On the way, Delivered",
-      "Inventory management, stock adjustments, and product CRUD with image uploads",
+      "Modern React 18 + Vite SPA: High-performance Single Page Application with dynamic client-side routing, protected user/admin route guards, and sub-second transitions",
+      "Dual User & Admin Portals: 8 customer pages (Home, Shop with category filter, Details, Reviews, Cart, Shipping Checkout, Order Tracking) and 7 admin management centers",
+      "Admin Operations Command: Analytics KPI stat cards, Category CRUD with inline editing, Product CRUD with image uploads, Customer Directory, Feedback Viewer, and Order Workflow (Pending → Processing → Shipped → Delivered / Cancelled)",
+      "Zero-Backend Serverless Showcase: In-browser localStorage REST simulation engine (client/src/api.js) supporting async simulated delays, full CRUD, pre-seeded catalog, and FileReader DataURL image uploads on Vercel",
+      "Production MERN Architecture in /api: Node.js, Express, Mongoose schemas mapped from legacy gstore.sql (Admin, Customer, Category, Product, Order, Shipping, Feedback) with JWT auth middleware and Cloudinary storage",
+      "1-Click Demo Onboarding: Built-in credentials auto-fill for both Customer (dhanush@gmail.com / 1234) and Admin (admin@gstore.com / admin123) for instant reviewer exploration",
+      "Non-Blocking Toast System: Replaced intrusive legacy browser alert() dialogs with modern react-hot-toast notifications across all user actions",
     ],
     highlights: [
-      "User authentication and role-based access control (Admin vs Customer)",
-      "Dynamic product catalog searching and filtering mechanisms",
-      "Secure MySQL-backed transactional checkout and cart system",
-      "Optimized database schemas for reliable order handling",
-      "Responsive frontend UI for seamless mobile shopping",
+      "Full legacy modernization from monolithic PHP 8.2 + MySQL (XAMPP) to decoupled React 18 + MERN architecture",
+      "7 Mongoose models cleanly mapped from legacy gstore.sql relational schema",
+      "Zero-backend localStorage REST adapter with FileReader DataURL image persistence for instant Vercel demo",
+      "Dual role authentication (JWT protectUser and protectAdmin guards) with auto-fill demo credentials",
+      "Live production deployment on Vercel with smooth react-hot-toast notifications",
     ],
     impact:
-      "Successfully delivered as both a verified industry internship platform at Encode Data Tech and the BCA final-year capstone project at Sharada Degree College.",
+      "Modernized a legacy local XAMPP application into a cloud-native, responsive e-commerce platform with dual User/Admin dashboards, instant sub-second page transitions, and 100% interactive serverless demo mode.",
     realVsSimulated:
-      "Full-stack relational architecture engineered with PHP and MySQL during the internship at Encode Data Tech, also serving as the BCA capstone showcase.",
+      "Dual Architecture: Repository contains a production-ready Node.js/Express/MongoDB REST API with Cloudinary image storage, alongside an interactive in-browser localStorage REST engine enabling full zero-backend testing on Vercel (https://gstore-nt2i.vercel.app).",
     challenges: [
       {
         problem:
-          "Managing relational database integrity during concurrent checkout transactions and maintaining secure session states.",
+          "Original PHP/MySQL monolith ran strictly on local XAMPP Apache servers, with PHP PDO inline queries and $_SESSION cookies that prevented cloud hosting on Vercel.",
         solution:
-          "Structured atomic database transactions in MySQL with foreign key constraints, session protection, and transactional rollbacks.",
+          "Audited PHP base controllers (Main.php, Admin.php) and normalized the 7 MySQL tables into Mongoose models, decoupling the frontend into a React 18 + Vite SPA.",
       },
       {
         problem:
-          "Admin updates to product stock and order statuses causing state desynchronization.",
+          "Serverless static hosts cannot persist binary image files uploaded through traditional PHP move_uploaded_file() or local multer disk storage.",
         solution:
-          "Standardized session-based authentication and centralized order processing controllers.",
+          "Implemented Cloudinary cloud storage in the Express backend, and engineered a client-side FileReader DataURL encoder in the localStorage demo adapter so uploaded product images render and persist immediately in the browser.",
+      },
+      {
+        problem:
+          "Legacy architecture triggered full page reloads and disruptive, blocking browser alert() dialogs on every cart addition or order status change.",
+        solution:
+          "Migrated to React Router v6 declarative routing with centralized AuthContext and non-blocking react-hot-toast notifications for a seamless mobile-first UX.",
+      },
+      {
+        problem:
+          "Admin updates to product stock and order statuses causing state desynchronization between customer views and admin tables.",
+        solution:
+          "Structured a unified reactive state layer where admin order progression (Pending -> Processing -> Shipped -> Delivered) immediately synchronizes with customer order tracking timelines.",
       },
     ],
     links: {
-      repo: "https://github.com/Dhanush596",
+      live: "https://gstore-nt2i.vercel.app",
+      repo: "https://github.com/Dhanush596/gstore",
     },
   },
 

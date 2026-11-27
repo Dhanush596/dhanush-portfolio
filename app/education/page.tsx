@@ -72,17 +72,17 @@ export default function EducationPage() {
     },
     {
       degree: 'BCA Capstone (2021–2024)',
-      title: 'Online Grocery Store E-Commerce Platform',
+      title: 'GStore — Full-Stack Grocery E-Commerce Platform',
       slug: 'online-grocery-store',
-      tagline: 'Full-featured grocery digital commerce platform with customer storefront and transactional admin portal.',
-      stack: ['React', 'PHP', 'MySQL', 'Apache', 'Tailwind CSS'],
+      tagline: 'Legacy PHP 8 + MySQL grocery store modernized into React 18 + MERN architecture with interactive Vercel showcase.',
+      stack: ['React 18', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'Legacy PHP/MySQL', 'Vercel'],
       features: [
-        'Dynamic product catalog with multi-category search, cart and checkout.',
-        'Atomic order processing with normalized MySQL relational schema.',
-        'Comprehensive admin panel for inventory management and sales records.',
+        'Decoupled monolithic PHP/MySQL into modern React 18 + Vite SPA with dual User & Admin portals.',
+        'Zero-backend localStorage REST adapter supporting full CRUD, order tracking, and image uploads.',
+        'Production MERN backend with 7 Mongoose models, JWT role middleware, and Cloudinary storage.',
       ],
-      accent: '#10B981',
-      accent2: '#06B6D4',
+      accent: '#16A34A',
+      accent2: '#22C55E',
     },
   ];
 

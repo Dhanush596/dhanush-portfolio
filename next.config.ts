@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
         destination: '/work/payflow-payroll',
         permanent: true,
       },
+      {
+        source: '/work/gstore',
+        destination: '/work/online-grocery-store',
+        permanent: false,
+      },
     ];
   },
 };
