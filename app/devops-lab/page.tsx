@@ -44,7 +44,7 @@ export default function DevOpsLabPage() {
         {labModules.map((mod, idx) => {
           const Icon = mod.icon;
           return (
-            <GlassCard key={idx} className="p-5 border-[var(--accent)]/20 hover:border-[var(--accent)]/50">
+            <GlassCard key={idx} colorIndex={idx * 2} className="p-5">
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
                   <Icon className="w-5 h-5" />

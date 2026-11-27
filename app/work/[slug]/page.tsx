@@ -26,6 +26,8 @@ import { Reveal } from '@/components/shared/Reveal';
 import { GithubIcon } from '@/components/shared/Icons';
 import { DeviceCoverFrame } from '@/components/work/DeviceCoverFrame';
 import { MegaFooter } from '@/components/contact/MegaFooter';
+import { Hero3DText } from '@/components/shared/Hero3DText';
+import { getMultiCardStyle } from '@/lib/cardThemes';
 
 interface ProjectDetailPageProps {
   params: Promise<{
@@ -88,21 +90,21 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
     <div
       style={
         {
-          '--accent': project.accent,
-          '--accent-2': project.accent2,
+          '--project-accent': project.accent,
+          '--project-accent-2': project.accent2,
           '--card-border': `${project.accent}30`,
           '--card-bg': `${project.accent}0a`,
           '--glass-glare': `${project.accent}20`,
         } as React.CSSProperties
       }
-      className="w-full min-h-screen transition-colors duration-500"
+      className="w-full min-h-screen transition-colors duration-500 bg-[var(--act-bg)] text-[var(--ink)]"
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
         {/* Back Link */}
         <Reveal delay={0.05}>
           <Link
-            href="/#work"
-            className="inline-flex items-center gap-2 text-xs font-mono text-[var(--text)]/70 hover:text-[var(--accent)] mb-8 transition-colors"
+            href="/work"
+            className="inline-flex items-center gap-2 text-xs font-mono text-[var(--muted)] hover:text-[var(--accent)] mb-8 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to all projects</span>
@@ -153,12 +155,15 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
             </div>
           </Reveal>
 
-          {/* Title */}
-          <Reveal delay={0.15}>
-            <h1 className="font-heading text-4xl sm:text-6xl font-extrabold tracking-tight text-[var(--text)] mb-4">
-              {project.title}
-            </h1>
-          </Reveal>
+          {/* 3D Animated Title */}
+          <div className="mb-4">
+            <Hero3DText
+              as="h1"
+              align="left"
+              segments={[{ text: project.title }]}
+              className="font-heading text-4xl sm:text-6xl font-extrabold tracking-tight text-[var(--ink)]"
+            />
+          </div>
 
           {/* Tagline */}
           <Reveal delay={0.2}>
@@ -246,7 +251,7 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
 
         {/* 2. At-a-glance Row */}
         <Reveal delay={0.3} className="mb-12">
-          <GlassCard className="p-6 sm:p-8 border-[var(--accent)]/30">
+          <GlassCard colorIndex={0} className="p-6 sm:p-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               <div>
                 <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text)]/50 mb-1 flex items-center gap-1.5">
@@ -323,7 +328,7 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
         {/* 4. Real vs Simulated Callout (Only if realVsSimulated exists) */}
         {project.realVsSimulated && (
           <Reveal delay={0.4} className="mb-14">
-            <GlassCard className="p-6 sm:p-8 border-l-4 border-l-[var(--accent)] border-[var(--accent)]/30 bg-[var(--card-bg)] shadow-xl">
+            <GlassCard colorIndex={2} className="p-6 sm:p-8 border-l-4 border-l-[var(--accent)] shadow-xl">
               <div className="flex items-start gap-4">
                 <div className="p-2.5 rounded-xl bg-[var(--accent)]/15 text-[var(--accent)] shrink-0">
                   <HelpCircle className="w-5 h-5" />
@@ -344,9 +349,9 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
         {/* 4b. Verified Engineering Impact & Results */}
         {project.impact && (
           <Reveal delay={0.42} className="mb-14">
-            <GlassCard className="p-6 sm:p-8 border-l-4 border-l-emerald-400 border-emerald-500/30 bg-[var(--card-bg)] shadow-xl">
+            <GlassCard colorIndex={1} className="p-6 sm:p-8 border-l-4 border-l-emerald-500 shadow-xl">
               <div className="flex items-start gap-4">
-                <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-400 shrink-0">
+                <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0">
                   <CheckCircle2 className="w-5 h-5" />
                 </div>
                 <div>
@@ -374,7 +379,7 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {project.features.map((feature, fIdx) => (
                 <Reveal key={fIdx} delay={0.45 + fIdx * 0.05}>
-                  <GlassCard className="p-5 h-full flex items-start gap-3 border-[var(--card-border)] hover:border-[var(--accent)]/40 transition-colors">
+                  <GlassCard colorIndex={fIdx + 3} className="p-5 h-full flex items-start gap-3 transition-colors">
                     <CheckCircle2 className="w-5 h-5 text-[var(--accent)] shrink-0 mt-0.5" />
                     <span className="text-sm text-[var(--text)]/85 leading-relaxed">
                       {feature}
@@ -401,11 +406,11 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
             <div className="space-y-6">
               {project.challenges!.map((chal, cIdx) => (
                 <Reveal key={cIdx} delay={0.5 + cIdx * 0.07}>
-                  <GlassCard className="p-6 sm:p-7 border-[var(--card-border)] overflow-hidden">
+                  <GlassCard colorIndex={cIdx + 6} className="p-6 sm:p-7 overflow-hidden">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 divide-y md:divide-y-0 md:divide-x divide-[var(--card-border)]">
                       {/* Problem Column */}
                       <div className="pr-0 md:pr-4">
-                        <div className="flex items-center gap-2 text-rose-400 font-mono text-xs uppercase tracking-wider mb-2 font-semibold">
+                        <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400 font-mono text-xs uppercase tracking-wider mb-2 font-semibold">
                           <AlertCircle className="w-4 h-4 shrink-0" />
                           <span>The Challenge</span>
                         </div>
@@ -437,31 +442,33 @@ async function ProjectDetailContent({ params }: ProjectDetailPageProps) {
           <div className="pt-10 border-t border-[var(--card-border)] flex flex-col sm:flex-row items-center justify-between gap-4">
             <Link
               href={`/work/${prevProject.slug}`}
-              className="w-full sm:w-auto p-4 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] hover:border-[var(--accent)]/50 transition-all text-left group"
+              style={getMultiCardStyle(4)}
+              className="w-full sm:w-auto p-4 rounded-xl border multi-card transition-all text-left group"
             >
-              <span className="text-[10px] font-mono text-[var(--text)]/50 block mb-1">
+              <span className="text-[10px] font-mono text-[var(--muted)] block mb-1">
                 ← Previous Project
               </span>
-              <span className="text-sm font-heading font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
+              <span className="text-sm font-heading font-bold text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">
                 {prevProject.title}
               </span>
             </Link>
 
             <Link
-              href="/#work"
-              className="px-4 py-2 text-xs font-mono text-[var(--text)]/70 hover:text-[var(--accent)] transition-colors"
+              href="/work"
+              className="px-4 py-2 text-xs font-mono text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
             >
               All Projects
             </Link>
 
             <Link
               href={`/work/${nextProject.slug}`}
-              className="w-full sm:w-auto p-4 rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] hover:border-[var(--accent)]/50 transition-all text-right group"
+              style={getMultiCardStyle(9)}
+              className="w-full sm:w-auto p-4 rounded-xl border multi-card transition-all text-right group"
             >
-              <span className="text-[10px] font-mono text-[var(--text)]/50 block mb-1">
+              <span className="text-[10px] font-mono text-[var(--muted)] block mb-1">
                 Next Project →
               </span>
-              <span className="text-sm font-heading font-bold text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
+              <span className="text-sm font-heading font-bold text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors">
                 {nextProject.title}
               </span>
             </Link>
@@ -478,7 +485,7 @@ export default function ProjectDetailPage(props: ProjectDetailPageProps) {
   return (
     <Suspense
       fallback={
-        <div className="w-full min-h-screen flex items-center justify-center bg-[var(--surface)]">
+        <div className="w-full min-h-screen flex items-center justify-center bg-[var(--act-bg)]">
           <div className="w-8 h-8 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" />
         </div>
       }

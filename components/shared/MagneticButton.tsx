@@ -62,7 +62,7 @@ export function MagneticButton({
 
   const variantStyles = {
     primary:
-      'bg-[var(--accent)] text-white font-semibold hover:shadow-lg hover:shadow-[var(--accent)]/25 hover:bg-[var(--accent-2)] transition-colors',
+      'bg-blue-600 text-white font-semibold hover:shadow-lg hover:shadow-blue-600/25 hover:bg-blue-700 dark:hover:bg-blue-500 transition-colors',
     secondary:
       'bg-[var(--surface)] text-[var(--ink)] border border-[var(--line)] hover:border-[var(--accent)] hover:shadow-md transition-all',
     glass:

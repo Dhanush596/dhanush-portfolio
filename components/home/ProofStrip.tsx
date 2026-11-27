@@ -90,6 +90,7 @@ export function ProofStrip() {
           return (
             <TiltCard
               key={idx}
+              colorIndex={idx * 2}
               beamDuration={5.5 + idx}
               floatEffect={false}
               className={`p-6 flex flex-col justify-between group select-none ${

@@ -16,7 +16,8 @@ interface BorderBeamProps {
 
 /**
  * Animated moving light beam that races continuously around the card border.
- * 100% GPU-composited, zero main-thread overhead, theme-adaptive.
+ * Uses pure CSS border mask-composite so the interior remains 100% transparent
+ * and never occludes sibling elements or card backgrounds.
  */
 export function BorderBeam({
   duration = 6,
@@ -34,7 +35,7 @@ export function BorderBeam({
       <div
         aria-hidden="true"
         className={cn(
-          'pointer-events-none absolute inset-0 rounded-[inherit] border border-[var(--line)]',
+          'pointer-events-none absolute inset-0 rounded-[inherit] border border-[var(--line)] z-10',
           className
         )}
       />
@@ -45,34 +46,25 @@ export function BorderBeam({
     <div
       aria-hidden="true"
       className={cn(
-        'pointer-events-none absolute -inset-[1px] rounded-[inherit] overflow-hidden z-0 select-none',
+        'pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden z-10 select-none',
         className
       )}
+      style={{
+        padding: `${borderWidth}px`,
+        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+        WebkitMaskComposite: 'xor',
+        mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+        maskComposite: 'exclude',
+      }}
     >
-      {/* 1. Orbiting Conic Gradient Beam */}
+      {/* Orbiting square conic-gradient ring centered safely for any aspect ratio */}
       <div
-        className="absolute inset-[-150%] animate-[beamSpin_6s_linear_infinite]"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[max(220%,800px)] aspect-square animate-[beamSpin_6s_linear_infinite]"
         style={{
-          background: `conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 270deg, ${colorFrom} 305deg, ${colorPop} 335deg, ${colorTo} 355deg, transparent 360deg)`,
+          background: `conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 255deg, ${colorFrom} 295deg, ${colorPop} 330deg, ${colorTo} 352deg, transparent 360deg)`,
           animationDuration: `${duration}s`,
           animationDelay: `${delay}s`,
         }}
-      />
-
-      {/* 2. Soft Outer Ambient Glow */}
-      <div
-        className="absolute inset-[-150%] animate-[beamSpin_6s_linear_infinite] blur-[3px] opacity-75"
-        style={{
-          background: `conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 280deg, ${colorFrom} 315deg, ${colorPop} 345deg, transparent 360deg)`,
-          animationDuration: `${duration}s`,
-          animationDelay: `${delay}s`,
-        }}
-      />
-
-      {/* 3. Surface Mask: cuts out the center so the radiant light travels along the border */}
-      <div
-        className="absolute rounded-[inherit] bg-[var(--surface)] transition-colors duration-300"
-        style={{ inset: `${borderWidth}px` }}
       />
     </div>
   );

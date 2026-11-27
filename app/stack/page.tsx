@@ -19,7 +19,7 @@ export default function StackPage() {
     >
       <div className="space-y-6 text-left max-w-2xl mx-auto my-6">
         {SKILL_CATEGORIES.map((cat, idx) => (
-          <GlassCard key={idx} className="p-6 border-[var(--accent)]/20 hover:border-[var(--accent)]/50">
+          <GlassCard key={idx} colorIndex={idx * 3} className="p-6">
             <h3 className="font-heading font-bold text-lg text-[var(--accent)] mb-1">
               {cat.category}
             </h3>

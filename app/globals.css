@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
 
 :root,
 [data-theme="light"],
@@ -35,7 +36,7 @@
 .dark {
   /* DARK THEME (Luminous, glowing contrast) */
   --ink: #F8FAFC;
-  --muted: #94A3B8;
+  --muted: #B0C0D6;
   --surface: #0F172A;
   --surface-2: #1E293B;
   --text: #F8FAFC;
@@ -56,26 +57,32 @@
   --glass-glare: rgba(56, 189, 248, 0.12);
 }
 
-/* Base Body & HTML */
-html,
-body {
-  background-color: var(--act-bg);
-  color: var(--ink);
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  transition: background-color 0.6s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s ease, border-color 0.4s ease;
-}
+@layer base {
+  /* Base Body & HTML */
+  html,
+  body {
+    background-color: var(--act-bg);
+    color: var(--ink);
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color 0.6s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s ease, border-color 0.4s ease;
+  }
 
-/* Typography mappings */
-h1, h2, h3, h4, h5, h6, .font-heading {
-  font-family: var(--font-space-grotesk), var(--font-inter), sans-serif;
-  letter-spacing: -0.03em;
-  color: var(--ink);
+  /* Typography mappings (layered so Tailwind utility text colors always take precedence) */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space-grotesk), var(--font-inter), sans-serif;
+    letter-spacing: -0.03em;
+  }
+
+  .font-heading {
+    font-family: var(--font-space-grotesk), var(--font-inter), sans-serif;
+    letter-spacing: -0.03em;
+  }
 }
 
 .font-mono {
@@ -234,6 +241,88 @@ body.calm-mode * {
   }
 }
 
+
+/* =========================================================================
+   MULTI-COLOR CARD SURFACE ENGINE (Guaranteed Contrast in Light & Dark)
+   ========================================================================= */
+
+.multi-card {
+  --mc1: 37, 99, 235;
+  --mc2: 124, 58, 237;
+  --mc3: 6, 182, 212;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(var(--mc1), 0.16), transparent 52%),
+    radial-gradient(circle at 100% 10%, rgba(var(--mc2), 0.15), transparent 50%),
+    radial-gradient(circle at 60% 100%, rgba(var(--mc3), 0.16), transparent 55%),
+    linear-gradient(135deg, rgba(var(--mc1), 0.08) 0%, rgba(var(--mc2), 0.06) 50%, rgba(var(--mc3), 0.09) 100%),
+    #FFFFFF;
+  border-color: rgba(var(--mc1), 0.34);
+  box-shadow:
+    0 12px 32px -12px rgba(var(--mc1), 0.22),
+    0 4px 14px -6px rgba(var(--mc2), 0.14);
+}
+
+.multi-card:hover {
+  border-color: rgba(var(--mc2), 0.65);
+  box-shadow:
+    0 22px 46px -14px rgba(var(--mc1), 0.28),
+    0 10px 26px -10px rgba(var(--mc3), 0.24);
+}
+
+[data-theme="dark"] .multi-card,
+.dark .multi-card {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(var(--mc1), 0.26), transparent 54%),
+    radial-gradient(circle at 100% 12%, rgba(var(--mc2), 0.22), transparent 52%),
+    radial-gradient(circle at 60% 100%, rgba(var(--mc3), 0.24), transparent 58%),
+    linear-gradient(135deg, rgba(var(--mc1), 0.14) 0%, rgba(var(--mc2), 0.12) 50%, rgba(var(--mc3), 0.15) 100%),
+    #0B1221;
+  border-color: rgba(var(--mc1), 0.42);
+  box-shadow:
+    0 16px 38px -12px rgba(0, 0, 0, 0.7),
+    0 0 28px -10px rgba(var(--mc2), 0.28);
+}
+
+[data-theme="dark"] .multi-card:hover,
+.dark .multi-card:hover {
+  border-color: rgba(var(--mc3), 0.72);
+  box-shadow:
+    0 24px 50px -12px rgba(0, 0, 0, 0.85),
+    0 0 36px -8px rgba(var(--mc1), 0.38);
+}
+
+/* Multi-color 3D text gentle idle float & holographic shine */
+@keyframes hero3DFloat {
+  0%, 100% {
+    transform: rotateX(4deg) rotateY(-4deg) translateZ(0px);
+  }
+  50% {
+    transform: rotateX(-4deg) rotateY(4deg) translateZ(8px);
+  }
+}
+
+@keyframes sheenSweep {
+  0% {
+    transform: translateX(-140%) skewX(-20deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.75;
+  }
+  80% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateX(240%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero3d-idle {
+    animation: none !important;
+  }
+}
 
 /* =========================================================================
    UNIVERSAL INTERACTION & POINTER PASS-THROUGH SAFETY

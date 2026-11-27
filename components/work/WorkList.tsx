@@ -16,16 +16,18 @@ import {
 } from 'lucide-react';
 import {
   projects,
-  siteStats,
   categoryLabels,
   statusLabels,
   Category,
   Status,
   Project,
 } from '@/lib/projects';
+import { LIVE_SITES } from '@/lib/data';
 import { Rotating3DDeck } from './Rotating3DDeck';
 import { WorkFilterHub, FilterTab } from './WorkFilterHub';
 import { CrazyProjectCard } from './CrazyProjectCard';
+import { Hero3DText } from '@/components/shared/Hero3DText';
+import { getMultiCardStyle } from '@/lib/cardThemes';
 
 // Prioritize: BCA & MCA first (1), Internship second (2), Live Production third (3), Company fourth (4), Practice fifth (5)
 const getProjectPriority = (p: Project): number => {
@@ -89,8 +91,8 @@ export function WorkList() {
     },
     {
       key: 'live-section',
-      label: 'Live Client Platforms',
-      shortLabel: 'Clients',
+      label: 'Live & Hosted Demos',
+      shortLabel: 'Live Demos',
       icon: Globe,
       count: projects.filter((p) => p.status === 'live').length,
     },
@@ -179,8 +181,21 @@ export function WorkList() {
       });
   }, [currentCategory, currentStatus, searchQuery]);
 
+  const academicCount = useMemo(
+    () =>
+      projects.filter(
+        (p) =>
+          p.category === 'mca' ||
+          p.category === 'bca' ||
+          p.secondaryCategory === 'bca' ||
+          p.secondaryCategory === 'mca'
+      ).length,
+    []
+  );
+  const liveClientsCount = LIVE_SITES.length;
+
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full">
       {/* 1. Page Header & Hero Intro */}
       <section className="relative pt-24 sm:pt-28 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-[var(--line)]">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -188,31 +203,50 @@ export function WorkList() {
             <span className="text-xs font-mono text-[var(--accent)] uppercase tracking-widest block mb-2 font-semibold">
               [SYSTEMS DIRECTORY · 2023 - 2026]
             </span>
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black text-[var(--ink)] tracking-tight">
-              Production{' '}
-              <span className="font-serif-accent bg-gradient-to-r from-[var(--accent)] via-[var(--pop)] to-[var(--accent-2)] bg-clip-text text-transparent font-normal italic lowercase">
-                systems &
-              </span>{' '}
-              architectures.
-            </h1>
+            <Hero3DText
+              as="h1"
+              align="left"
+              segments={[
+                { text: 'Production' },
+                { text: 'systems &', accent: true },
+                { text: 'architectures.' },
+              ]}
+              gradientClass="from-[var(--accent)] via-[var(--pop)] to-[var(--accent-2)]"
+              className="font-heading text-4xl sm:text-5xl md:text-6xl font-black text-[var(--ink)] tracking-tight"
+            />
             <p className="mt-3 text-sm sm:text-base text-[var(--muted)] font-sans leading-relaxed">
-              Explore 22 software engineering platforms: MCA/BCA capstones, full-stack AI applications, production client deployments, and modern MERN/Next.js architectures built by Dhanush A.
+              Explore {projects.length} software engineering platforms: MCA/BCA capstones, full-stack AI applications, production client deployments, and modern MERN/Next.js architectures built by Dhanush A.
             </p>
           </div>
 
-          {/* Quick Metrics Badge */}
-          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-            <div className="px-3.5 py-2 rounded-xl border border-[var(--line)] bg-[var(--surface)] shadow-sm">
-              <span className="block text-lg font-heading font-black text-[var(--ink)]">22</span>
-              <span className="text-[10px] font-mono text-[var(--muted)] uppercase">Total Projects</span>
+          {/* Quick Metrics Multi-Color Cards */}
+          <div className="grid grid-cols-3 gap-2 sm:flex sm:items-center sm:gap-3 w-full md:w-auto">
+            <div
+              style={getMultiCardStyle(0)}
+              className="px-3 sm:px-3.5 py-2 rounded-xl border multi-card transition-all"
+            >
+              <span className="block text-base sm:text-lg font-heading font-black text-[var(--ink)]">
+                {String(projects.length).padStart(2, '0')}
+              </span>
+              <span className="text-[9px] sm:text-[10px] font-mono text-[var(--muted)] uppercase font-semibold">Total Projects</span>
             </div>
-            <div className="px-3.5 py-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 shadow-sm">
-              <span className="block text-lg font-heading font-black text-emerald-600 dark:text-emerald-400">05</span>
-              <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 uppercase">Live Clients</span>
+            <div
+              style={getMultiCardStyle(1)}
+              className="px-3 sm:px-3.5 py-2 rounded-xl border multi-card transition-all"
+            >
+              <span className="block text-base sm:text-lg font-heading font-black text-emerald-700 dark:text-emerald-400">
+                {String(liveClientsCount).padStart(2, '0')}
+              </span>
+              <span className="text-[9px] sm:text-[10px] font-mono text-emerald-700 dark:text-emerald-400 uppercase font-semibold">Live Clients</span>
             </div>
-            <div className="px-3.5 py-2 rounded-xl border border-blue-500/30 bg-blue-500/10 shadow-sm">
-              <span className="block text-lg font-heading font-black text-blue-600 dark:text-blue-400">07</span>
-              <span className="text-[10px] font-mono text-blue-600 dark:text-blue-400 uppercase">MCA / BCA Academic</span>
+            <div
+              style={getMultiCardStyle(5)}
+              className="px-3 sm:px-3.5 py-2 rounded-xl border multi-card transition-all"
+            >
+              <span className="block text-base sm:text-lg font-heading font-black text-violet-700 dark:text-violet-300">
+                {String(academicCount).padStart(2, '0')}
+              </span>
+              <span className="text-[9px] sm:text-[10px] font-mono text-violet-700 dark:text-violet-300 uppercase font-semibold">Academic</span>
             </div>
           </div>
         </div>
@@ -242,12 +276,12 @@ export function WorkList() {
               No matching systems found
             </h3>
             <p className="text-xs sm:text-sm text-[var(--muted)] font-mono max-w-md mx-auto mb-5">
-              No projects match your current filter query. Try resetting filters to explore all 22 engineering architectures.
+              No projects match your current filter query. Try resetting filters to explore all {projects.length} engineering architectures.
             </p>
             <button
               type="button"
               onClick={resetFilters}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--accent)] text-white text-xs font-mono font-bold hover:bg-[var(--accent-2)] transition-colors shadow-md"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500 text-white text-xs font-mono font-bold transition-colors shadow-md"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset all filters</span>

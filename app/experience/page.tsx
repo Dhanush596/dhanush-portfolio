@@ -22,6 +22,8 @@ import { Reveal } from '@/components/shared/Reveal';
 import { BorderBeam } from '@/components/shared/BorderBeam';
 import { ProtectedDocumentModal } from '@/components/shared/ProtectedDocumentModal';
 import { Footer } from '@/components/shared/Footer';
+import { Hero3DText } from '@/components/shared/Hero3DText';
+import { getCardTheme, getMultiCardStyle } from '@/lib/cardThemes';
 
 export default function ExperiencePage() {
   const [selectedDoc, setSelectedDoc] = useState<{
@@ -168,8 +170,9 @@ export default function ExperiencePage() {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-[var(--act-bg)] text-[var(--ink)] pt-24 pb-20 px-4 sm:px-6 lg:px-8 transition-colors duration-500">
-      <div className="max-w-5xl mx-auto">
+    <div className="w-full min-h-screen flex flex-col justify-between bg-[var(--act-bg)] text-[var(--ink)] transition-colors duration-500">
+      <div className="w-full pt-24 pb-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
         {/* Breadcrumb / Top Eyebrow */}
         <Reveal delay={0.05}>
           <div className="flex items-center gap-2 text-xs font-mono text-[var(--muted)] mb-6">
@@ -188,13 +191,16 @@ export default function ExperiencePage() {
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               <span>CAREER // 1 FULL-TIME ROLE · 2 VERIFIED INTERNSHIPS</span>
             </div>
-            <h1 className="font-heading text-4xl sm:text-6xl font-black uppercase tracking-tight text-[var(--ink)] leading-none mb-4">
-              Work &{' '}
-              <span className="font-serif-accent bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] bg-clip-text text-transparent font-normal italic lowercase">
-                experience
-              </span>
-              .
-            </h1>
+            <Hero3DText
+              as="h1"
+              align="left"
+              segments={[
+                { text: 'Work &' },
+                { text: 'experience.', accent: true },
+              ]}
+              gradientClass="from-[var(--accent)] to-[var(--accent-2)]"
+              className="font-heading text-4xl sm:text-6xl font-black uppercase tracking-tight text-[var(--ink)] leading-none mb-4"
+            />
             <p className="text-base sm:text-lg text-[var(--muted)] max-w-3xl leading-relaxed">
               Real-world software engineering at PrimePro.ai alongside 2 enterprise internships in DevOps (Rooman Technologies, perfect 100/100 score) and Full-Stack Engineering (Encode Data Tech).
             </p>
@@ -216,8 +222,17 @@ export default function ExperiencePage() {
 
           {/* PrimePro.ai Card */}
           <Reveal delay={0.2}>
-            <div className="relative p-6 sm:p-8 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-lg overflow-hidden">
-              <BorderBeam duration={7} borderWidth={1.5} colorFrom="var(--accent)" colorTo="var(--accent-2)" />
+            <div
+              style={getMultiCardStyle(0)}
+              className="relative p-6 sm:p-8 rounded-3xl border multi-card overflow-hidden"
+            >
+              <BorderBeam
+                duration={7}
+                borderWidth={1.5}
+                colorFrom={getCardTheme(0).c1Hex}
+                colorTo={getCardTheme(0).c2Hex}
+                colorPop={getCardTheme(0).c3Hex}
+              />
               
               <div className="relative z-10">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[var(--line)] pb-4 mb-6">
@@ -325,12 +340,22 @@ export default function ExperiencePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {workProjects.map((proj) => (
+            {workProjects.map((proj, wIdx) => {
+              const wTheme = getCardTheme(wIdx + 2);
+              return (
               <div
                 key={proj.slug}
-                className="p-6 sm:p-7 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-md flex flex-col justify-between hover:border-[var(--accent)]/50 transition-all"
+                style={getMultiCardStyle(wIdx + 2)}
+                className="relative overflow-hidden p-6 sm:p-7 rounded-3xl border multi-card flex flex-col justify-between transition-all"
               >
-                <div>
+                <BorderBeam
+                  duration={6.5 + (wIdx % 3)}
+                  borderWidth={1.5}
+                  colorFrom={wTheme.c1Hex}
+                  colorTo={wTheme.c2Hex}
+                  colorPop={wTheme.c3Hex}
+                />
+                <div className="relative z-10">
                   <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-4">
                     <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30">
                       CLIENT PRODUCTION · DEMO
@@ -369,10 +394,10 @@ export default function ExperiencePage() {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[var(--line)] flex items-center justify-between gap-2">
+                <div className="relative z-10 pt-4 border-t border-[var(--line)] flex items-center justify-between gap-2">
                   <Link
                     href={`/work/${proj.slug}`}
-                    className="flex-1 py-2 px-3 rounded-xl bg-[var(--act-tint)] hover:bg-[var(--accent)] hover:text-white text-[var(--accent)] border border-[var(--line)] font-mono text-xs font-bold transition-all text-center cursor-pointer pointer-events-auto"
+                    className="flex-1 py-2 px-3 rounded-xl bg-[var(--surface)]/85 hover:bg-blue-600 hover:text-white text-[var(--accent)] border border-[var(--line)] font-mono text-xs font-bold transition-all text-center cursor-pointer pointer-events-auto"
                   >
                     Demo Showcase
                   </Link>
@@ -382,7 +407,7 @@ export default function ExperiencePage() {
                       href={proj.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="py-2 px-3 rounded-xl border border-[var(--line)] hover:border-[var(--accent)] text-[var(--ink)] font-mono text-xs font-semibold flex items-center gap-1.5 cursor-pointer pointer-events-auto"
+                      className="py-2 px-3 rounded-xl border border-[var(--line)] bg-[var(--surface)]/85 hover:border-[var(--accent)] text-[var(--ink)] font-mono text-xs font-semibold flex items-center gap-1.5 cursor-pointer pointer-events-auto"
                     >
                       <span>Live Website</span>
                       <ExternalLink className="w-3.5 h-3.5 text-[var(--accent)]" />
@@ -390,7 +415,8 @@ export default function ExperiencePage() {
                   )}
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -413,10 +439,19 @@ export default function ExperiencePage() {
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Internship 1: Rooman Technologies (100/100 score) */}
+            {/* Internship 1: Rooman Technologies (Theme 1: Emerald + Teal + Gold) */}
             <Reveal delay={0.3}>
-              <div className="relative p-6 sm:p-7 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-md flex flex-col justify-between h-full group hover:border-emerald-500/50 transition-all">
-                <BorderBeam duration={8} borderWidth={1.5} colorFrom="#10B981" colorTo="var(--accent)" />
+              <div
+                style={getMultiCardStyle(1)}
+                className="relative overflow-hidden p-6 sm:p-7 rounded-3xl border multi-card flex flex-col justify-between h-full group transition-all"
+              >
+                <BorderBeam
+                  duration={8}
+                  borderWidth={1.5}
+                  colorFrom={getCardTheme(1).c1Hex}
+                  colorTo={getCardTheme(1).c2Hex}
+                  colorPop={getCardTheme(1).c3Hex}
+                />
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-4">
@@ -484,7 +519,7 @@ export default function ExperiencePage() {
                 <div className="relative z-10 pt-4 border-t border-[var(--line)] space-y-2">
                   <Link
                     href="/work/mern-gitops-pipeline"
-                    className="w-full py-2.5 px-4 rounded-xl bg-[var(--act-tint)] hover:bg-[var(--accent)] hover:text-white text-[var(--accent)] border border-[var(--line)] font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer pointer-events-auto"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[var(--act-tint)] hover:bg-blue-600 hover:text-white text-[var(--accent)] border border-[var(--line)] font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer pointer-events-auto"
                   >
                     <span>Inspect DevOps Architecture Case Study</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -509,10 +544,19 @@ export default function ExperiencePage() {
               </div>
             </Reveal>
 
-            {/* Internship 2: Encode Data Tech */}
+            {/* Internship 2: Encode Data Tech (Theme 5: Violet + Fuchsia + Sky) */}
             <Reveal delay={0.35}>
-              <div className="relative p-6 sm:p-7 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-md flex flex-col justify-between h-full group hover:border-[var(--accent)]/50 transition-all">
-                <BorderBeam duration={8} borderWidth={1.5} colorFrom="var(--accent)" colorTo="var(--accent-2)" />
+              <div
+                style={getMultiCardStyle(5)}
+                className="relative overflow-hidden p-6 sm:p-7 rounded-3xl border multi-card flex flex-col justify-between h-full group transition-all"
+              >
+                <BorderBeam
+                  duration={8}
+                  borderWidth={1.5}
+                  colorFrom={getCardTheme(5).c1Hex}
+                  colorTo={getCardTheme(5).c2Hex}
+                  colorPop={getCardTheme(5).c3Hex}
+                />
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-4">
@@ -580,7 +624,7 @@ export default function ExperiencePage() {
                 <div className="relative z-10 pt-4 border-t border-[var(--line)] space-y-2">
                   <Link
                     href="/work/online-grocery-store"
-                    className="w-full py-2.5 px-4 rounded-xl bg-[var(--act-tint)] hover:bg-[var(--accent)] hover:text-white text-[var(--accent)] border border-[var(--line)] font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer pointer-events-auto"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[var(--act-tint)] hover:bg-blue-600 hover:text-white text-[var(--accent)] border border-[var(--line)] font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer pointer-events-auto"
                   >
                     <span>Inspect E-Commerce Architecture Case Study</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -609,8 +653,11 @@ export default function ExperiencePage() {
 
         {/* Quick Navigation Strip */}
         <Reveal delay={0.4}>
-          <div className="p-6 rounded-3xl border border-[var(--line)] bg-[var(--surface)] flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
+          <div
+            style={getMultiCardStyle(3)}
+            className="relative overflow-hidden p-6 rounded-3xl border multi-card flex flex-col sm:flex-row items-center justify-between gap-4"
+          >
+            <div className="relative z-10">
               <h3 className="font-heading text-lg font-bold text-[var(--ink)]">
                 Explore More of Dhanush&apos;s Work & Background
               </h3>
@@ -619,10 +666,10 @@ export default function ExperiencePage() {
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="relative z-10 flex flex-wrap items-center gap-3">
               <Link
                 href="/work"
-                className="px-4 py-2 rounded-xl bg-[var(--accent)] text-white font-mono text-xs font-bold hover:bg-[var(--accent-2)] transition-colors flex items-center gap-1.5 cursor-pointer pointer-events-auto"
+                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500 text-white font-mono text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer pointer-events-auto"
               >
                 <span>View Projects (BCA & MCA)</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -637,6 +684,7 @@ export default function ExperiencePage() {
             </div>
           </div>
         </Reveal>
+        </div>
       </div>
 
       {/* Protected Document Modal (Strictly No Download, Anti-Screenshot Shield) */}

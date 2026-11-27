@@ -6,11 +6,12 @@ import { TouchSensorScene } from './TouchSensorScene';
 
 interface TouchSensorCanvasProps {
   mode?: 'fluid' | 'wireframe';
+  isDark?: boolean;
 }
 
-export default function TouchSensorCanvas({ mode = 'fluid' }: TouchSensorCanvasProps) {
+export default function TouchSensorCanvas({ mode = 'fluid', isDark = false }: TouchSensorCanvasProps) {
   return (
-    <div style={{ pointerEvents: 'none' }} className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-transparent">
+    <div style={{ pointerEvents: 'none' }} className="absolute inset-0 pointer-events-none z-0 overflow-hidden bg-transparent">
       <Canvas
         style={{ pointerEvents: 'none' }}
         onCreated={({ gl }) => {
@@ -20,7 +21,7 @@ export default function TouchSensorCanvas({ mode = 'fluid' }: TouchSensorCanvasP
         gl={{ antialias: true, alpha: true, powerPreference: 'low-power' }}
         dpr={[1, 1.25]}
       >
-        <TouchSensorScene mode={mode} />
+        <TouchSensorScene mode={mode} isDark={isDark} />
       </Canvas>
     </div>
   );

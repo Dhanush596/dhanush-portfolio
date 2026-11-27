@@ -1,20 +1,25 @@
 'use client';
 
 import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { TopBar } from '@/components/shared/TopBar';
 import { CommandPalette } from '@/components/shared/CommandPalette';
 import { CustomCursor } from '@/components/shared/CustomCursor';
 import { PuppetCursor } from '@/components/cursor/PuppetCursor';
 import { ScrollProgressIndicator } from '@/components/shared/ScrollProgressIndicator';
 import { ActBackground } from '@/components/home/ActBackground';
+import { CrazyLoadFX } from '@/components/shared/CrazyLoadFX';
 import { useEasterEggs } from '@/components/shared/EasterEggs';
 
 export function ClientShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const [commandOpen, setCommandOpen] = useState(false);
   const { calmMode, soundEnabled, toggleCalm, toggleSound } = useEasterEggs();
 
   return (
     <>
+      {/* Page Load / Route Transition Crazy 3D Chromatic Burst */}
+      <CrazyLoadFX key={pathname} />
       {/* Subtle Grain Overlay for tactile editorial texture */}
       <div className="fixed inset-0 pointer-events-none z-[60] opacity-[0.04] mix-blend-multiply bg-[radial-gradient(var(--ink)_1px,transparent_1px)] [background-size:16px_16px]" />
 

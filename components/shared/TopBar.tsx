@@ -182,8 +182,8 @@ export function TopBar({ onOpenCommand }: { onOpenCommand?: () => void }) {
             <span className="font-heading font-black tracking-tight text-[var(--ink)] text-xs sm:text-sm">
               DHANUSH A
             </span>
-            <span className="hidden lg:inline-block text-[var(--muted)]/40 font-normal">/</span>
-            <span className="hidden lg:inline-block text-[var(--muted)] text-[11px]">
+            <span className="hidden xl:inline-block text-[var(--muted)]/40 font-normal">/</span>
+            <span className="hidden xl:inline-block text-[var(--muted)] text-[11px]">
               Software Engineer
             </span>
           </Link>
@@ -192,7 +192,7 @@ export function TopBar({ onOpenCommand }: { onOpenCommand?: () => void }) {
         {/* Center Desktop Navigation Dock with Active Animated Pill */}
         <nav
           aria-label="Primary Navigation"
-          className="hidden md:flex items-center gap-1 px-2 py-1 rounded-full border border-[var(--line)] bg-[var(--surface)]/90 backdrop-blur-2xl shadow-sm pointer-events-auto"
+          className="hidden lg:flex items-center gap-1 px-2 py-1 rounded-full border border-[var(--line)] bg-[var(--surface)]/90 backdrop-blur-2xl shadow-sm pointer-events-auto"
         >
           {NAV_ITEMS.map((item) => {
             const isActive =
@@ -225,7 +225,7 @@ export function TopBar({ onOpenCommand }: { onOpenCommand?: () => void }) {
           <button
             type="button"
             onClick={togglePuppet}
-            className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)]/90 text-[var(--ink)] hover:border-[var(--accent)] transition-all duration-200 text-xs font-mono shadow-sm cursor-pointer"
+            className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)]/90 text-[var(--ink)] hover:border-[var(--accent)] transition-all duration-200 text-xs font-mono shadow-sm cursor-pointer"
             title={puppetEnabled ? 'Turn OFF 3D Puppet Cursor (P)' : 'Turn ON 3D Puppet Cursor (P)'}
             aria-label="Toggle 3D Puppet Cursor"
           >
@@ -241,11 +241,11 @@ export function TopBar({ onOpenCommand }: { onOpenCommand?: () => void }) {
           <button
             type="button"
             onClick={onOpenCommand}
-            className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)]/90 text-[var(--muted)] hover:text-[var(--ink)] hover:border-[var(--accent)] transition-all duration-200 shadow-sm"
+            className="hidden xl:flex items-center gap-1 px-3 py-1.5 rounded-full border border-[var(--line)] bg-[var(--surface)]/90 text-[var(--muted)] hover:text-[var(--ink)] hover:border-[var(--accent)] transition-all duration-200 shadow-sm"
             title="Open command palette (Cmd+K)"
           >
             <Command className="w-3.5 h-3.5 text-[var(--muted)]" />
-            <span className="text-[11px] font-mono">⌘K</span>
+            <span className="text-[11px] font-mono font-semibold">K</span>
           </button>
 
           {/* Resume PDF pill (Tablet & Desktop) */}
@@ -277,17 +277,17 @@ export function TopBar({ onOpenCommand }: { onOpenCommand?: () => void }) {
           <Link
             href="/contact"
             prefetch={true}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[var(--accent)] hover:bg-[var(--accent-2)] text-white font-heading font-bold text-xs transition-colors duration-200 shadow-md shadow-[var(--accent)]/20 active:scale-95"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-heading font-bold text-xs transition-colors duration-200 shadow-md shadow-blue-600/25 active:scale-95"
           >
             <Send className="w-3.5 h-3.5" />
             <span>Let&apos;s build</span>
           </Link>
 
-          {/* Mobile Hamburger Button (High Contrast, Guaranteed Visible on Phones) */}
+          {/* Mobile & Tablet Hamburger Button (High Contrast, Guaranteed Visible) */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden flex items-center justify-center w-9 h-9 rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] hover:bg-[var(--surface-2)] hover:border-[var(--accent)] transition-all shadow-md active:scale-90"
+            className="lg:hidden flex items-center justify-center w-9 h-9 rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] hover:bg-[var(--surface-2)] hover:border-[var(--accent)] transition-all shadow-md active:scale-90"
             aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
           >
             {mobileMenuOpen ? <X className="w-5 h-5 text-[var(--pop)]" /> : <Menu className="w-5 h-5" />}
@@ -295,7 +295,7 @@ export function TopBar({ onOpenCommand }: { onOpenCommand?: () => void }) {
         </div>
       </motion.header>
 
-      {/* Full-Screen High-Impact Mobile Navigation Drawer */}
+      {/* Full-Screen High-Impact Mobile & Tablet Navigation Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -303,7 +303,7 @@ export function TopBar({ onOpenCommand }: { onOpenCommand?: () => void }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="fixed inset-0 z-[120] bg-[var(--surface)] text-[var(--ink)] overflow-y-auto flex flex-col justify-between p-6 sm:p-10 md:hidden pointer-events-auto"
+            className="fixed inset-0 z-[120] bg-[var(--surface)] text-[var(--ink)] overflow-y-auto flex flex-col justify-between p-6 sm:p-10 lg:hidden pointer-events-auto"
           >
             {/* Drawer Header with Title & Direct Close Button */}
             <div className="flex items-center justify-between pb-6 border-b border-[var(--line)]">
@@ -385,7 +385,7 @@ export function TopBar({ onOpenCommand }: { onOpenCommand?: () => void }) {
               <Link
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3.5 px-4 rounded-2xl bg-[var(--accent)] text-white font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[var(--accent)]/20 active:scale-95"
+                className="w-full py-3.5 px-4 rounded-2xl bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500 text-white font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-blue-600/25 active:scale-95"
               >
                 <Send className="w-4 h-4" />
                 <span>Let&apos;s build together</span>

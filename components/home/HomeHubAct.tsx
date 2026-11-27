@@ -16,6 +16,9 @@ import {
 import { Reveal } from '@/components/shared/Reveal';
 import { BorderBeam } from '@/components/shared/BorderBeam';
 import { TiltCard } from '@/components/shared/TiltCard';
+import { Hero3DText } from '@/components/shared/Hero3DText';
+import { getCardTheme, getMultiCardStyle } from '@/lib/cardThemes';
+import { projects } from '@/lib/projects';
 
 export function HomeHubAct() {
   return (
@@ -27,13 +30,13 @@ export function HomeHubAct() {
             <span className="text-xs font-mono text-[var(--accent)] uppercase tracking-widest block mb-2 font-semibold">
               [PORTFOLIO HUB // DIRECTORY & SECTIONS]
             </span>
-            <h2 className="font-heading text-3xl sm:text-5xl font-black text-[var(--ink)] uppercase tracking-tight">
-              Engineering{' '}
-              <span className="font-serif-accent bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] bg-clip-text text-transparent font-normal italic lowercase">
-                overview
-              </span>
-              .
-            </h2>
+            <Hero3DText
+              as="h2"
+              trigger="inView"
+              align="left"
+              segments={[{ text: 'Engineering' }, { text: 'overview.', accent: true }]}
+              className="font-heading text-3xl sm:text-5xl font-black text-[var(--ink)] uppercase tracking-tight"
+            />
           </div>
           <p className="text-xs sm:text-sm font-mono text-[var(--muted)] max-w-md">
             Concise index of projects, career history, academic degrees, and verified credentials. Select a section to explore comprehensive case studies and records.
@@ -41,12 +44,21 @@ export function HomeHubAct() {
         </div>
       </Reveal>
 
-      {/* Grid of Section Hub Cards */}
+      {/* Grid of Multi-Color Section Hub Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Card 1: Projects (Starts with BCA & MCA) */}
+        {/* Card 1: Projects (Theme 0: Cobalt + Violet + Cyan) */}
         <Reveal delay={0.1}>
-          <div className="relative p-6 sm:p-8 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-md flex flex-col justify-between h-full group hover:border-[var(--accent)]/50 transition-all">
-            <BorderBeam duration={7} borderWidth={1.5} colorFrom="var(--accent)" colorTo="var(--accent-2)" />
+          <div
+            style={getMultiCardStyle(0)}
+            className="relative p-6 sm:p-8 rounded-3xl border multi-card flex flex-col justify-between h-full group transition-all overflow-hidden"
+          >
+            <BorderBeam
+              duration={7}
+              borderWidth={1.5}
+              colorFrom={getCardTheme(0).c1Hex}
+              colorTo={getCardTheme(0).c2Hex}
+              colorPop={getCardTheme(0).c3Hex}
+            />
 
             <div className="relative z-10">
               <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-5">
@@ -54,7 +66,7 @@ export function HomeHubAct() {
                   [01 // PROJECTS ARCHIVE]
                 </span>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[var(--act-tint)] text-[var(--muted)] border border-[var(--line)]">
-                  21 Architectures
+                  {projects.length} Architectures
                 </span>
               </div>
 
@@ -85,7 +97,7 @@ export function HomeHubAct() {
               <Link
                 href="/work"
                 prefetch={true}
-                className="w-full py-3 px-4 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-2)] text-white font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-md shadow-[var(--accent)]/15 group"
+                className="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500 text-white font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 group"
               >
                 <span>View All Projects (BCA, MCA, Internships & Live)</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -94,10 +106,19 @@ export function HomeHubAct() {
           </div>
         </Reveal>
 
-        {/* Card 2: Work Experience & 2 Internships */}
+        {/* Card 2: Work Experience & 2 Internships (Theme 1: Emerald + Teal + Gold) */}
         <Reveal delay={0.15}>
-          <div className="relative p-6 sm:p-8 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-md flex flex-col justify-between h-full group hover:border-emerald-500/50 transition-all">
-            <BorderBeam duration={8} borderWidth={1.5} colorFrom="#10B981" colorTo="var(--accent)" />
+          <div
+            style={getMultiCardStyle(1)}
+            className="relative p-6 sm:p-8 rounded-3xl border multi-card flex flex-col justify-between h-full group transition-all overflow-hidden"
+          >
+            <BorderBeam
+              duration={8}
+              borderWidth={1.5}
+              colorFrom={getCardTheme(1).c1Hex}
+              colorTo={getCardTheme(1).c2Hex}
+              colorPop={getCardTheme(1).c3Hex}
+            />
 
             <div className="relative z-10">
               <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-5">
@@ -145,10 +166,19 @@ export function HomeHubAct() {
           </div>
         </Reveal>
 
-        {/* Card 3: Academic Qualifications & Transcripts */}
+        {/* Card 3: Academic Qualifications & Transcripts (Theme 3: Amber + Coral + Violet) */}
         <Reveal delay={0.2}>
-          <div className="relative p-6 sm:p-8 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-md flex flex-col justify-between h-full group hover:border-amber-500/50 transition-all">
-            <BorderBeam duration={8} borderWidth={1.5} colorFrom="#F59E0B" colorTo="var(--accent)" />
+          <div
+            style={getMultiCardStyle(3)}
+            className="relative p-6 sm:p-8 rounded-3xl border multi-card flex flex-col justify-between h-full group transition-all overflow-hidden"
+          >
+            <BorderBeam
+              duration={8}
+              borderWidth={1.5}
+              colorFrom={getCardTheme(3).c1Hex}
+              colorTo={getCardTheme(3).c2Hex}
+              colorPop={getCardTheme(3).c3Hex}
+            />
 
             <div className="relative z-10">
               <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-5">
@@ -196,10 +226,19 @@ export function HomeHubAct() {
           </div>
         </Reveal>
 
-        {/* Card 4: Verified Credentials & Certifications */}
+        {/* Card 4: Verified Credentials & Certifications (Theme 2: Rose + Magenta + Indigo) */}
         <Reveal delay={0.25}>
-          <div className="relative p-6 sm:p-8 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-md flex flex-col justify-between h-full group hover:border-purple-500/50 transition-all">
-            <BorderBeam duration={9} borderWidth={1.5} colorFrom="#A855F7" colorTo="var(--accent)" />
+          <div
+            style={getMultiCardStyle(2)}
+            className="relative p-6 sm:p-8 rounded-3xl border multi-card flex flex-col justify-between h-full group transition-all overflow-hidden"
+          >
+            <BorderBeam
+              duration={9}
+              borderWidth={1.5}
+              colorFrom={getCardTheme(2).c1Hex}
+              colorTo={getCardTheme(2).c2Hex}
+              colorPop={getCardTheme(2).c3Hex}
+            />
 
             <div className="relative z-10">
               <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-5">
@@ -248,10 +287,20 @@ export function HomeHubAct() {
         </Reveal>
       </div>
 
-      {/* Card 5: Full-Width About & Story Banner */}
+      {/* Card 5: Full-Width About & Story Banner (Theme 7: Teal + Indigo + Lime) */}
       <Reveal delay={0.3}>
-        <div className="mt-8 p-6 sm:p-8 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-md flex flex-col md:flex-row items-center justify-between gap-6 hover:border-[var(--accent)]/40 transition-all">
-          <div className="flex items-center gap-4">
+        <div
+          style={getMultiCardStyle(7)}
+          className="relative overflow-hidden mt-8 p-6 sm:p-8 rounded-3xl border multi-card flex flex-col md:flex-row items-center justify-between gap-6 transition-all"
+        >
+          <BorderBeam
+            duration={7.5}
+            borderWidth={1.5}
+            colorFrom={getCardTheme(7).c1Hex}
+            colorTo={getCardTheme(7).c2Hex}
+            colorPop={getCardTheme(7).c3Hex}
+          />
+          <div className="relative z-10 flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center shrink-0 font-heading font-black text-xl">
               DA
             </div>
@@ -273,7 +322,7 @@ export function HomeHubAct() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 shrink-0 w-full md:w-auto">
+          <div className="relative z-10 flex flex-wrap items-center gap-3 shrink-0 w-full md:w-auto">
             <Link
               href="/resume"
               prefetch={true}

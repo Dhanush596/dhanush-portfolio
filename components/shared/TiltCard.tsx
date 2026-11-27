@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { BorderBeam } from './BorderBeam';
+import { getCardTheme, getMultiCardStyle } from '@/lib/cardThemes';
 
 export interface TiltCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ export interface TiltCardProps extends React.HTMLAttributes<HTMLDivElement> {
   borderBeam?: boolean;
   beamDuration?: number;
   floatEffect?: boolean;
+  colorIndex?: number;
 }
 
 export function TiltCard({
@@ -23,12 +25,16 @@ export function TiltCard({
   borderBeam = true,
   beamDuration = 6.0,
   floatEffect = true,
+  colorIndex = 0,
+  style,
   ...props
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const glareRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const rafId = useRef<number | null>(null);
+  const theme = getCardTheme(colorIndex);
+  const multiStyle = getMultiCardStyle(colorIndex);
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -56,11 +62,11 @@ export function TiltCard({
 
         if (glareRef.current) {
           glareRef.current.style.opacity = String(glareOpacity);
-          glareRef.current.style.background = `radial-gradient(circle at ${(x / rect.width) * 100}% ${(y / rect.height) * 100}%, var(--glass-glare), transparent 60%)`;
+          glareRef.current.style.background = `radial-gradient(circle at ${(x / rect.width) * 100}% ${(y / rect.height) * 100}%, rgba(${theme.c2Rgb}, 0.22), transparent 60%)`;
         }
       });
     },
-    [maxTilt, glareOpacity, prefersReducedMotion]
+    [maxTilt, glareOpacity, prefersReducedMotion, theme.c2Rgb]
   );
 
   const handleMouseLeave = useCallback(() => {
@@ -84,18 +90,27 @@ export function TiltCard({
       style={{
         transformStyle: 'preserve-3d',
         transition: 'transform 0.15s ease-out',
+        ...multiStyle,
+        ...style,
       }}
       className={cn(
-        'group relative overflow-hidden rounded-2xl border text-[var(--ink)] select-none',
-        'bg-[var(--surface)] border-[var(--line)]',
-        'transition-all duration-300 shadow-[var(--card-shadow)] hover:shadow-2xl hover:border-[var(--accent)]/50',
+        'group relative overflow-hidden rounded-2xl border text-[var(--ink)] select-none multi-card',
+        'transition-all duration-300',
         floatEffect && 'animate-float-2',
         className
       )}
       {...props}
     >
-      {/* Animated Light Moving Around the Border */}
-      {borderBeam && <BorderBeam duration={beamDuration} borderWidth={1.5} />}
+      {/* Animated Multi-Color Light Moving Around the Border */}
+      {borderBeam && (
+        <BorderBeam
+          duration={beamDuration}
+          borderWidth={1.5}
+          colorFrom={theme.c1Hex}
+          colorTo={theme.c2Hex}
+          colorPop={theme.c3Hex}
+        />
+      )}
 
       {/* Glare Highlight */}
       {!prefersReducedMotion && (

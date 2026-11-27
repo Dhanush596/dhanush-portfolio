@@ -77,7 +77,7 @@ export function CommandPalette({
       {
         id: 'nav-work',
         title: 'Projects Archive (BCA, MCA, Internships & Production)',
-        subtitle: '21 engineering architectures, academic builds, and client platforms',
+        subtitle: `${projects.length} engineering architectures, academic builds, and client platforms`,
         category: 'Pages',
         action: () => {
           onClose();

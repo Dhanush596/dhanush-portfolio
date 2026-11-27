@@ -19,6 +19,8 @@ import { ACADEMIC_CREDENTIALS } from '@/lib/data';
 import { BorderBeam } from '@/components/shared/BorderBeam';
 import { ProtectedDocumentModal } from '@/components/shared/ProtectedDocumentModal';
 import { Footer } from '@/components/shared/Footer';
+import { Hero3DText } from '@/components/shared/Hero3DText';
+import { getCardTheme, getMultiCardStyle } from '@/lib/cardThemes';
 
 export default function EducationPage() {
   const [selectedDoc, setSelectedDoc] = useState<{
@@ -88,20 +90,19 @@ export default function EducationPage() {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-[var(--act-bg)] text-[var(--ink)] pt-28 pb-24 px-4 sm:px-6 lg:px-8">
+    <div className="w-full min-h-screen flex flex-col justify-between bg-[var(--act-bg)] text-[var(--ink)] transition-colors duration-500">
       {/* Protected Document Modal with Anti-Screenshot Shielding */}
-      {selectedDoc && (
-        <ProtectedDocumentModal
-          isOpen={Boolean(selectedDoc)}
-          onClose={() => setSelectedDoc(null)}
-          title={selectedDoc.title}
-          issuer={selectedDoc.issuer}
-          category={selectedDoc.category}
-          fileUrl={selectedDoc.fileUrl}
-        />
-      )}
+      <ProtectedDocumentModal
+        isOpen={Boolean(selectedDoc)}
+        onClose={() => setSelectedDoc(null)}
+        title={selectedDoc?.title || ''}
+        issuer={selectedDoc?.issuer}
+        category={selectedDoc?.category}
+        fileUrl={selectedDoc?.fileUrl || ''}
+      />
 
-      <div className="w-full max-w-5xl mx-auto">
+      <div className="w-full pt-28 pb-8 px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-5xl mx-auto">
         {/* Navigation Breadcrumb */}
         <div className="mb-8">
           <Link
@@ -119,13 +120,16 @@ export default function EducationPage() {
             <Lock className="w-3.5 h-3.5" />
             <span>[ACADEMIC ARCHIVE · VIEW ONLY · ANTI-SCREENSHOT PROTECTED]</span>
           </div>
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-black text-[var(--ink)] uppercase tracking-tight mb-4 leading-none">
-            Academic Degrees &{' '}
-            <span className="font-serif-accent bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] bg-clip-text text-transparent font-normal italic lowercase">
-              markscards
-            </span>
-            .
-          </h1>
+          <Hero3DText
+            as="h1"
+            align="left"
+            segments={[
+              { text: 'Academic Degrees &' },
+              { text: 'markscards.', accent: true },
+            ]}
+            gradientClass="from-[var(--accent)] to-[var(--accent-2)]"
+            className="font-heading text-4xl sm:text-5xl md:text-6xl font-black text-[var(--ink)] uppercase tracking-tight mb-4 leading-none"
+          />
           <p className="text-sm sm:text-base text-[var(--muted)] font-sans max-w-2xl leading-relaxed">
             Official verified academic markscards for MCA, BCA, PUC, and 10th SSLC, plus complete engineering details of systems built during education.
           </p>
@@ -133,18 +137,22 @@ export default function EducationPage() {
 
         {/* Academic Degrees Stack */}
         <div className="space-y-8 mb-20">
-          {ACADEMIC_CREDENTIALS.map((prog, idx) => (
+          {ACADEMIC_CREDENTIALS.map((prog, idx) => {
+            const degTheme = getCardTheme(idx * 2);
+            return (
             <div
               key={prog.id}
-              className="relative rounded-3xl overflow-hidden p-[1.5px] shadow-xl"
+              style={getMultiCardStyle(idx * 2)}
+              className="relative rounded-3xl overflow-hidden border multi-card"
             >
               <BorderBeam
                 duration={6 + idx * 1.5}
-                borderWidth={1.5}
-                colorFrom="var(--accent)"
-                colorTo="var(--accent-2)"
+                borderWidth={1.6}
+                colorFrom={degTheme.c1Hex}
+                colorTo={degTheme.c2Hex}
+                colorPop={degTheme.c3Hex}
               />
-              <div className="relative z-10 rounded-3xl bg-[var(--surface)] p-6 sm:p-10 border border-[var(--line)]">
+              <div className="relative z-10 p-6 sm:p-10">
                 {/* Header Strip */}
                 <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[var(--line)] mb-6">
                   <div className="flex items-center gap-3">
@@ -226,7 +234,8 @@ export default function EducationPage() {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Dedicated Section: Academic Projects Built During Education */}
@@ -250,12 +259,22 @@ export default function EducationPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {academicProjects.map((proj, pIdx) => (
+            {academicProjects.map((proj, pIdx) => {
+              const projTheme = getCardTheme(pIdx * 2 + 1);
+              return (
               <div
                 key={proj.slug}
-                className="p-6 sm:p-7 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-md flex flex-col justify-between hover:border-[var(--accent)]/50 transition-all"
+                style={getMultiCardStyle(pIdx * 2 + 1)}
+                className="relative overflow-hidden p-6 sm:p-7 rounded-3xl border multi-card flex flex-col justify-between transition-all"
               >
-                <div>
+                <BorderBeam
+                  duration={6.5 + pIdx}
+                  borderWidth={1.5}
+                  colorFrom={projTheme.c1Hex}
+                  colorTo={projTheme.c2Hex}
+                  colorPop={projTheme.c3Hex}
+                />
+                <div className="relative z-10">
                   <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-4">
                     <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--act-tint)] text-[var(--accent)] border border-[var(--line)]">
                       {proj.degree}
@@ -291,18 +310,20 @@ export default function EducationPage() {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-[var(--line)]">
+                <div className="relative z-10 pt-4 border-t border-[var(--line)]">
                   <Link
                     href={`/work/${proj.slug}`}
-                    className="w-full py-2.5 px-4 rounded-xl bg-[var(--act-tint)] hover:bg-[var(--accent)] hover:text-white text-[var(--accent)] border border-[var(--line)] font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer pointer-events-auto group"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[var(--surface)]/85 hover:bg-blue-600 hover:text-white text-[var(--accent)] border border-[var(--line)] font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer pointer-events-auto group"
                   >
                     <span>Inspect Project Case Study</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
+        </div>
         </div>
       </div>
 

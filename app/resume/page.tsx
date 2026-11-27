@@ -19,7 +19,7 @@ export default function ResumePage() {
       accent2="#F59E0B"
       description="Official resume detailing technical competencies, commercial achievements, and engineering career history."
     >
-      <GlassCard className="p-8 max-w-xl mx-auto text-center border-[var(--accent)]/30 my-6">
+      <GlassCard colorIndex={3} className="p-8 max-w-xl mx-auto text-center my-6">
         <div className="w-16 h-16 rounded-2xl bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mx-auto mb-4">
           <FileText className="w-8 h-8" />
         </div>

@@ -22,6 +22,9 @@ import { Reveal } from '@/components/shared/Reveal';
 import { TiltCard } from '@/components/shared/TiltCard';
 import { ProtectedDocumentModal } from '@/components/shared/ProtectedDocumentModal';
 import { Footer } from '@/components/shared/Footer';
+import { Hero3DText } from '@/components/shared/Hero3DText';
+import { BorderBeam } from '@/components/shared/BorderBeam';
+import { getCardTheme, getMultiCardStyle } from '@/lib/cardThemes';
 
 type Tab = 'all' | 'academic' | 'internships' | 'certifications';
 
@@ -65,8 +68,9 @@ export default function CredentialsPage() {
     totalAcademicDocs + totalInternshipDocs + totalCertDocs;
 
   return (
-    <div className="w-full min-h-screen bg-[var(--act-bg)] text-[var(--ink)] pt-24 pb-20 px-4 sm:px-6 lg:px-8 transition-colors duration-500">
-      <div className="max-w-6xl mx-auto">
+    <div className="w-full min-h-screen flex flex-col justify-between bg-[var(--act-bg)] text-[var(--ink)] transition-colors duration-500">
+      <div className="w-full pt-24 pb-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
         {/* Breadcrumb */}
         <Reveal delay={0.05}>
           <div className="flex items-center gap-2 text-xs font-mono text-[var(--muted)] mb-6">
@@ -85,13 +89,15 @@ export default function CredentialsPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
               <span>[VERIFIED CREDENTIALS ARCHIVE // {grandTotalDocs} PROTECTED RECORDS]</span>
             </div>
-            <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[var(--ink)] uppercase mb-4 leading-none">
-              Credentials &{' '}
-              <span className="font-serif-accent bg-gradient-to-r from-[var(--accent)] to-[var(--pop)] bg-clip-text text-transparent font-normal italic lowercase">
-                records
-              </span>
-              .
-            </h1>
+            <Hero3DText
+              as="h1"
+              segments={[
+                { text: 'Credentials &' },
+                { text: 'records.', accent: true },
+              ]}
+              gradientClass="from-[var(--accent)] to-[var(--pop)]"
+              className="font-heading text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[var(--ink)] uppercase mb-4 leading-none"
+            />
             <p className="text-sm sm:text-base text-[var(--muted)] leading-relaxed font-sans max-w-2xl mx-auto">
               Official academic markscards (MCA, BCA, PUC, 10th), verified internship completion credentials, and professional technical certifications.
             </p>
@@ -102,24 +108,24 @@ export default function CredentialsPage() {
             </div>
           </Reveal>
 
-          {/* Quick Stats Strip */}
+          {/* Quick Stats Strip (Multi-Color) */}
           <Reveal delay={0.12}>
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
-              <div className="p-3.5 rounded-2xl border border-[var(--line)] bg-[var(--surface)] text-left shadow-sm">
+              <div style={getMultiCardStyle(0)} className="p-3.5 rounded-2xl border multi-card text-left transition-all">
                 <span className="text-[10px] font-mono text-[var(--muted)] block">ACADEMIC MARKS</span>
                 <span className="font-heading text-lg font-bold text-[var(--ink)]">{totalAcademicDocs} PDFs</span>
               </div>
-              <div className="p-3.5 rounded-2xl border border-[var(--line)] bg-[var(--surface)] text-left shadow-sm">
+              <div style={getMultiCardStyle(1)} className="p-3.5 rounded-2xl border multi-card text-left transition-all">
                 <span className="text-[10px] font-mono text-[var(--muted)] block">INTERNSHIPS</span>
-                <span className="font-heading text-lg font-bold text-emerald-600 dark:text-emerald-400">{totalInternshipDocs} Verified</span>
+                <span className="font-heading text-lg font-bold text-emerald-700 dark:text-emerald-400">{totalInternshipDocs} Verified</span>
               </div>
-              <div className="p-3.5 rounded-2xl border border-[var(--line)] bg-[var(--surface)] text-left shadow-sm">
+              <div style={getMultiCardStyle(5)} className="p-3.5 rounded-2xl border multi-card text-left transition-all">
                 <span className="text-[10px] font-mono text-[var(--muted)] block">CERTIFICATIONS</span>
                 <span className="font-heading text-lg font-bold text-[var(--accent)]">{totalCertDocs} Industry</span>
               </div>
-              <div className="p-3.5 rounded-2xl border border-[var(--line)] bg-[var(--surface)] text-left shadow-sm">
+              <div style={getMultiCardStyle(3)} className="p-3.5 rounded-2xl border multi-card text-left transition-all">
                 <span className="text-[10px] font-mono text-[var(--muted)] block">TOTAL RECORDS</span>
-                <span className="font-heading text-lg font-bold text-amber-500">{grandTotalDocs} Records</span>
+                <span className="font-heading text-lg font-bold text-amber-600 dark:text-amber-400">{grandTotalDocs} Records</span>
               </div>
             </div>
           </Reveal>
@@ -193,9 +199,22 @@ export default function CredentialsPage() {
             </Reveal>
 
             <div className="space-y-8">
-              {(ACADEMIC_CREDENTIALS || []).map((program, pIdx) => (
+              {(ACADEMIC_CREDENTIALS || []).map((program, pIdx) => {
+                const pTheme = getCardTheme(pIdx * 2 + 1);
+                return (
                 <Reveal key={program.id} delay={0.06 * pIdx}>
-                  <div className="p-6 sm:p-8 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-md transition-all duration-300">
+                  <div
+                    style={getMultiCardStyle(pIdx * 2 + 1)}
+                    className="relative overflow-hidden p-6 sm:p-8 rounded-3xl border multi-card transition-all duration-300"
+                  >
+                    <BorderBeam
+                      duration={7 + pIdx}
+                      borderWidth={1.5}
+                      colorFrom={pTheme.c1Hex}
+                      colorTo={pTheme.c2Hex}
+                      colorPop={pTheme.c3Hex}
+                    />
+                    <div className="relative z-10">
                     {/* Program Header */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[var(--line)] pb-4 mb-6">
                       <div>
@@ -251,7 +270,7 @@ export default function CredentialsPage() {
                               doc.type || 'Academic Markscard'
                             )
                           }
-                          className="group flex items-center justify-between p-3.5 rounded-2xl border border-[var(--line)] bg-[var(--act-tint)] hover:border-[var(--accent)] hover:shadow-md transition-all duration-200 text-left"
+                          className="group flex items-center justify-between p-3.5 rounded-2xl border border-[var(--line)] bg-[var(--surface)]/85 backdrop-blur-xs hover:border-[var(--accent)] hover:shadow-md transition-all duration-200 text-left"
                         >
                           <div className="flex items-center gap-2.5 min-w-0">
                             <div className="p-2 rounded-xl bg-amber-500/10 text-amber-500 shrink-0">
@@ -274,8 +293,10 @@ export default function CredentialsPage() {
                       ))}
                     </div>
                   </div>
+                  </div>
                 </Reveal>
-              ))}
+              );
+              })}
             </div>
           </section>
         )}
@@ -298,10 +319,22 @@ export default function CredentialsPage() {
             </Reveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {(INTERNSHIP_CREDENTIALS || []).map((intern, idx) => (
+              {(INTERNSHIP_CREDENTIALS || []).map((intern, idx) => {
+                const iTheme = getCardTheme(idx * 3 + 4);
+                return (
                 <Reveal key={intern.id} delay={0.1 * idx}>
-                  <div className="h-full p-6 sm:p-8 flex flex-col justify-between group border border-[var(--line)] bg-[var(--surface)] shadow-md hover:border-emerald-500/50 rounded-3xl transition-all duration-300">
-                    <div>
+                  <div
+                    style={getMultiCardStyle(idx * 3 + 4)}
+                    className="relative overflow-hidden h-full p-6 sm:p-8 flex flex-col justify-between group border multi-card rounded-3xl transition-all duration-300"
+                  >
+                    <BorderBeam
+                      duration={7 + idx}
+                      borderWidth={1.5}
+                      colorFrom={iTheme.c1Hex}
+                      colorTo={iTheme.c2Hex}
+                      colorPop={iTheme.c3Hex}
+                    />
+                    <div className="relative z-10">
                       {/* Header Row */}
                       <div className="flex items-center justify-between border-b border-[var(--line)] pb-4 mb-6">
                         <div className="flex items-center gap-2">
@@ -355,7 +388,7 @@ export default function CredentialsPage() {
                     </div>
 
                     {/* Protected Certificate View Button - Strictly View Only */}
-                    <div className="pt-4 border-t border-[var(--line)]">
+                    <div className="relative z-10 pt-4 border-t border-[var(--line)]">
                       <button
                         type="button"
                         onClick={() =>
@@ -366,18 +399,19 @@ export default function CredentialsPage() {
                             'Internship Certificate'
                           )
                         }
-                        className="w-full py-2.5 px-4 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2"
+                        className="w-full py-2.5 px-4 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2"
                       >
-                        <Lock className="w-3.5 h-3.5 text-emerald-500" />
+                        <Lock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                         <span>View Completion Certificate</span>
-                        <span className="text-[10px] text-emerald-600/70 dark:text-emerald-400/70 font-normal">
+                        <span className="text-[10px] text-emerald-700/75 dark:text-emerald-300/75 font-normal">
                           (View Only · Protected)
                         </span>
                       </button>
                     </div>
                   </div>
                 </Reveal>
-              ))}
+              );
+              })}
             </div>
           </section>
         )}
@@ -400,22 +434,34 @@ export default function CredentialsPage() {
             </Reveal>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {(CERTIFICATIONS || []).map((cert, idx) => (
+              {(CERTIFICATIONS || []).map((cert, idx) => {
+                const cTheme = getCardTheme(idx + 2);
+                return (
                 <Reveal key={cert.id} delay={0.04 * idx}>
-                  <div className="h-full p-6 flex flex-col justify-between group border border-[var(--line)] bg-[var(--surface)] shadow-md hover:border-purple-500/50 rounded-3xl transition-all duration-300">
-                    <div>
+                  <div
+                    style={getMultiCardStyle(idx + 2)}
+                    className="relative overflow-hidden h-full p-6 flex flex-col justify-between group border multi-card rounded-3xl transition-all duration-300"
+                  >
+                    <BorderBeam
+                      duration={6.5 + (idx % 3)}
+                      borderWidth={1.5}
+                      colorFrom={cTheme.c1Hex}
+                      colorTo={cTheme.c2Hex}
+                      colorPop={cTheme.c3Hex}
+                    />
+                    <div className="relative z-10">
                       {/* Header Row */}
                       <div className="flex items-center justify-between border-b border-[var(--line)] pb-3 mb-4">
                         <span className="font-mono text-xs text-[var(--muted)] font-bold">
                           [0{idx + 1}]
                         </span>
-                        <span className="px-2 py-0.5 rounded text-[10px] font-mono border border-[var(--line)] bg-[var(--act-tint)] text-[var(--muted)]">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-mono border border-[var(--line)] bg-[var(--surface)]/85 text-[var(--ink)] font-semibold">
                           {cert.category}
                         </span>
                       </div>
 
                       {/* Title & Issuer */}
-                      <h3 className="font-heading text-lg font-bold text-[var(--ink)] group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors mb-1 tracking-tight">
+                      <h3 className="font-heading text-lg font-bold text-[var(--ink)] group-hover:text-[var(--accent)] transition-colors mb-1 tracking-tight">
                         {cert.title}
                       </h3>
                       <p className="text-xs font-mono text-[var(--muted)] mb-6">
@@ -424,7 +470,7 @@ export default function CredentialsPage() {
                     </div>
 
                     {/* Protected View Button - Strictly View Only */}
-                    <div className="pt-4 border-t border-[var(--line)]">
+                    <div className="relative z-10 pt-4 border-t border-[var(--line)]">
                       <button
                         type="button"
                         onClick={() =>
@@ -435,21 +481,23 @@ export default function CredentialsPage() {
                             `Certification · ${cert.category}`
                           )
                         }
-                        className="w-full py-2 px-3 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/30 font-mono text-xs font-bold transition-all flex items-center justify-center gap-2"
+                        className="group/btn w-full py-2 px-3 rounded-xl bg-[var(--surface)]/85 hover:bg-blue-600 hover:text-white text-[var(--ink)] border border-[var(--line)] font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
                       >
-                        <Lock className="w-3.5 h-3.5 text-purple-500" />
+                        <Lock className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 group-hover/btn:text-white transition-colors" />
                         <span>Inspect Certificate</span>
-                        <span className="text-[10px] text-purple-600/70 dark:text-purple-400/70 font-normal">
+                        <span className="text-[10px] opacity-75 font-normal">
                           (View Only)
                         </span>
                       </button>
                     </div>
                   </div>
                 </Reveal>
-              ))}
+              );
+              })}
             </div>
           </section>
         )}
+        </div>
       </div>
 
       {/* Protected Document Modal with Anti-Screenshot Shielding & Zero Download */}

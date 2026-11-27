@@ -110,7 +110,7 @@ export function WorkIndex() {
                     onClick={() => setCurrentStatus(stat)}
                     className={`px-2.5 py-1 rounded-md text-[11px] font-mono transition-all border ${
                       currentStatus === stat
-                        ? 'bg-[var(--ink)] text-white border-[var(--ink)]'
+                        ? 'bg-[var(--ink)] text-[var(--act-bg)] font-bold border-[var(--ink)]'
                         : 'bg-[var(--surface)] text-[var(--muted)] border-[var(--line)] hover:text-[var(--ink)]'
                     }`}
                   >

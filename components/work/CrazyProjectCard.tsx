@@ -8,6 +8,7 @@ import { Project, categoryLabels, statusLabels } from '@/lib/projects';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { BorderBeam } from '@/components/shared/BorderBeam';
 import { ProjectGradientArt } from './ProjectGradientArt';
+import { getCardTheme, getMultiCardStyle } from '@/lib/cardThemes';
 
 interface CrazyProjectCardProps {
   project: Project;
@@ -20,6 +21,9 @@ export function CrazyProjectCard({ project, index }: CrazyProjectCardProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const rafId = useRef<number | null>(null);
   const [isHovered, setIsHovered] = useState(false);
+
+  const cardTheme = getCardTheme(index);
+  const cardMultiStyle = getMultiCardStyle(index);
 
   // 3D Parallax Mouse Physics
   const handleMouseMove = useCallback(
@@ -49,11 +53,11 @@ export function CrazyProjectCard({ project, index }: CrazyProjectCardProps) {
 
         if (glareRef.current) {
           glareRef.current.style.opacity = '0.35';
-          glareRef.current.style.background = `radial-gradient(circle at ${(x / rect.width) * 100}% ${(y / rect.height) * 100}%, var(--glass-glare), transparent 65%)`;
+          glareRef.current.style.background = `radial-gradient(circle at ${(x / rect.width) * 100}% ${(y / rect.height) * 100}%, rgba(${cardTheme.c2Rgb}, 0.25), transparent 65%)`;
         }
       });
     },
-    [prefersReducedMotion]
+    [prefersReducedMotion, cardTheme.c2Rgb]
   );
 
   const handleMouseLeave = useCallback(() => {
@@ -110,19 +114,26 @@ export function CrazyProjectCard({ project, index }: CrazyProjectCardProps) {
         style={{
           transformStyle: 'preserve-3d',
           transition: 'transform 0.15s ease-out, box-shadow 0.3s ease',
+          ...cardMultiStyle,
         }}
-        className={`group relative w-full rounded-2xl border overflow-hidden flex flex-col justify-between transition-colors duration-300 select-none bg-[var(--surface)] ${
-          isHovered
-            ? 'border-[var(--accent)] shadow-[0_22px_45px_-12px_rgba(37,99,235,0.22)]'
-            : 'border-[var(--line)] shadow-lg hover:shadow-xl'
-        }`}
+        className="group relative w-full rounded-2xl border overflow-hidden flex flex-col justify-between transition-colors duration-300 select-none multi-card"
       >
-        {/* Orbiting Laser Border Beam */}
+        {/* Multi-Color Top Spectrum Accent Bar */}
+        <div
+          aria-hidden="true"
+          className="h-1 w-full shrink-0"
+          style={{
+            background: `linear-gradient(90deg, ${cardTheme.c1Hex}, ${cardTheme.c2Hex}, ${cardTheme.c3Hex})`,
+          }}
+        />
+
+        {/* Orbiting 3-Color Laser Border Beam */}
         <BorderBeam
           duration={isHovered ? 3.5 : 7}
-          borderWidth={1.5}
-          colorFrom={isAcademic ? 'var(--accent)' : isClient ? 'var(--ok)' : 'var(--accent-2)'}
-          colorTo="var(--accent)"
+          borderWidth={1.6}
+          colorFrom={cardTheme.c1Hex}
+          colorTo={cardTheme.c2Hex}
+          colorPop={cardTheme.c3Hex}
         />
 
         {/* Specular Radial Glare Surface */}
@@ -234,7 +245,7 @@ export function CrazyProjectCard({ project, index }: CrazyProjectCardProps) {
                 {project.stack.slice(0, 4).map((tech) => (
                   <span
                     key={tech}
-                    className="px-2 py-0.5 rounded text-[10px] font-mono bg-[var(--act-tint)] text-[var(--ink)] border border-[var(--line)] transition-transform hover:scale-105"
+                    className="px-2 py-0.5 rounded text-[10px] font-mono bg-[var(--surface)]/85 text-[var(--ink)] border border-[var(--line)] backdrop-blur-xs transition-transform hover:scale-105"
                   >
                     {tech}
                   </span>
@@ -266,7 +277,7 @@ export function CrazyProjectCard({ project, index }: CrazyProjectCardProps) {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold bg-[var(--accent)] text-white hover:bg-[var(--accent-2)] transition-all shadow-sm active:scale-95"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold bg-blue-600 text-white hover:bg-blue-700 dark:hover:bg-blue-500 transition-all shadow-sm active:scale-95"
                       >
                         <span>Live Site</span>
                         <ExternalLink className="w-3 h-3" />
@@ -287,7 +298,7 @@ export function CrazyProjectCard({ project, index }: CrazyProjectCardProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-mono font-bold border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition-all shadow-sm active:scale-95"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-mono font-bold border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-[var(--accent)] hover:bg-blue-600 hover:text-white transition-all shadow-sm active:scale-95"
                     >
                       <span>Interactive Demo</span>
                       <ExternalLink className="w-3 h-3" />

@@ -6,9 +6,9 @@ import * as THREE from 'three';
 
 interface TouchSensorSceneProps {
   mode?: 'fluid' | 'wireframe';
+  isDark?: boolean;
 }
 
-// Custom Vertex Shader with Touch & Velocity Wave Deformation
 const vertexShader = `
   uniform float u_time;
   uniform vec2 u_mouse;
@@ -21,7 +21,6 @@ const vertexShader = `
   varying vec3 vNormal;
   varying vec3 vViewPosition;
 
-  // Classic Simplex 2D Noise
   vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
   float snoise(vec2 v){
     const vec4 C = vec4(0.211324865405187, 0.366025403784439,
@@ -55,19 +54,14 @@ const vertexShader = `
 
     vec3 pos = position;
 
-    // Ambient subtle organic rolling wave
     float ambientNoise = snoise(pos.xy * 0.45 + u_time * 0.12) * 0.22;
     ambientNoise += snoise(pos.xy * 0.9 - u_time * 0.08) * 0.11;
 
-    // Distance from current pointer/touch
     float dist = distance(pos.xy, u_mouse * vec2(8.0, 5.0));
-    
-    // Wave ripple pulse influenced by velocity and touch
     float touchRadius = 3.2;
     float touchInfluence = smoothstep(touchRadius, 0.0, dist);
     float ripple = sin(dist * 7.0 - u_time * 4.0) * touchInfluence * (0.35 + u_velocity * 0.8);
 
-    // Total displacement
     float elevation = ambientNoise + ripple;
     pos.z += elevation;
 
@@ -80,60 +74,73 @@ const vertexShader = `
   }
 `;
 
-// Fragment Shader tailored for Bright Light Theme with soft pastel wave & indigo lines
+// Dual-Theme Fragment Shader (Soft Sky Pastel in Light Mode, Deep Cosmic Aurora in Dark Mode)
 const fragmentShader = `
   uniform float u_time;
   uniform float u_mode;
+  uniform float u_dark;
   uniform vec2 u_mouse;
-  
+
   varying vec2 vUv;
   varying float vElevation;
   varying vec3 vNormal;
   varying vec3 vViewPosition;
 
   void main() {
-    // Normal & view vector for Fresnel reflection
     vec3 normal = normalize(vNormal);
     vec3 viewDir = normalize(vViewPosition);
 
-    // Fresnel effect
     float fresnel = pow(1.0 - max(dot(viewDir, normal), 0.0), 2.5);
 
-    // Specular highlight
     vec3 lightDir = normalize(vec3(0.5, 0.8, 1.0));
     vec3 halfVector = normalize(lightDir + viewDir);
     float NdotH = max(dot(normal, halfVector), 0.0);
     float specular = pow(NdotH, 18.0);
 
-    // Palette: #BFDBFE, #DDD6FE, #FFFFFF with highlights in #2563EB
-    vec3 colorSky = vec3(0.749, 0.859, 0.996);     // #BFDBFE
+    // Light palette
+    vec3 colorSky = vec3(0.749, 0.859, 0.996);      // #BFDBFE
     vec3 colorLavender = vec3(0.867, 0.839, 0.996); // #DDD6FE
     vec3 colorWhite = vec3(1.0, 1.0, 1.0);
-    vec3 colorIndigo = vec3(0.145, 0.388, 0.922);  // #2563EB
+    vec3 colorIndigo = vec3(0.145, 0.388, 0.922);   // #2563EB
 
-    // Mode 1: Wireframe Mode (Indigo lines on transparent)
+    // Dark cosmic aurora palette (keeps background deep & dark so white/light text is razor-sharp)
+    vec3 darkObsidian = vec3(0.027, 0.043, 0.071);  // #070B12
+    vec3 darkIndigo = vec3(0.118, 0.106, 0.294);    // #1E1B4B
+    vec3 darkTeal = vec3(0.043, 0.184, 0.235);      // #0B2F3C
+    vec3 darkGlow = vec3(0.220, 0.741, 0.973);      // #38BDF8
+
     if (u_mode > 0.5) {
       vec2 grid = abs(fract(vUv * 36.0 - 0.5) - 0.5) / fwidth(vUv * 36.0);
       float line = min(grid.x, grid.y);
       float gridLine = 1.0 - min(line, 1.0);
-      float alpha = gridLine * 0.28 + fresnel * 0.15;
-      gl_FragColor = vec4(colorIndigo, alpha);
+      float alpha = gridLine * 0.24 + fresnel * 0.14;
+      vec3 wireCol = mix(colorIndigo, darkGlow, u_dark);
+      gl_FragColor = vec4(wireCol, alpha);
       return;
     }
 
-    // Mode 0: Soft Pastel Gradient Wave
     float mixFactor = clamp((vElevation + 0.25) * 1.6, 0.0, 1.0);
-    vec3 pastelBase = mix(colorSky, colorLavender, vUv.x);
-    pastelBase = mix(pastelBase, colorWhite, mixFactor * 0.65);
 
-    vec3 finalColor = pastelBase;
-    finalColor = mix(finalColor, colorIndigo, specular * 0.22 + fresnel * 0.12);
+    // Light mode wave
+    vec3 lightBase = mix(colorSky, colorLavender, vUv.x);
+    lightBase = mix(lightBase, colorWhite, mixFactor * 0.65);
+    vec3 lightFinal = mix(lightBase, colorIndigo, specular * 0.22 + fresnel * 0.12);
+    float lightAlpha = 0.70 + mixFactor * 0.2;
 
-    gl_FragColor = vec4(finalColor, 0.72 + mixFactor * 0.2);
+    // Dark mode wave
+    vec3 darkBase = mix(darkObsidian, darkIndigo, vUv.x);
+    darkBase = mix(darkBase, darkTeal, mixFactor * 0.65);
+    vec3 darkFinal = mix(darkBase, darkGlow, specular * 0.35 + fresnel * 0.20);
+    float darkAlpha = 0.45 + mixFactor * 0.22;
+
+    vec3 finalColor = mix(lightFinal, darkFinal, u_dark);
+    float finalAlpha = mix(lightAlpha, darkAlpha, u_dark);
+
+    gl_FragColor = vec4(finalColor, finalAlpha);
   }
 `;
 
-export function TouchSensorScene({ mode = 'fluid' }: TouchSensorSceneProps) {
+export function TouchSensorScene({ mode = 'fluid', isDark = false }: TouchSensorSceneProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const { viewport } = useThree();
 
@@ -147,8 +154,10 @@ export function TouchSensorScene({ mode = 'fluid' }: TouchSensorSceneProps) {
       u_prev_mouse: { value: new THREE.Vector2(0, 0) },
       u_velocity: { value: 0 },
       u_mode: { value: mode === 'wireframe' ? 1.0 : 0.0 },
+      u_dark: { value: isDark ? 1.0 : 0.0 },
     }),
-    [mode]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
   useEffect(() => {
@@ -156,10 +165,11 @@ export function TouchSensorScene({ mode = 'fluid' }: TouchSensorSceneProps) {
       const mat = meshRef.current.material as THREE.ShaderMaterial;
       if (mat.uniforms) {
         mat.uniforms.u_mode.value = mode === 'wireframe' ? 1.0 : 0.0;
+        mat.uniforms.u_dark.value = isDark ? 1.0 : 0.0;
         mat.wireframe = mode === 'wireframe';
       }
     }
-  }, [mode]);
+  }, [mode, isDark]);
 
   useFrame((state, delta) => {
     if (!meshRef.current) return;
@@ -167,11 +177,9 @@ export function TouchSensorScene({ mode = 'fluid' }: TouchSensorSceneProps) {
     const mat = meshRef.current.material as THREE.ShaderMaterial;
     mat.uniforms.u_time.value += delta;
 
-    // Track mouse coordinates normalized (-1 to 1)
     const currentX = state.pointer.x;
     const currentY = state.pointer.y;
 
-    // Compute pointer velocity
     const dx = currentX - prevMouse.current.x;
     const dy = currentY - prevMouse.current.y;
     const currentSpeed = Math.sqrt(dx * dx + dy * dy) / Math.max(delta, 0.001);
@@ -182,7 +190,6 @@ export function TouchSensorScene({ mode = 'fluid' }: TouchSensorSceneProps) {
       delta * 5.0
     );
 
-    // Smooth pointer lerp
     mat.uniforms.u_mouse.value.x = THREE.MathUtils.lerp(
       mat.uniforms.u_mouse.value.x,
       currentX,
@@ -201,15 +208,15 @@ export function TouchSensorScene({ mode = 'fluid' }: TouchSensorSceneProps) {
   });
 
   return (
-    <mesh ref={meshRef} position={[0, 0, 0]} rotation={[-0.2, 0, 0]}>
-      {/* Optimized plane geometry for fluid wave dynamics */}
-      <planeGeometry args={[viewport.width * 1.5, viewport.height * 1.5, 36, 36]} />
+    <mesh ref={meshRef} rotation={[-0.1, 0, 0]} position={[0, 0, 0]}>
+      <planeGeometry args={[viewport.width * 1.4, viewport.height * 1.4, 96, 64]} />
       <shaderMaterial
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={uniforms}
-        wireframe={mode === 'wireframe'}
         transparent
+        depthWrite={false}
+        wireframe={mode === 'wireframe'}
       />
     </mesh>
   );

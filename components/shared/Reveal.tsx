@@ -41,7 +41,7 @@ export function Reveal({
     <motion.div
       initial={initialVariants[direction]}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: '0px' }}
+      viewport={{ once: true, amount: 'some', margin: '80px 0px' }}
       transition={{
         duration,
         delay,

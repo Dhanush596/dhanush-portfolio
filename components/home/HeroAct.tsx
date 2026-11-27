@@ -9,6 +9,8 @@ import { ProofStrip } from '@/components/home/ProofStrip';
 import { TouchSensorWrapper } from '@/components/canvas/TouchSensorWrapper';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { BorderBeam } from '@/components/shared/BorderBeam';
+import { Hero3DText } from '@/components/shared/Hero3DText';
+import { getCardTheme, getMultiCardStyle } from '@/lib/cardThemes';
 import { PERSONAL_INFO } from '@/lib/data';
 import { ArrowDown, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
 
@@ -46,9 +48,6 @@ export function HeroAct() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [prefersReducedMotion, mouseX, mouseY]);
 
-  // Staggered per-word animation
-  const headlineWords = "Dhanush A, Software Engineer".split(" ");
-
   return (
     <section
       id="hello"
@@ -71,15 +70,22 @@ export function HeroAct() {
         <motion.div
           style={
             prefersReducedMotion
-              ? undefined
+              ? getMultiCardStyle(1)
               : {
                   x: bubble1X,
                   y: bubble1Y,
+                  ...getMultiCardStyle(1),
                 }
           }
-          className="absolute top-28 right-8 p-3.5 rounded-2xl border border-[var(--line)] bg-[var(--surface)]/95 backdrop-blur-xl shadow-xl shadow-[var(--accent)]/10 pointer-events-auto flex items-start gap-3 select-none text-[var(--ink)] overflow-hidden"
+          className="absolute top-28 right-8 p-3.5 rounded-2xl border backdrop-blur-xl pointer-events-auto flex items-start gap-3 select-none text-[var(--ink)] overflow-hidden multi-card"
         >
-          <BorderBeam duration={5} borderWidth={1.5} colorFrom="var(--ok)" colorTo="var(--accent)" />
+          <BorderBeam
+            duration={5}
+            borderWidth={1.5}
+            colorFrom={getCardTheme(1).c1Hex}
+            colorTo={getCardTheme(1).c2Hex}
+            colorPop={getCardTheme(1).c3Hex}
+          />
           <div className="relative z-10 p-2 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5">
             <CheckCircle2 className="w-4 h-4" />
           </div>
@@ -100,15 +106,22 @@ export function HeroAct() {
         <motion.div
           style={
             prefersReducedMotion
-              ? undefined
+              ? getMultiCardStyle(5)
               : {
                   x: bubble2X,
                   y: bubble2Y,
+                  ...getMultiCardStyle(5),
                 }
           }
-          className="absolute top-28 left-8 p-3.5 rounded-2xl border border-[var(--line)] bg-[var(--surface)]/95 backdrop-blur-xl shadow-xl shadow-[var(--accent)]/10 pointer-events-auto flex items-start gap-3 select-none text-[var(--ink)] overflow-hidden"
+          className="absolute top-28 left-8 p-3.5 rounded-2xl border backdrop-blur-xl pointer-events-auto flex items-start gap-3 select-none text-[var(--ink)] overflow-hidden multi-card"
         >
-          <BorderBeam duration={6} borderWidth={1.5} colorFrom="var(--accent)" colorTo="var(--accent-2)" />
+          <BorderBeam
+            duration={6}
+            borderWidth={1.5}
+            colorFrom={getCardTheme(5).c1Hex}
+            colorTo={getCardTheme(5).c2Hex}
+            colorPop={getCardTheme(5).c3Hex}
+          />
           <div className="relative z-10 p-2 rounded-xl bg-[var(--accent)]/15 text-[var(--accent)] shrink-0 mt-0.5">
             <ShieldCheck className="w-4 h-4" />
           </div>
@@ -139,26 +152,19 @@ export function HeroAct() {
           </span>
         </div>
 
-        {/* Staggered Per-Word Headline */}
-        <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-[var(--ink)] uppercase leading-[1.05] mb-6 flex flex-wrap justify-center gap-x-3 sm:gap-x-4">
-          {headlineWords.map((word, wIdx) => (
-            <motion.span
-              key={wIdx}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.08 * wIdx, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-block"
-            >
-              {word === 'Software' ? (
-                <span className="font-serif-accent bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] bg-clip-text text-transparent font-normal italic lowercase tracking-normal">
-                  software
-                </span>
-              ) : (
-                word
-              )}
-            </motion.span>
-          ))}
-        </h1>
+        {/* 3D Extruded Kinetic Hero Headline */}
+        <div className="mb-6">
+          <Hero3DText
+            as="h1"
+            segments={[
+              { text: 'Dhanush A,' },
+              { text: 'software', accent: true },
+              { text: 'Engineer' },
+            ]}
+            gradientClass="from-blue-600 via-violet-600 to-rose-500 dark:from-cyan-400 dark:via-violet-400 dark:to-rose-400"
+            className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-[var(--ink)] uppercase leading-[1.05]"
+          />
+        </div>
 
         {/* Rotating Titles */}
         <div className="mb-6 flex justify-center">
@@ -175,7 +181,7 @@ export function HeroAct() {
           <Link
             href="/work"
             prefetch={true}
-            className="px-6 py-3 rounded-full bg-[var(--accent)] text-white font-heading font-black text-xs uppercase tracking-wider hover:bg-[var(--accent-2)] transition-colors duration-200 shadow-lg shadow-[var(--accent)]/20 flex items-center gap-2 pointer-events-auto cursor-pointer"
+            className="px-6 py-3 rounded-full bg-blue-600 text-white font-heading font-black text-xs uppercase tracking-wider hover:bg-blue-700 dark:hover:bg-blue-500 transition-colors duration-200 shadow-lg shadow-blue-600/25 flex items-center gap-2 pointer-events-auto cursor-pointer"
           >
             <span>Explore Work Archive</span>
             <ArrowRight className="w-3.5 h-3.5" />

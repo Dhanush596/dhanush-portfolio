@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { Copy, Check, Send, Download, FileText, ArrowUpRight, Loader2 } from 'lucide-react';
 import { PERSONAL_INFO } from '@/lib/data';
 import { BorderBeam } from '@/components/shared/BorderBeam';
+import { Hero3DText } from '@/components/shared/Hero3DText';
+import { getCardTheme, getMultiCardStyle } from '@/lib/cardThemes';
 
 export function ContactBlock() {
   const [formData, setFormData] = useState({
@@ -61,21 +63,35 @@ export function ContactBlock() {
         <span className="text-[11px] font-mono text-[var(--accent)] uppercase tracking-widest block mb-3 font-semibold">
           [ACT 05 · DIRECT TRANSMISSION]
         </span>
-        <h2 className="font-heading text-4xl sm:text-6xl md:text-7xl font-black text-[var(--ink)] uppercase tracking-tight leading-[1.05]">
-          Let&apos;s build what&apos;s{' '}
-          <span className="font-serif-accent bg-gradient-to-r from-[var(--accent)] to-[var(--pop)] bg-clip-text text-transparent font-normal italic lowercase">
-            next
-          </span>
-          .
-        </h2>
+        <Hero3DText
+          as="h2"
+          trigger="inView"
+          segments={[
+            { text: "Let's build" },
+            { text: "what's" },
+            { text: 'next.', accent: true },
+          ]}
+          gradientClass="from-[var(--accent)] via-[var(--pop)] to-[var(--accent-2)]"
+          className="font-heading text-4xl sm:text-6xl md:text-7xl font-black text-[var(--ink)] uppercase tracking-tight leading-[1.05]"
+        />
         <p className="text-sm sm:text-base text-[var(--muted)] font-mono mt-4 leading-relaxed">
           Have an engineering opportunity, full-stack challenge, or cloud infrastructure project?
         </p>
       </div>
 
-      {/* Huge Interactive Email Wave Link with Copy Button */}
-      <div className="p-8 sm:p-12 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-xl mb-14 text-center flex flex-col items-center">
-        <span className="text-[11px] font-mono text-[var(--muted)] uppercase tracking-widest mb-4">
+      {/* Huge Interactive Email Wave Link Card (Theme 0) */}
+      <div
+        style={getMultiCardStyle(0)}
+        className="relative overflow-hidden p-8 sm:p-12 rounded-3xl border multi-card mb-14 text-center flex flex-col items-center"
+      >
+        <BorderBeam
+          duration={7.5}
+          borderWidth={1.5}
+          colorFrom={getCardTheme(0).c1Hex}
+          colorTo={getCardTheme(0).c2Hex}
+          colorPop={getCardTheme(0).c3Hex}
+        />
+        <span className="relative z-10 text-[11px] font-mono text-[var(--muted)] uppercase tracking-widest mb-4">
           Click email to launch mail client or copy directly:
         </span>
 
@@ -118,9 +134,18 @@ export function ContactBlock() {
 
       {/* Two Column Grid: Contact Form (Left) & Quick Links (Right) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Contact Form (7 cols) */}
-        <div className="lg:col-span-7 relative p-6 sm:p-8 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-2xl overflow-hidden animate-float-1">
-          <BorderBeam duration={7} borderWidth={1.5} colorFrom="var(--accent)" colorTo="var(--pop)" />
+        {/* Contact Form (Theme 2: Rose + Magenta + Indigo) */}
+        <div
+          style={getMultiCardStyle(2)}
+          className="lg:col-span-7 relative p-6 sm:p-8 rounded-3xl border multi-card overflow-hidden animate-float-1"
+        >
+          <BorderBeam
+            duration={7}
+            borderWidth={1.5}
+            colorFrom={getCardTheme(2).c1Hex}
+            colorTo={getCardTheme(2).c2Hex}
+            colorPop={getCardTheme(2).c3Hex}
+          />
 
           <div className="relative z-10">
             <div className="mb-6 pb-4 border-b border-[var(--line)]">
@@ -203,7 +228,7 @@ export function ContactBlock() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full py-3.5 rounded-xl bg-[var(--accent)] text-white font-heading font-black text-xs uppercase tracking-wider hover:bg-[var(--accent-2)] transition-colors duration-200 shadow-md shadow-[var(--accent)]/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              className="w-full py-3.5 rounded-xl bg-blue-600 text-white font-heading font-black text-xs uppercase tracking-wider hover:bg-blue-700 dark:hover:bg-blue-500 transition-colors duration-200 shadow-md shadow-blue-600/25 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
               {status === 'loading' ? (
                 <>
@@ -223,9 +248,18 @@ export function ContactBlock() {
 
         {/* Direct Cards & Documents (5 cols) */}
         <div className="lg:col-span-5 space-y-4">
-          {/* Resume Download Card */}
-          <div className="relative p-6 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-xl overflow-hidden animate-float-2">
-            <BorderBeam duration={6} borderWidth={1.5} colorFrom="var(--warn)" colorTo="var(--accent)" colorPop="var(--pop)" />
+          {/* Resume Download Card (Theme 3: Amber + Coral + Violet) */}
+          <div
+            style={getMultiCardStyle(3)}
+            className="relative p-6 rounded-3xl border multi-card overflow-hidden animate-float-2"
+          >
+            <BorderBeam
+              duration={6}
+              borderWidth={1.5}
+              colorFrom={getCardTheme(3).c1Hex}
+              colorTo={getCardTheme(3).c2Hex}
+              colorPop={getCardTheme(3).c3Hex}
+            />
 
             <div className="relative z-10">
               <span className="text-[10px] font-mono text-[var(--warn)] font-bold uppercase tracking-widest block mb-2">
@@ -253,7 +287,7 @@ export function ContactBlock() {
                 <a
                   href={PERSONAL_INFO.resumePdf}
                   download="Dhanush_A_Resume.pdf"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--accent)] text-white text-xs font-mono hover:bg-[var(--accent-2)] transition-colors shadow-sm"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-mono hover:bg-blue-700 dark:hover:bg-blue-500 transition-colors shadow-sm"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>Download</span>
@@ -262,9 +296,18 @@ export function ContactBlock() {
             </div>
           </div>
 
-          {/* Quick Contact Info Card */}
-          <div className="relative p-6 rounded-3xl border border-[var(--line)] bg-[var(--surface)] shadow-xl space-y-3 font-mono text-xs overflow-hidden animate-float-3">
-            <BorderBeam duration={6.8} borderWidth={1.5} colorFrom="var(--ok)" colorTo="var(--accent)" />
+          {/* Quick Contact Info Card (Theme 1: Emerald + Teal + Gold) */}
+          <div
+            style={getMultiCardStyle(1)}
+            className="relative p-6 rounded-3xl border multi-card space-y-3 font-mono text-xs overflow-hidden animate-float-3"
+          >
+            <BorderBeam
+              duration={6.8}
+              borderWidth={1.5}
+              colorFrom={getCardTheme(1).c1Hex}
+              colorTo={getCardTheme(1).c2Hex}
+              colorPop={getCardTheme(1).c3Hex}
+            />
 
             <div className="relative z-10 space-y-3">
               <div className="flex items-center justify-between pb-3 border-b border-[var(--line)]">

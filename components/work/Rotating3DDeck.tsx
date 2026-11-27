@@ -6,6 +6,8 @@ import { ExternalLink, ChevronLeft, ChevronRight, Pause, Play, Sparkles, ShieldC
 import { LIVE_SITES } from '@/lib/data';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { BorderBeam } from '@/components/shared/BorderBeam';
+import { Hero3DText } from '@/components/shared/Hero3DText';
+import { getCardTheme, getMultiCardStyle } from '@/lib/cardThemes';
 
 const ROTATION_INTERVAL_MS = 4500; // Still for 4.5 seconds, then rotate
 
@@ -88,16 +90,21 @@ export function Rotating3DDeck() {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 border-b border-[var(--line)] pb-6">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 text-[var(--accent)] text-[10px] sm:text-[11px] font-mono uppercase tracking-widest font-semibold mb-3">
-            <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-ping" />
+            <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-ping shrink-0" />
             <span>Featured 3D Showcase · 05 Live Client Platforms</span>
           </div>
-          <h2 className="font-heading text-2xl sm:text-4xl md:text-5xl font-black text-[var(--ink)] uppercase tracking-tight">
-            Commercial{' '}
-            <span className="font-serif-accent bg-gradient-to-r from-[var(--ok)] via-[var(--accent)] to-[var(--accent-2)] bg-clip-text text-transparent font-normal italic lowercase">
-              client
-            </span>{' '}
-            deployments.
-          </h2>
+          <Hero3DText
+            as="h2"
+            trigger="inView"
+            align="left"
+            segments={[
+              { text: 'Commercial' },
+              { text: 'client', accent: true },
+              { text: 'deployments.' },
+            ]}
+            gradientClass="from-[var(--ok)] via-[var(--accent)] to-[var(--accent-2)]"
+            className="font-heading text-2xl sm:text-4xl md:text-5xl font-black text-[var(--ink)] uppercase tracking-tight"
+          />
         </div>
 
         {/* Rotation Status & Controls Indicator */}
@@ -157,11 +164,11 @@ export function Rotating3DDeck() {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="relative w-full min-h-[470px] sm:min-h-[520px] flex items-center justify-center overflow-hidden sm:overflow-visible py-2 sm:py-4 select-none touch-pan-y"
+        className="relative w-full min-h-[490px] sm:min-h-[520px] flex items-center justify-center overflow-hidden sm:overflow-visible py-2 sm:py-4 select-none touch-pan-y"
         style={{ perspective: isMobile ? '800px' : '1200px' }}
       >
         <div
-          className="relative w-full max-w-lg h-[460px] sm:h-[490px] flex items-center justify-center"
+          className="relative w-full max-w-lg h-[480px] sm:h-[490px] flex items-center justify-center"
           style={{ transformStyle: 'preserve-3d' }}
         >
           {LIVE_SITES.map((site, idx) => {
@@ -223,6 +230,8 @@ export function Rotating3DDeck() {
               xOffset = offset * (isMobile ? 120 : 320);
             }
 
+            const deckTheme = getCardTheme(idx * 2);
+
             return (
               <motion.div
                 key={site.id}
@@ -248,28 +257,27 @@ export function Rotating3DDeck() {
                 style={{
                   transformStyle: 'preserve-3d',
                   pointerEvents: isActive ? 'auto' : isMobile ? 'none' : 'auto',
+                  ...getMultiCardStyle(idx * 2),
                 }}
-                className={`absolute w-[94%] sm:w-[420px] max-w-[420px] h-full rounded-2xl border bg-[var(--surface)] shadow-2xl overflow-hidden flex flex-col justify-between transition-colors duration-300 ${
+                className={`absolute w-[94%] sm:w-[420px] max-w-[420px] h-full rounded-2xl border multi-card overflow-hidden flex flex-col justify-between transition-colors duration-300 ${
                   isActive
-                    ? 'border-[var(--accent)] shadow-[0_20px_50px_-15px_rgba(37,99,235,0.30)] cursor-default'
-                    : 'border-[var(--line)] cursor-pointer hover:border-[var(--accent)]/60'
+                    ? 'shadow-[0_24px_55px_-14px_rgba(37,99,235,0.34)] cursor-default'
+                    : 'cursor-pointer'
                 }`}
               >
-                {/* Active Card Glowing Laser Beam */}
-                {isActive && (
-                  <BorderBeam
-                    duration={4.5}
-                    borderWidth={1.8}
-                    colorFrom="var(--accent)"
-                    colorTo="var(--ok)"
-                    colorPop="var(--accent-2)"
-                  />
-                )}
+                {/* Glowing Multi-Color Laser Beam */}
+                <BorderBeam
+                  duration={isActive ? 4.5 : 7.5}
+                  borderWidth={isActive ? 2 : 1.2}
+                  colorFrom={deckTheme.c1Hex}
+                  colorTo={deckTheme.c2Hex}
+                  colorPop={deckTheme.c3Hex}
+                />
 
                 {/* Card Container */}
-                <div className="relative z-10 w-full h-full flex flex-col justify-between bg-[var(--surface)]">
+                <div className="relative z-10 w-full h-full flex flex-col justify-between">
                   {/* Browser Mockup Top Bar */}
-                  <div className="px-3.5 sm:px-4 py-2 sm:py-2.5 border-b border-[var(--line)] bg-[var(--surface-2)] flex items-center justify-between shrink-0">
+                  <div className="px-3.5 sm:px-4 py-2 sm:py-2.5 border-b border-[var(--line)] bg-[var(--surface)]/75 backdrop-blur-md flex items-center justify-between shrink-0">
                     <div className="flex items-center gap-1.5">
                       <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-red-500/80" />
                       <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-amber-500/80" />
@@ -346,7 +354,7 @@ export function Rotating3DDeck() {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="flex-1 py-2 px-3 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-2)] text-white text-[11px] sm:text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95"
+                          className="flex-1 py-2 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-[11px] sm:text-xs font-mono font-bold flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95"
                         >
                           <span>Live Website</span>
                           <ExternalLink className="w-3.5 h-3.5" />
