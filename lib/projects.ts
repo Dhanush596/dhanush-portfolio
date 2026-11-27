@@ -936,24 +936,85 @@ export const projects: Project[] = [
   },
   {
     slug: "hanger-commerce",
-    title: "HangerHome",
-    tagline: "Custom ceiling cloth drying hangers and smart space-saving home organization platform with doorstep installation across Bengaluru",
+    title: "HangerHome — Luxury E-Commerce & Home Installation Platform",
+    tagline: "Luxury drying systems storefront and 16-module RBAC admin portal with client-side REST simulation and Vercel serverless deployment",
     category: "company",
     status: "realtime",
-    role: "Developer, PrimePro.ai",
-    period: "2024 – 2025",
+    backend: "simulated-api",
+    role: "Full-Stack Lead Engineer / Architect, PrimePro.ai",
+    period: "Commercial Project (PrimePro.ai)",
     cover: "/media/sites/hangerhome.png",
     accent: "#15803D",
-    accent2: "#F59E0B",
-    features: [
-      "Interactive home product showcase with hot-spot product inspection for steel rod 6ft ceiling hangers and compact entryway shoe racks",
-      "Doorstep installation scheduling engine covering residential apartments and villas across all zones in Bengaluru",
-      "Instant WhatsApp booking integration ('Book on WhatsApp') and interactive 'See How It Works' video walkthrough modal",
-      "Bilingual language toggle (English & Kannada) with direct technician call routing (9591390826)",
-      "Customer reviews, space-saving tips, and custom balcony/utility drying solutions catalog",
+    accent2: "#D97706",
+    featured: true,
+    stack: [
+      "React 18.3",
+      "Vite 6.0",
+      "React Router DOM 7.1",
+      "Framer Motion 11.15",
+      "Recharts 3.10",
+      "Lucide React",
+      "Tokens CSS Design System",
+      "Client-Side REST Dispatcher",
+      "LocalStorage (hh_demo_db_v1)",
+      "Node.js & Express 4.21",
+      "MongoDB & Mongoose 8.9",
+      "JWT & Bcryptjs",
+      "Zod Validation",
+      "Sharp & Multer",
+      "Vercel",
     ],
-    stack: ["React", "Node.js", "Express", "Tailwind CSS", "WhatsApp Concierge", "Vercel"],
-    links: {},
+    features: [
+      "Dark emerald and champagne-gold luxury e-commerce storefront with 3-level category hierarchy (Ceiling Hangers, Wall Racks, Space Savers, Accessories)",
+      "Interactive product inspection with hot-spot product highlights, high-resolution galleries, verified customer reviews, and dynamic stock countdowns",
+      "Frictionless checkout pipeline with guest/customer cart persistence, tiered promo code validation (WELCOME10, HANGERHOME500, FESTIVE15), and optional +₹499 professional installation toggle",
+      "Simulated multi-method Razorpay payment gateway modal supporting UPI/QR code, Card, and Netbanking with instant transaction verification",
+      "On-site installation booking engine (/service-booking) and bulk commercial quotation generator (/quote) with WhatsApp concierge assistance",
+      "16-Module RBAC Admin Command Center: Role-Based Access Control dividing Super Admin (full control) and Operations Staff (Orders, Enquiries, Bookings, Gallery)",
+      "Recharts analytics dashboard with monthly revenue Area charts, order volume Bar charts, category distribution Pie charts, and 1-click demo database reset",
+      "1-Click instant demo onboarding for both Customer (rahul.verma@example.com / Customer@123) and Super Admin (admin@example.com / Admin@123)",
+    ],
+    highlights: [
+      "Zero-backend client-side REST simulation engine (IS_DEMO_MODE) running 100% serverlessly on Vercel",
+      "16-module RBAC Admin Portal with Recharts data visualization and audit trail logging",
+      "Multi-method simulated Razorpay checkout with dynamic stock decrement and printable invoices",
+      "Custom CSS design token architecture (emerald & gold) with Framer Motion micro-interactions",
+      "Complete switchable Express 4 + MongoDB/Mongoose backend architecture in repository",
+    ],
+    impact:
+      "Engineered a luxury retail and home installation web platform combining high-converting direct checkout with a 16-module admin ERP, capable of running fully offline or cloud-connected with zero spin-up latency.",
+    realVsSimulated:
+      "Dual-Mode Architecture: Engineered with a custom client-side REST dispatcher (api.js -> demoServer.js) using localStorage ('hh_demo_db_v1') and HTML5 Canvas image resizing on Vercel. Can be switched to a production Node.js/Express + MongoDB backend via a single environment flag (VITE_USE_LIVE_API=true).",
+    challenges: [
+      {
+        problem:
+          "Providing an instant, zero-cost, fully functional recruiter demo on Vercel without relying on sleeping MongoDB Atlas free-tier clusters.",
+        solution:
+          "Engineered an in-browser REST router (demoServer.js) backed by pre-seeded localStorage (hh_demo_db_v1), supporting full CRUD, JWT session simulation, and 1-click database resets.",
+      },
+      {
+        problem:
+          "Handling product and gallery image uploads on a serverless static frontend without cloud S3 bucket credentials.",
+        solution:
+          "Implemented a client-side HTML5 Canvas image downsampling utility that converts uploaded files into optimized base64 DataURLs before storing in demo localStorage.",
+      },
+      {
+        problem:
+          "Strict Role-Based Access Control (RBAC) across 16 admin modules without server-side middleware verification.",
+        solution:
+          "Architected declarative React Router v7 ProtectedRoute wrappers and API-level permission checks enforcing strict separation between Super Admin and Operations Staff.",
+      },
+      {
+        problem:
+          "Managing complex promotional coupon rules (minimum order value, percentage vs flat discounts, single-use limits) client-side.",
+        solution:
+          "Engineered a centralized pricing and coupon calculation engine with atomic validation rules against active cart subtotals and saved customer usage records.",
+      },
+    ],
+    links: {
+      live: "https://hangerhome.vercel.app",
+      repo: "https://github.com/Dhanush596/hangerhome",
+    },
   },
   {
     slug: "sri-manjunatha-batteries",
