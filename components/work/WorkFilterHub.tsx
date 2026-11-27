@@ -47,11 +47,11 @@ export function WorkFilterHub({
   const isFiltered = currentCategory !== 'all' || searchQuery.trim().length > 0;
 
   return (
-    <div className="sticky top-16 sm:top-20 z-30 w-full bg-[var(--surface)]/90 backdrop-blur-xl border-y border-[var(--line)] shadow-sm transition-colors py-3">
+    <div className="sticky top-14 sm:top-20 z-30 w-full bg-[var(--surface)]/90 backdrop-blur-xl border-y border-[var(--line)] shadow-sm transition-colors py-2.5 sm:py-3">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-          {/* Scrollable Category Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 shrink-0 -mx-4 px-4 sm:mx-0 sm:px-0">
+          {/* Scrollable Category Tabs with Touch Momentum */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 shrink-0 -mx-4 px-4 sm:mx-0 sm:px-0 touch-pan-x">
             {filterTabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = currentCategory === tab.key;
