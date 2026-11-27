@@ -45,11 +45,11 @@ export function CrazyProjectCard({ project, index }: CrazyProjectCardProps) {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const maxTilt = 10;
+        const maxTilt = 4;
         const rotateX = ((y - centerY) / centerY) * -maxTilt;
         const rotateY = ((x - centerX) / centerX) * maxTilt;
 
-        cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.015, 1.015, 1.015)`;
 
         if (glareRef.current) {
           glareRef.current.style.opacity = '0.35';

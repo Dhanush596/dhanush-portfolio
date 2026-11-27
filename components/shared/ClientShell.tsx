@@ -9,6 +9,7 @@ import { PuppetCursor } from '@/components/cursor/PuppetCursor';
 import { ScrollProgressIndicator } from '@/components/shared/ScrollProgressIndicator';
 import { ActBackground } from '@/components/home/ActBackground';
 import { CrazyLoadFX } from '@/components/shared/CrazyLoadFX';
+import { InteractiveCardFX } from '@/components/shared/InteractiveCardFX';
 import { useEasterEggs } from '@/components/shared/EasterEggs';
 
 export function ClientShell({ children }: { children: React.ReactNode }) {
@@ -20,6 +21,8 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
     <>
       {/* Page Load / Route Transition Crazy 3D Chromatic Burst */}
       <CrazyLoadFX key={pathname} />
+      {/* Global cursor-reactive multi-color spotlight on cards */}
+      <InteractiveCardFX />
       {/* Subtle Grain Overlay for tactile editorial texture */}
       <div className="fixed inset-0 pointer-events-none z-[60] opacity-[0.04] mix-blend-multiply bg-[radial-gradient(var(--ink)_1px,transparent_1px)] [background-size:16px_16px]" />
 

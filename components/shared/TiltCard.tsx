@@ -20,7 +20,7 @@ export interface TiltCardProps extends React.HTMLAttributes<HTMLDivElement> {
 export function TiltCard({
   children,
   className,
-  maxTilt = 8,
+  maxTilt = 4,
   glareOpacity = 0.25,
   borderBeam = true,
   beamDuration = 6.0,
